@@ -418,8 +418,6 @@ cvServ.factory('CV_Camper', ['$http', '$q', function($http, $q) {
 			};
 		
 			path = rawpath+'add_image/?access_token='+global.accessToken;
-			var formData = new FormData();
-			formData.append("file", image);
 			
 			data.image_data = formData;
 			data.post_id = camper_id;

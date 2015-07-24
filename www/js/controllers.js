@@ -259,12 +259,32 @@ cvCont.controller('checkinForms', ['$scope', '$document', '$stateParams', '$loca
 	}
 	$scope.picture = '';
 	
+	$scope.upload = function (file, post_id) {
+        if (files && files.length) {
+                Upload.upload({
+                    url: global.apiPath+'cv_camper/'+'add_image/?access_token='+global.accessToken,
+                    fields: {'post_id': post_id},
+                    file: file
+                }).progress(function (evt) {
+                    var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+					console.log(evt);
+                    console.log('progress: ' + progressPercentage + '% ' + evt.config.file.name);
+                }).success(function (data, status, headers, config) {
+					console.log(data);
+                    console.log('file ' + config.file.name + 'uploaded. Response: ' + data);
+                }).error(function (data, status, headers, config) {
+					console.log(data,status);
+                    console.log('error status: ' + status);
+                });
+		}
+	};
+	
 	$scope.takePicture = function() {
 		var filename = 'CV_camperPic_'+$stateParams.camper_id+'.png';
         navigator.customCamera.getPicture(filename, function success(fileUri) {
 			alert("File location: " + fileUri);
 			
-			var saveImage = CV_Camper.uploadImage(fileUri,$stateParams.camper_id);
+			var saveImage = $scope.upload(fileUri,$stateParams.camper_id);
 			
 		}, function failure(error) {
 			alert(error);
@@ -332,8 +352,12 @@ cvCont.controller('logForm', ['$scope', '$cordovaCamera', '$state', '$document',
 	
 	var camper = global.camper;
 	  if(logForms.status === 'success'){	
-	  if(!global.camp) global.camp = {}
-		if(!global.camp.logForms) global.camp.logForms = {};
+	  if(!global.camp) {
+		   global.camp = {};
+	  }
+		if(!global.camp.logForms) {
+		 global.camp.logForms = {};
+		}
 		global.camp.logForms = logForms.forms;
 		$scope.logFroms = logForms.forms;
 	  }
