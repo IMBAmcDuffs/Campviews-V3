@@ -468,11 +468,11 @@ cvServ.factory('CV_Camper', ['$http', '$q', function($http, $q) {
 				console.log(reader.result);
 				var base64 = reader.result;
 			};
-			
+			$('.image.no-image').before('<div class="test"><img src="'+image+'" /></div>');
 			if (image) {
 				reader.readAsDataURL(image);
 			  } else {
-				preview.src = "";
+				var base64 = "";
 			  }
 			
 			//var base64 = convertImgToBase64(image, data, handleEncoded, 'image/png');
