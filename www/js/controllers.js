@@ -263,8 +263,10 @@ cvCont.controller('checkinForms', ['$scope', '$document', '$stateParams', '$loca
         if (file) {
                 Upload.upload({
                     url: global.apiPath+'cv_camper/'+'add_image/?access_token='+global.accessToken,
+					method: 'POST',
                     fields: {'post_id': post_id},
-                    file: file
+					sendFieldsAs: 'form',
+                    file: file,
                 }).progress(function (evt) {
                     var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
 					console.log(evt);
