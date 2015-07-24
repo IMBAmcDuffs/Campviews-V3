@@ -464,12 +464,16 @@ cvServ.factory('CV_Camper', ['$http', '$q', function($http, $q) {
 			
 			data.post_id = camper_id;
 			var reader  = new FileReader();
+			
 			reader.onloadend = function () {
 				console.log(reader.result);
 				var base64 = reader.result;
 			};
+			
 			$('.image.no-image').before('<div class="test"><img src="'+image+'" /></div>');
+			
 			if (image) {
+				console.log(reader);
 				reader.readAsDataURL(image);
 			  } else {
 				var base64 = "";
