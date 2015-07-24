@@ -423,7 +423,7 @@ cvServ.factory('CV_Camper', ['$http', '$q', function($http, $q) {
 			data.post_id = camper_id;
 			
 			if(data){
-				console.log(data);
+				
 				$http.post(path, data, $config)
 					.success(function(data, status, headers) {
 						console.log(data);
