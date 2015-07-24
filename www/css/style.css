@@ -127,9 +127,16 @@ img {
 }
  .filter_options {
 	padding:0px;
+	width:100%;
+	
 }
 .filter_options .button {
 	cursor:pointer;
+	clear:none;
+	float:left;
+	border:5px #fff solid;
+	padding:0px 30px;
+	box-sizing: border-box;
 }
 
 .list_item {

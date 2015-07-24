@@ -38,6 +38,7 @@ cvCont.controller('AppCtrl', function($scope, $ionicHistory, $ionicModal, $locat
   if(campData){
 	global.camp = campData.camp;
 	global.forms = campData.forms;
+	global.cabins = campData.cabins;
 	
 	var $current = localStorage.getItem('user_info');
 	global.userName = $current;	
@@ -128,6 +129,10 @@ cvCont.controller('MainCtrl', ['$scope', '$ionicFilterBar', '$timeout', '$stateP
   }
   
   loadItems();
+  
+  console.log(global);
+  
+  $scope.cabins = global.cabins;
 		
     var filterBarInstance;
 
@@ -160,6 +165,11 @@ cvCont.controller('MainCtrl', ['$scope', '$ionicFilterBar', '$timeout', '$stateP
 	$scope.filterResults = function(type) {
 	$('#loading').show();
 	$scope.activeFilter = type;
+	var page = $location.$$path.replace('/','');
+	if(page === 'logsheets' && type!=='everyone'){
+		var id = type;
+		type = 'logsheets';	
+	}
 	  if(type){
 		$('.search-button.bar').hide();
 		var items = {};
@@ -167,6 +177,23 @@ cvCont.controller('MainCtrl', ['$scope', '$ionicFilterBar', '$timeout', '$stateP
 		var _c = Object.keys(_items).length;
 		var _i = 0;
 		switch(type){
+			case 'logsheets': 
+				var cabin = parseInt(id);
+				if(id > 0){
+					if(_c > 0){
+						for(var i = 0; i < _c; i++){
+							if(typeof(_items[i]) !== 'undefined'){
+								if(_items[i].cabin){
+									if(_items[i].cabin.id === cabin) {
+										items[_i] = _items[i];
+										_i++;
+									}
+								}
+							}
+						} 
+					}
+				}
+			break;
 			case 'everyone':
 				$('.search-button.bar').show();
 				items = _items;
