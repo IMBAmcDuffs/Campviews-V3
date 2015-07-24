@@ -261,7 +261,7 @@ cvCont.controller('checkinForms', ['$scope', '$document', '$stateParams', '$loca
 	
 	$scope.takePicture = function() {
 		var filename = 'CV_camperPic_'+$stateParams.camper_id;
-        navigator.camera.getPicture(filename, function success(fileUri) {
+        navigator.camera.getPicture(function success(fileUri) {
 			alert("File location: " + fileUri);
 			var saveImage = CV_Camper.uploadImage(fileUri);
 			
