@@ -431,8 +431,7 @@ cvServ.factory('CV_Camper', ['$http', '$q', function($http, $q) {
 		};
 		
 		self.handleEncoded = function(base64Img, data){
-			console.log(base64Img);	
-			if(camper_id>0 && data){
+			if(data.post_id>0 && data){
 				data.image_data = base64Img;
 				console.log(data);
 				$http.post(path, data, $config)
