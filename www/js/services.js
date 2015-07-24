@@ -427,7 +427,7 @@ cvServ.factory('CV_Camper', ['$http', '$q', function($http, $q) {
 		
 			path = rawpath+'add_image/?access_token='+global.accessToken;
 			
-			var base64 = Base64.encode(file);
+			var base64 = Base64.encode(image);
 			console.log(base64);
 			data.image_data = base64;
 			data.post_id = camper_id;
