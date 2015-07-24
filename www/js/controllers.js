@@ -310,27 +310,15 @@ cvCont.controller('logForm', ['$scope', '$cordovaCamera', '$state', '$document',
 	
 	$scope.modal = {};
 	
-	$ionicModal.fromTemplateUrl('logFormSignature.html', {
-		scope: $scope,
-		animation: 'slide-in-up'
-	  }).then(function(modal) {
-		$scope.modal = modal;
-	  });
-		
-	$scope.openModal = function() {
-		$scope.modal.show();
-	  };	
 	$scope.saveForm = function(form) {
 		var results = CV_Forms.saveForm(form);
 	};
 	
-	$scope.closeModal = function() {
-		$scope.modal.hide();
+
+	$scope.showSignature = function() {
+		$('.main-signature-pad').slideDown(200);	
 	};
 
-	  $scope.$on('$destroy', function() {
-		$scope.modal.remove();
-	  });
 	  
   	$('#loading').hide();
 	
@@ -366,12 +354,17 @@ cvCont.controller('SignatureCtrl', function($scope) {
  
     $scope.clearCanvas = function() {
         signaturePad.clear();
-    }
+    };
  
     $scope.saveCanvas = function() {
         var sigImg = signaturePad.toDataURL();
         $scope.signatureData = sigImg;
-    }
+		// we should now put this data into the text box for signatures
+		$('#field_17440').val(sigImg).before('<div class="item"><img width="400" src="'+sigImg+'" /></div>');
+		$('#field_17440').parent().show();
+		$('#field_17440').hide(); // make sure to hide the signature
+		$('.main-signature-pad').slideUp(300);
+    };
 });
 
 cvCont.controller('formBuilder', ['$sce','$scope', function($sce, $scope) {

@@ -1,28 +1,32 @@
 <ion-view view-title="Log Form - {{global.camper.first_name}} {{global.camper.last_name}}">
+    
+    <ion-content scroll="false" class="padding main-signature-pad hidden">
+       <ion-item ng-controller="SignatureCtrl" class="form_list_item list main-signature-pad">
+            <div class="bar bar-header bar-positive" style="position:relative; margin-bottom:15px;">      
+                <h1 class="title">Please sign the box</h1>
+            </div>   
+            <div class="item padding-verticle">
+            <canvas id='signatureCanvas' width='985' height='450' style='border: 1px solid black;'></canvas>
+              <div class='button-bar'>
+                  <a class='button button-energized' ng-click='clearCanvas()'>Clear</a>
+                  <a class='button button-balanced' ng-click='saveCanvas()'>Save</a>
+              </div>
+            </div>
+        </ion-item>
+     </ion-content>
+     
   <ion-content class="padding">
     
         <div class="row checkin_title">
             <h2 class="sub_title">Log Form Entry on {{date}} at {{time_of_day}}</h2>
         </div>
   	<div class="row logsheets-container">
-            
     	<div class="col col-75 padding-horizontal">
             <ion-list> 
             	<form name="logForm" class="log_form" id="form_{{form_id}}" data-id="{{form_id}}" ng-submit="saveForm(logForm)">
                     <ion-item ng-controller="formBuilder" ng-repeat="field in form.fields" class="form_list_item list" id="form_input_{{field.id}}" ng-model="checkinData" ng-bind-html="fieldHTML">
                     </ion-item>
-                    <ion-item ng-controller="SignatureCtrl" class="form_list_item list">
-                    	<div class="item padding-verticle" ng-show="!signatureData">
-                        <canvas id='signatureCanvas' width='700' height='300' style='border: 1px solid black;'></canvas>
-                          <div class='button-bar'>
-                              <a class='button button-energized' ng-click='clearCanvas()'>Clear</a>
-                              <a class='button button-balanced' ng-click='saveCanvas()'>Save</a>
-                          </div>
-                        </div>
-                        <div class="item user_signature_box" ng-show="signatureData">
-                        	<img ng-src='{{signatureData}}' width="300" />
-                        </div>
-                    </ion-item>
+                    <ion-item ng-click="showSignature()" class="item padding-verticle item-positive add-signature-button" ng-show="!signatureData">Add a Signature</ion-item>
                     <ion-item>
                     	<input name="cv_user_id" id="user_id" type="hidden" value="{{user_id}}" />
                     	<input name="cv_camp_id" id="camp_id" type="hidden" value="{{camp_id}}" />

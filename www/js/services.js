@@ -312,7 +312,7 @@ cvServ.factory('CV_Forms', ['$http', '$q', '$location', '$ionicPopup', function(
 				};
 			console.log($data);
 			$http.post(path,$data,$config).success(function(data,satus){
-				console.log(JSON.stringify(data));
+				console.log(data);
 				if(data.status === 'success'){
 				   var alertPopup = $ionicPopup.alert({
 					 title: 'Success!',

@@ -47,6 +47,9 @@ var formBuilder = {
 	if(field.meta_value.label === 'Signature') {
 		classOutput+= ' hidden';
 		fieldClass = ' hidden';
+		
+		return '<label class="item item-input item-stacked-label'+fieldClass+'"><span class="input-label">'+field.meta_value.label+'</span><input type="text" class="' + classOutput + '" name="form_values[field_'+field.meta_id+']" data-field="true" id="field_'+field.meta_id+'" value="'+formBuilder.value+'" placeholder="'+field.meta_value.placeholder+'"></label>';
+
 	}
     return '<label class="item item-input item-stacked-label'+fieldClass+'">'+field.meta_value.label+'<textarea class="' + classOutput + '" name="form_values[field_'+field.meta_id+']" id="field_'+field.meta_id+'" data-field="true"  placeholder="'+field.meta_value.placeholder+'" ng-model="checkinData.field_'+field.meta_id+'">'+formBuilder.value+'</textarea></label>';
   },

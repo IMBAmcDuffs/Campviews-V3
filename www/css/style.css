@@ -239,6 +239,19 @@ img {
 	
 }
 
+.main-signature-pad {
+	position:absolute;
+	top:0px;
+	left:0px;
+	width:100%;	
+	z-index:999;
+	height:100%;
+	padding:0px;
+}
+.main-signature-pad canvas {
+	width:100%;	
+}
+
 .positive .bar-stable {
   border-color: #0c63ee;
   background-color: #387ef5;
