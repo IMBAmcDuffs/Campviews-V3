@@ -522,11 +522,6 @@ cvCont.controller('logBuilder', ['$scope', '$timeout', 'CV_Camper', '$stateParam
 		}
 	}
 	
-	$scope.signUserValues = function(value){
-		var $data = value;
-		
-		return $data;
-	};
 	
 	
 	$scope.cur_i = 0;
