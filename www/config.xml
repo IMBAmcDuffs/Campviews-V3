@@ -18,13 +18,10 @@
   <preference name="SplashScreen" value="screen"/>
   <preference name="SplashScreenDelay" value="3000"/>
   <preference name="orientation" value="landscape"/>
-  <gap:plugin name="com.performanceactive.plugins.camera" version="1.4" />
+  <gap:plugin name="com.logilite.vision.camera" version="0.2.11" />
   <feature name="StatusBar">
     <param name="ios-package" value="CDVStatusBar" onload="true"/>
   </feature>
-  <feature name="CustomCamera">
-        <param name="ios-package" value="CustomCamera" />
-  </feature>  
   <platform name="ios">
     <icon src="resources/ios/icon/icon.png" width="57" height="57"/>
     <icon src="resources/ios/icon/icon@2x.png" width="114" height="114"/>
