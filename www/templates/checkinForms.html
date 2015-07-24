@@ -23,7 +23,7 @@
                 	<img ng-src="{{camper.thumbnail}}">
     			</div>
                 <div class="image no-image" ng-show="!camper.thumbnail">
-                    <img ng-src="http://placehold.it/300x300">
+                    <img id="noImage" ng-src="http://placehold.it/300x300">
                 </div>
                 <ion-item ng-click="takePicture()" class="item padding-vertical item-positive button" style="text-align:left; width:100%;">
                 	<i class="ion-camera ion-icon"></i> Take Picture

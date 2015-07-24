@@ -251,7 +251,7 @@ cvCont.controller('MainCtrl', ['$scope', '$ionicFilterBar', '$timeout', '$stateP
 	
 }]);
  
-cvCont.controller('checkinForms', ['$scope', '$document', '$stateParams', '$location', 'CV_Camper', 'CV_Forms', '$cordovaCamera', 'Upload', function($scope, $document, $stateParams, $location, CV_Camper, CV_Forms, $cordovaCamera, Upload) {
+cvCont.controller('checkinForms', ['$scope', '$document', '$stateParams', '$location', 'CV_Camper', 'CV_Forms', '$cordovaCamera', 'camera', function($scope, $document, $stateParams, $location, CV_Camper, CV_Forms, $cordovaCamera, camera) {
  	$scope.camper_id = 0;
 	$scope.global = global;
 	if($stateParams.camper_id){
@@ -259,43 +259,21 @@ cvCont.controller('checkinForms', ['$scope', '$document', '$stateParams', '$loca
 	}
 	$scope.picture = '';
 	
-	$scope.upload = function (file, post_id) {
-        if (file) {
-                Upload.upload({
-                    url: global.apiPath+'cv_camper/'+'add_image/?access_token='+global.accessToken,
-					method: 'POST',
-                    fields: {'post_id': post_id},
-					sendFieldsAs: 'form',
-                    file: file,
-                }).progress(function (evt) {
-                    var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
-					console.log(evt);
-                    console.log('progress: ' + progressPercentage + '% ' + evt.config.file.name);
-                }).success(function (data, status, headers, config) {
-					console.log(data);
-                    console.log('file ' + config.file.name + 'uploaded. Response: ' + data);
-                }).error(function (data, status, headers, config) {
-					console.log(data,status);
-                    console.log('error status: ' + status);
-                });
-		}
-	};
 	
 	$scope.takePicture = function() {
-		var filename = 'CV_camperPic_'+$stateParams.camper_id+'.png';
-        navigator.customCamera.getPicture(filename, function success(fileUri) {
-			alert("File location: " + fileUri);
-			var file = fileUri.createObjectURL();
-			console.log(file);
-			var saveImage = $scope.upload(fileUri,$stateParams.camper_id);
-			
-		}, function failure(error) {
-			alert(error);
-		}, {
-			quality: 80,
-			targetWidth: 350,
-			targetHeight: 350,
+		navigator.camera.getPicture(onSuccess, onFail, { quality: 50,
+			destinationType: Camera.DestinationType.DATA_URL
 		});
+		
+		function onSuccess(imageData) {
+			var image = document.getElementById('noImage');
+			image.src = "data:image/jpeg;base64," + imageData;
+			console.log(imageData);
+		}
+		
+		function onFail(message) {
+			alert('Failed because: ' + message);
+		}
     };
 	
 	CV_Camper.getCachedCamper($stateParams.camper_id); 
