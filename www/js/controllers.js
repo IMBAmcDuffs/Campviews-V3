@@ -283,7 +283,7 @@ cvCont.controller('checkinForm', ['$scope', '$cordovaCamera', '$state', '$docume
 	
 }]);
 
-cvCont.controller('logForm', ['$scope', '$cordovaCamera', '$state', '$document', '$stateParams', '$location', 'CV_Camper', 'CV_Forms', 'logForms', function($scope, $cordovaCamera, $state, $document, $stateParams, $location, CV_Camper, CV_Forms, logForms) {
+cvCont.controller('logForm', ['$scope', '$cordovaCamera', '$state', '$document', '$stateParams', '$location', '$ionicModal', 'CV_Camper', 'CV_Forms', 'logForms', function($scope, $cordovaCamera, $state, $document, $stateParams, $location, $ionicModal, CV_Camper, CV_Forms, logForms) {
 	CV_Camper.getCachedCamper($stateParams.camper_id); 
 	
 	var camper = global.camper;
@@ -306,12 +306,32 @@ cvCont.controller('logForm', ['$scope', '$cordovaCamera', '$state', '$document',
 	$scope.date = $stateParams.day;
 	$scope.user_id = global.userData.ID;
 	
+	$scope.signatureData = false;
 	
+	$scope.modal = {};
+	
+	$ionicModal.fromTemplateUrl('logFormSignature.html', {
+		scope: $scope,
+		animation: 'slide-in-up'
+	  }).then(function(modal) {
+		$scope.modal = modal;
+	  });
 		
+	$scope.openModal = function() {
+		$scope.modal.show();
+	  };	
 	$scope.saveForm = function(form) {
 		var results = CV_Forms.saveForm(form);
 	};
 	
+	$scope.closeModal = function() {
+		$scope.modal.hide();
+	};
+
+	  $scope.$on('$destroy', function() {
+		$scope.modal.remove();
+	  });
+	  
   	$('#loading').hide();
 	
 	// set data (mask as var _checkinData)
@@ -340,6 +360,19 @@ cvCont.controller('logForm', ['$scope', '$cordovaCamera', '$state', '$document',
 	
 }]);
 
+cvCont.controller('SignatureCtrl', function($scope) {
+    var canvas = document.getElementById('signatureCanvas');
+    var signaturePad = new SignaturePad(canvas);
+ 
+    $scope.clearCanvas = function() {
+        signaturePad.clear();
+    }
+ 
+    $scope.saveCanvas = function() {
+        var sigImg = signaturePad.toDataURL();
+        $scope.signatureData = sigImg;
+    }
+});
 
 cvCont.controller('formBuilder', ['$sce','$scope', function($sce, $scope) {
 	var field_id = $scope.field.meta_id;

@@ -11,6 +11,18 @@
             	<form name="logForm" class="log_form" id="form_{{form_id}}" data-id="{{form_id}}" ng-submit="saveForm(logForm)">
                     <ion-item ng-controller="formBuilder" ng-repeat="field in form.fields" class="form_list_item list" id="form_input_{{field.id}}" ng-model="checkinData" ng-bind-html="fieldHTML">
                     </ion-item>
+                    <ion-item ng-controller="SignatureCtrl" class="form_list_item list">
+                    	<div class="item padding-verticle" ng-show="!signatureData">
+                        <canvas id='signatureCanvas' width='700' height='300' style='border: 1px solid black;'></canvas>
+                          <div class='button-bar'>
+                              <a class='button button-energized' ng-click='clearCanvas()'>Clear</a>
+                              <a class='button button-balanced' ng-click='saveCanvas()'>Save</a>
+                          </div>
+                        </div>
+                        <div class="item user_signature_box" ng-show="signatureData">
+                        	<img ng-src='{{signatureData}}' width="300" />
+                        </div>
+                    </ion-item>
                     <ion-item>
                     	<input name="cv_user_id" id="user_id" type="hidden" value="{{user_id}}" />
                     	<input name="cv_camp_id" id="camp_id" type="hidden" value="{{camp_id}}" />
