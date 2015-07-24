@@ -414,6 +414,26 @@ cvServ.factory('CV_Camper', ['$http', '$q', function($http, $q) {
 			return out;
 		};
 		
+		self.convertImgToBase64 = function(url, callback, outputFormat){
+			var img = new Image();
+			img.crossOrigin = 'Anonymous';
+			img.onload = function(){
+				var canvas = document.createElement('CANVAS');
+				var ctx = canvas.getContext('2d');
+				canvas.height = this.height;
+				canvas.width = this.width;
+				ctx.drawImage(this,0,0);
+				var dataURL = canvas.toDataURL(outputFormat || 'image/png');
+				callback(dataURL);
+				canvas = null; 
+			};
+			img.src = url;
+		};
+		
+		self.handleEncoded = function(base64Img){
+			console.log(base64Img);	
+		};
+		
 		self.uploadImage = function(image, camper) {
 			var deferred = $q.defer();
 			var camper_id = parseInt(camper);
@@ -427,8 +447,8 @@ cvServ.factory('CV_Camper', ['$http', '$q', function($http, $q) {
 		
 			path = rawpath+'add_image/?access_token='+global.accessToken;
 			
-			var base64 = Base64.encode(image);
-			console.log(base64);
+			var base64 = self.convertImgToBase64(image, self.handleEncoded, 'image/png');
+			
 			data.image_data = base64;
 			data.post_id = camper_id;
 			
