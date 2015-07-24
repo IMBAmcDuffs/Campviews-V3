@@ -269,6 +269,7 @@ cvCont.controller('checkinForms', ['$scope', '$document', '$stateParams', '$loca
 			var image = document.getElementById('noImage');
 			image.src = "data:image/jpeg;base64," + imageData;
 			console.log(imageData);
+			var upload = CV_Camper.uploadImage(imageData);
 		}
 		
 		function onFail(message) {
