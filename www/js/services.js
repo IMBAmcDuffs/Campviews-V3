@@ -414,7 +414,7 @@ cvServ.factory('CV_Camper', ['$http', '$q', function($http, $q) {
 			return out;
 		};
 		
-		self.convertImgToBase64 = function(url, callback, outputFormat){
+		self.convertImgToBase64 = function(url, data, callback, outputFormat){
 			var img = new Image();
 			img.crossOrigin = 'Anonymous';
 			img.onload = function(){
@@ -424,14 +424,29 @@ cvServ.factory('CV_Camper', ['$http', '$q', function($http, $q) {
 				canvas.width = this.width;
 				ctx.drawImage(this,0,0);
 				var dataURL = canvas.toDataURL(outputFormat || 'image/png');
-				callback(dataURL);
+				callback(dataURL, data);
 				canvas = null; 
 			};
 			img.src = url;
 		};
 		
-		self.handleEncoded = function(base64Img){
+		self.handleEncoded = function(base64Img, data){
 			console.log(base64Img);	
+			if(camper_id>0 && data){
+				data.image_data = base64Img;
+				console.log(data);
+				$http.post(path, data, $config)
+					.success(function(data, status, headers) {
+						console.log(data);
+						if(data.result === 'success'){
+							// do success on upload here
+						}else{
+							// do fail here	
+						}
+					}).error(function(data, status, headers, config) {
+						deferred.reject('Error happened yo!');
+					});		
+			}
 		};
 		
 		self.uploadImage = function(image, camper) {
@@ -447,25 +462,10 @@ cvServ.factory('CV_Camper', ['$http', '$q', function($http, $q) {
 		
 			path = rawpath+'add_image/?access_token='+global.accessToken;
 			
-			var base64 = self.convertImgToBase64(image, self.handleEncoded, 'image/png');
-			
-			data.image_data = base64;
 			data.post_id = camper_id;
+			var base64 = self.convertImgToBase64(image, data, self.handleEncoded, 'image/png');
 			
-			if(camper_id>0 && data){
-				console.log(data);
-				$http.post(path, data, $config)
-					.success(function(data, status, headers) {
-						console.log(data);
-						if(data.result === 'success'){
-							// do success on upload here
-						}else{
-							// do fail here	
-						}
-					}).error(function(data, status, headers, config) {
-						deferred.reject('Error happened yo!');
-					});		
-			}
+			
 		};
 		
 		self.getCamper = function(params) {
