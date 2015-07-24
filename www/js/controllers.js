@@ -41,7 +41,7 @@ cvCont.controller('AppCtrl', function($scope, $ionicHistory, $ionicModal, $locat
 	
 	var $current = localStorage.getItem('user_info');
 	global.userName = $current;	
-	global.userData = localStorage.getItem('user_data');
+	global.userData = JSON.parse(localStorage.getItem('user_data'));
 	$scope.global = global;	
   
 	console.log('AppCtrl');
@@ -295,7 +295,7 @@ cvCont.controller('logForm', ['$scope', '$cordovaCamera', '$state', '$document',
 	  }
 
 	var form = logForms.forms[0]; 
-	console.log(global);
+	console.log(global, 'globals');
 
 	$scope.camper = camper; 
 	$scope.form = form; 
@@ -522,9 +522,8 @@ cvCont.controller('logBuilder', ['$scope', '$timeout', 'CV_Camper', '$stateParam
 		}
 	}
 	
-	$scope.processUserValue = function(value){
+	$scope.signUserValues = function(value){
 		var $data = value;
-		console.log(value,1);
 		
 		return $data;
 	};

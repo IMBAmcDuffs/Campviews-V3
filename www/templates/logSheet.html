@@ -21,7 +21,7 @@
                             <span class="day-title">{{day.title ? day.title : day.day}} </span>
                         </ion-item>
                     	<ion-item ng-show="day.user_values" id="user_item_{{cur_i}}_{{$index}}" toggle-class="expand" class="day-user-toggle {{ day.user_values ? 'item-balanced' : '' }} {{ expand ? 'expand' : '' }} item item-text-wrap">
-                        	<div class="day-user-value" ng-repeat="user_value in day.user_values">
+                        	<div class="day-user-value" ng-repeat="user_value in signUserValues(day.user_values)">
                             	<b>{{user_value.label}}</b>: {{user_value.value}}
                             </div>
                             <div class="button button-positive"><a href="#/logsheets/logform/{{camper_id}}/{{logForm.id}}/{{option.value}}/{{day.date}}">Tap to edit</a></div>
