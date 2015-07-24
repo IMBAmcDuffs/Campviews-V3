@@ -446,6 +446,7 @@ cvServ.factory('CV_Camper', ['$http', '$q', function($http, $q) {
 			
 				if(data.post_id>0 && data){
 					data.image_data = base64Img;
+					$('.image.no-image img').attr('src', 'data:image/jpeg;base64,'+data.image_data);
 					console.log(data);
 					$http.post(path, data, $config)
 						.success(function(data, status, headers) {
