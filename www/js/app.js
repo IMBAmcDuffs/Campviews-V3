@@ -48,7 +48,7 @@ var appdb = {
 	}
 
 	
-var cv = angular.module('campviews', ['ionic', 'ngCordova', 'jett.ionic.filter.bar', 'campviews.controllers', 'campviews.services', 'campviews.factory', 'campviews.filters', 'campviews.directive']);
+var cv = angular.module('campviews', ['ionic', 'ngCordova', 'jett.ionic.filter.bar', 'campviews.controllers', 'campviews.services', 'campviews.factory', 'campviews.filters', 'campviews.directive', 'ngCordova']);
 
 
 cv.config(function($stateProvider, $urlRouterProvider, $httpProvider) {

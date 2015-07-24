@@ -251,27 +251,36 @@ cvCont.controller('MainCtrl', ['$scope', '$ionicFilterBar', '$timeout', '$stateP
 	
 }]);
  
-cvCont.controller('checkinForms', ['$scope', '$document', '$stateParams', '$location', 'CV_Camper', 'CV_Forms', 'Camera', function($scope, $document, $stateParams, $location, CV_Camper, CV_Forms, Camera) {
+cvCont.controller('checkinForms', ['$scope', '$document', '$stateParams', '$location', 'CV_Camper', 'CV_Forms', '$cordovaCamera', function($scope, $document, $stateParams, $location, CV_Camper, CV_Forms, $cordovaCamera) {
  	$scope.camper_id = 0;
 	$scope.global = global;
 	if($stateParams.camper_id){
 		$scope.camper_id = $stateParams.camper_id;
 	}
 	$scope.picture = '';
+	
 	$scope.takePicture = function() {
-		Camera.getPicture().then(function(imageURI) {
-		  console.log(imageURI);
-		  $scope.picture = imageURI;
-		}, function(err) {
-		  console.log(err);
-		}, {
-		  quality: 75,
-		  targetWidth: 320,
-		  targetHeight: 320,
-		  saveToPhotoAlbum: false
-		});
-    };
+        var options = { 
+            quality : 75, 
+            destinationType : Camera.DestinationType.DATA_URL, 
+            sourceType : Camera.PictureSourceType.CAMERA, 
+            allowEdit : true,
+            encodingType: Camera.EncodingType.JPEG,
+            targetWidth: 300,
+            targetHeight: 300,
+            popoverOptions: CameraPopoverOptions,
+            saveToPhotoAlbum: false
+        };
 
+        $cordovaCamera.getPicture(options).then(function(imageData) {
+			console.log('Picture!!!',imageData);
+            $scope.imgURI = "data:image/jpeg;base64," + imageData;
+        }, function(err) {
+			console.log(err);
+            // An error occured. Show a message to the user
+        });
+    };
+	
 	CV_Camper.getCachedCamper($stateParams.camper_id); 
   	$('#loading').hide();
 	
