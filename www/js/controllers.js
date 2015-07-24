@@ -251,7 +251,7 @@ cvCont.controller('MainCtrl', ['$scope', '$ionicFilterBar', '$timeout', '$stateP
 	
 }]);
  
-cvCont.controller('checkinForms', ['$scope', '$document', '$stateParams', '$location', 'CV_Camper', 'CV_Forms', '$cordovaCamera', 'camera', function($scope, $document, $stateParams, $location, CV_Camper, CV_Forms, $cordovaCamera, camera) {
+cvCont.controller('checkinForms', ['$scope', '$document', '$stateParams', '$location', 'CV_Camper', 'CV_Forms', '$cordovaCamera', function($scope, $document, $stateParams, $location, CV_Camper, CV_Forms, $cordovaCamera) {
  	$scope.camper_id = 0;
 	$scope.global = global;
 	if($stateParams.camper_id){
