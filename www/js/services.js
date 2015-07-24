@@ -406,6 +406,14 @@ cvServ.factory('CV_Camper', ['$http', '$q', function($http, $q) {
 			}
 		};
 		
+		self.uint8ToString = function(buf) {
+			var i, length, out = '';
+			for (i = 0, length = buf.length; i < length; i += 1) {
+				out += String.fromCharCode(buf[i]);
+			}
+			return out;
+		};
+		
 		self.uploadImage = function(image, camper) {
 			var deferred = $q.defer();
 			var camper_id = parseInt(camper);
@@ -413,15 +421,15 @@ cvServ.factory('CV_Camper', ['$http', '$q', function($http, $q) {
 			var data = {};
 			var $config = {
 				headers: {
-					'Content-Type': undefined
+					'Content-Type': 'multipart/form-data' 	
 				} 
 			};
 		
 			path = rawpath+'add_image/?access_token='+global.accessToken;
-			var formData = new FormData();
-			formData.append("file", image);
 			
-			data.image_data = formData;
+			var base64 = Base64.encode(file);
+			console.log(base64);
+			data.image_data = base64;
 			data.post_id = camper_id;
 			
 			if(camper_id>0 && data){
