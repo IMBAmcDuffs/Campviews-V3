@@ -251,14 +251,32 @@ cvCont.controller('MainCtrl', ['$scope', '$ionicFilterBar', '$timeout', '$stateP
 	
 }]);
  
-cvCont.controller('checkinForms', ['$scope', '$document', '$stateParams', '$location', 'CV_Camper', 'CV_Forms', function($scope, $document, $stateParams, $location, CV_Camper, CV_Forms) {
+cvCont.controller('checkinForms', ['$scope', '$document', '$stateParams', '$location', 'CV_Camper', 'CV_Forms', 'Camera', function($scope, $document, $stateParams, $location, CV_Camper, CV_Forms, Camera) {
  	$scope.camper_id = 0;
 	$scope.global = global;
 	if($stateParams.camper_id){
 		$scope.camper_id = $stateParams.camper_id;
 	}
 	
-	$scope.takePicture = function() {};
+	$scope.takePicture = function() {
+	  var cameraOptions = {
+		  quality: 75,
+		  targetWidth: 320,
+		  targetHeight: 320,
+		  saveToPhotoAlbum: false
+	  };
+	  console.log('takePictue');
+	  navigator.camera.getPicture(function(imageURI) {
+		console.log(imageURI);
+		// imageURI is the URL of the image that we can use for
+		// an <img> element or backgroundImage.
+		
+	  }, function(err) {
+		console.log(err);
+		// Ruh-roh, something bad happened
+	
+	  }, cameraOptions);
+	};
 
 	CV_Camper.getCachedCamper($stateParams.camper_id); 
   	$('#loading').hide();
