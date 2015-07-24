@@ -47,6 +47,8 @@ cvCont.controller('AppCtrl', function($scope, $ionicHistory, $ionicModal, $locat
 	console.log('AppCtrl');
   }
   
+  
+  
   $scope.setNavColor = function($color){
 	var _b = false;	
 	$scope.page = page = $location.$$path.replace('/','');
@@ -359,7 +361,12 @@ cvCont.controller('logForm', ['$scope', '$cordovaCamera', '$state', '$document',
 	
 	
 	// we need to put the correct signature if the doctor has one already
-	
+	if(global.userData.data){
+		var signature = global.userData.data.signature;
+		if(signature !== ''){
+			_checkinData.field_17440 = $scope.signatureData = signature;	
+		}
+	}
 	
 }]);
 
@@ -375,7 +382,15 @@ cvCont.controller('SignatureCtrl', function($scope) {
         var sigImg = signaturePad.toDataURL();
         $scope.signatureData = sigImg;
 		// we should now put this data into the text box for signatures
-		$('#field_17440').val(sigImg).before('<div class="item"><img width="400" src="'+sigImg+'" /></div>');
+		$('#field_17440').val(sigImg);
+		if($('#field_17440').parent().find('img').length>0){
+			$('#field_17440').parent().find('img').attr('src',sigImg);
+		}else{
+			$('#field_17440').before('<div class="item"><img width="400" src="'+sigImg+'" /></div>')	;
+		}
+		
+		global.userData.data.signature = sigImg;
+		
 		$('#field_17440').parent().show();
 		$('#field_17440').hide(); // make sure to hide the signature
 		$('.main-signature-pad').slideUp(300);

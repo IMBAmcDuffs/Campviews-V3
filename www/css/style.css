@@ -106,6 +106,10 @@ img {
 	color:#333;
 }
 
+#form_input_17438, #form_input_17434, #field_17440 {
+	display:none;	
+}
+
 .day-user-toggle.expand::before {
 	content: "Tap to hide";
 	color:#D6FFDC;

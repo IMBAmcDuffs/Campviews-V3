@@ -8,8 +8,12 @@ cvDir.directive('toggleClass', function() {
         restrict: 'A',
         link: function(scope, element, attrs) {
             element.bind('click', function() {
-				$('.'+attrs.toggleClass).toggleClass(attrs.toggleClass);
-                element.toggleClass(attrs.toggleClass);
+				var $this = $(element);
+				$('.'+attrs.toggleClass).not($this).removeClass('expand');
+				
+				element.toggleClass(attrs.toggleClass);
+				
+                //
             });
         }
     };

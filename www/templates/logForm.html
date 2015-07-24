@@ -24,9 +24,9 @@
     	<div class="col col-75 padding-horizontal">
             <ion-list> 
             	<form name="logForm" class="log_form" id="form_{{form_id}}" data-id="{{form_id}}" ng-submit="saveForm(logForm)">
-                    <ion-item ng-controller="formBuilder" ng-repeat="field in form.fields" class="form_list_item list" id="form_input_{{field.id}}" ng-model="checkinData" ng-bind-html="fieldHTML">
+                    <ion-item ng-controller="formBuilder" ng-repeat="field in form.fields" class="form_list_item list" id="form_input_{{field.meta_id}}" ng-model="checkinData" ng-bind-html="fieldHTML">
                     </ion-item>
-                    <ion-item ng-click="showSignature()" class="append-to-signature item padding-verticle item-positive add-signature-button" ng-show="!signatureData">Add a Signature</ion-item>
+                    <ion-item ng-click="showSignature()" class="append-to-signature padding-verticle item-positive add-signature-button"><span ng-show="signatureData">Change Account Signature</span><span ng-show="!signatureData">Add a Signature</span></ion-item>
                     <ion-item>
                     	<input name="cv_user_id" id="user_id" type="hidden" value="{{user_id}}" />
                     	<input name="cv_camp_id" id="camp_id" type="hidden" value="{{camp_id}}" />
