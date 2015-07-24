@@ -410,12 +410,25 @@ cvServ.factory('CV_Camper', ['$http', '$q', function($http, $q) {
 			var deferred = $q.defer();
 			var camper_id = parseInt(camper);
 			var image_data = image;
-			
+			var data = {};
+			var $config = {
+				headers: {
+					'Content-Type': 'multipart/form-data' 	
+				} 
+			};
+		
 			path = rawpath+'add_image/?access_token='+global.accessToken;
+			var formData = new FormData();
+			formData.append("file", image);
 			
-			if(camper_id>0 && image_data){
-				$http.post(path)
-					.success(function(data, status, headers, config) {
+			data.image_data = formData;
+			data.post_id = camper_id;
+			
+			if(camper_id>0 && data){
+				console.log(data);
+				$http.post(path, data, $config)
+					.success(function(data, status, headers) {
+						console.log(data);
 						if(data.result === 'success'){
 							// do success on upload here
 						}else{

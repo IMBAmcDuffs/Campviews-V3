@@ -261,18 +261,17 @@ cvCont.controller('checkinForms', ['$scope', '$document', '$stateParams', '$loca
 	
 	$scope.takePicture = function() {
 		var filename = 'CV_camperPic_'+$stateParams.camper_id;
-        navigator.camera.getPicture(function success(fileUri) {
+        navigator.customCamera.getPicture(filename, function success(fileUri) {
 			alert("File location: " + fileUri);
-			var saveImage = CV_Camper.uploadImage(fileUri);
+			
+			var saveImage = CV_Camper.uploadImage(fileUri,$stateParams.camper_id);
 			
 		}, function failure(error) {
 			alert(error);
 		}, {
 			quality: 80,
-			targetWidth: 300,
-			targetHeight: 300,
-			destinationType: navigator.camera.DestinationType.DATA_URL,
-			sourceType: navigator.camera.PictureSourceType.CAMERA,
+			targetWidth: 350,
+			targetHeight: 350,
 		});
     };
 	
