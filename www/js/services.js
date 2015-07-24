@@ -413,7 +413,7 @@ cvServ.factory('CV_Camper', ['$http', '$q', function($http, $q) {
 			var data = {};
 			var $config = {
 				headers: {
-					'Content-Type': 'multipart/form-data' 	
+					'Content-Type': undefined
 				} 
 			};
 		
