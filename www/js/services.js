@@ -463,7 +463,19 @@ cvServ.factory('CV_Camper', ['$http', '$q', function($http, $q) {
 			}
 			
 			data.post_id = camper_id;
-			var base64 = convertImgToBase64(image, data, handleEncoded, 'image/png');
+			var reader  = new FileReader();
+			reader.onloadend = function () {
+				console.log(reader.result);
+				var base64 = reader.result;
+			};
+			
+			if (image) {
+				reader.readAsDataURL(image);
+			  } else {
+				preview.src = "";
+			  }
+			
+			//var base64 = convertImgToBase64(image, data, handleEncoded, 'image/png');
 			
 			
 		};

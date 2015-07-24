@@ -260,7 +260,7 @@ cvCont.controller('checkinForms', ['$scope', '$document', '$stateParams', '$loca
 	$scope.picture = '';
 	
 	$scope.takePicture = function() {
-		var filename = 'CV_camperPic_'+$stateParams.camper_id;
+		var filename = 'CV_camperPic_'+$stateParams.camper_id+'.png';
         navigator.customCamera.getPicture(filename, function success(fileUri) {
 			alert("File location: " + fileUri);
 			
