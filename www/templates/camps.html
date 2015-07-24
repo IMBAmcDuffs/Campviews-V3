@@ -1,0 +1,25 @@
+<ion-view view-title="Camps">
+<div class="container">
+     <ion-header-bar align-title="center" class="bar-balanced">       
+              <h1 class="title">Select a Camp!</h1>
+     </ion-header-bar>
+  <ion-content class="padding">
+    	<ion-list class="row list list-inset"> 
+        	<ion-item ng-repeat="item in camps" class="col list_item" ng-click="selectCamp(item.id)">
+            	<div class="list_item_left">
+                	<img ng-src="{{item.image_url}}" />
+                </div>
+                <div class="list_item_right">
+                    <div class="list_item_title">
+                        {{item.title}}
+                    </div>
+                    <div class="list_item_dates">
+                        <span class="label">Start Date: <b>{{item.start_date}}</b></span>
+                        <span class="label">End Date: <b>{{item.end_date}}</b></span>
+                    </div>
+                </div>
+            </ion-item>
+        </ion-list>
+  </ion-content>
+</div>
+</ion-view>

@@ -1,0 +1,22 @@
+<ion-view view-title="Dashboard">
+   	<div class="bar bar-footer bar-assertive">
+        <h1 class="title">Welcome to CampViews {{global.userName}}, Please select an action above!</h1>
+    </div>
+ <ion-content class="dashboard">
+      <ion-list class="main-menu row">
+        <ion-item menu-close href="#/campers" ng-click="setNavColor('positive')" class="col column padding-vertical item-positive">
+          <i class="icon ion-person-stalker"></i> Campers
+        </ion-item>
+        <ion-item menu-close href="#/checkin" ng-click="setNavColor('balanced')" class="col column padding-vertical item-balanced">
+          <i class="icon ion-android-checkbox-outline"></i> Check In
+        </ion-item>
+        <ion-item menu-close href="#/logsheets" ng-click="setNavColor('calm')" class="col column padding-vertical item-calm">
+          <i class="icon ion-pizza"></i> Log Sheets
+        </ion-item>
+        <ion-item menu-close href="#/checkout" ng-click="setNavColor('energized')" class="col column padding-vertical item-energized">
+          <i class="icon ion-android-checkbox"></i> Check Out
+        </ion-item>
+      </ion-list>
+      
+  </ion-content>
+</ion-view>

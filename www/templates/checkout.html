@@ -1,0 +1,23 @@
+<ion-view view-title="Check Out">
+  <ion-content class="padding">
+   	<div class="checkin_content">
+    	<div class="checkin_title">
+        	<h2 class="sub_title">Checked in Users:</h2>
+        </div>
+        
+    	<ion-list class="row list list-inset"> 
+            <ion-item ng-repeat="item in global.campers|checkedIn" class="col list_item"  href="#/checkin/{{item.id}}">
+                <div class="list_item_left">
+                    <img ng-src="{{item.thumbnail}}" />
+                </div>
+                <div class="list_item_right">
+                    <div class="list_item_title">
+                        {{item.first_name}} {{item.last_name}}
+                    </div>
+                </div>
+            </ion-item>
+        </ion-list>
+        
+    </div>
+  </ion-content>
+</ion-view>

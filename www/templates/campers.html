@@ -1,0 +1,36 @@
+<ion-view view-title="{{page_title}}">
+  <ion-content direction="y">
+        <div class="search-button bar header-bar bar-dark">
+        	<h2 class="title" ng-click="showFilterBar()">  <i class=" icon ion-ios-search"></i> Search Campers</h2>
+        </div>
+        <ion-refresher pulling-icon="ion-arrow-down-b" on-refresh="refreshItems()">
+        </ion-refresher> 
+   	<div class="camper_list_content padding">
+        <div class="filter_options button-bar" ng-show="page == 'checkin'">
+        	<a class="button filter icon-left ion-ios-people {{ activeFilter=='everyone' || !activeFilter ? 'active' : '' }}" ng-click="filterResults('everyone')">Everyone</a>
+        	<a class="button filter icon-left ion-ios-checkmark-outline {{ activeFilter=='not_checked' ? 'active' : '' }}" ng-click="filterResults('not_checked')" data-filter="not-checked">Not Checked In</a>
+        	<a class="button filter icon-left ion-ios-checkmark-outline {{ activeFilter=='checking_in'  ? 'active' : '' }}" ng-click="filterResults('checking_in')" data-filter="checking-in">Checking In</a>
+        	<a class="button filter icon-left ion-android-checkbox {{ activeFilter=='checked_in' ? 'active' : '' }}" ng-click="filterResults('checked_in')" data-filter="checked-in">Checked In</a>
+        </div>
+    	<ion-list class="row list list-inset"> 
+         <div ng-show="_c" class="results-info results-found bar bar-positive">There are {{_c}} campers in our list.</div>
+         <div ng-show="_c==0" class="results-info no-results bar bar-assertive">No Campers found for your selection...</div>
+           <ion-item ng-repeat="item in items| orderBy:'last_name' " ng-show="item.id > 0" class="col list_item item card item-thumbnail-left {{ item.checked_in>0 && page=='checkin' ? 'item-balanced' : '' }}" ng-href="#/{{URI}}/{{item.id}}">
+                	<img ng-src="{{item.thumbnail ? item.thumbnail : 'http://placehold.it/300x300'}}" />
+
+                    <div class="list_item_title row">
+                        {{item.first_name}} {{item.last_name}}
+                    </div>
+                    <div ng-show="page=='checkin'">
+                        <div class="list_item_title row" ng-show="item.checked_in>0">
+                            Checked in {{item.checked_in}} out of {{item.checkins.length}}
+                        </div>
+                    </div>
+                
+            </ion-item>
+        </ion-list>
+        
+         
+    </div>
+  </ion-content>
+</ion-view>

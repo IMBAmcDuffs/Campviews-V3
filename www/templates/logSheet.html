@@ -1,0 +1,41 @@
+<ion-view view-title="Log Sheets - {{global.camper.first_name}} {{global.camper.last_name}}">
+  <ion-content class="padding">
+  	<div class="row">
+        <div class="col-80 col checkin_title">
+            <h2 class="sub_title">{{global.camper.first_name}} {{global.camper.last_name}} - {{logForm.name}}</h2>
+        </div>
+        <div class="col-20 col">
+        	<button class="button button-stable button-full" ng-click="filterCurrent()" toggle-class="button-calm">
+            	Current Time
+            </button>
+        </div>
+    </div>
+    <div class="row"> 
+    	<div class="col tod-container flex-container">
+            <div class="row">
+            	<div class="col-10 col">&nbsp;</div>
+                <div ng-repeat="option in timeOfDay.options" class="col" data-tod="{{option.value}}">
+              		<div ng-init="setIntervalScope($index)" class="heading item item-divider">{{ option.label }}<br /><center>{{option.value}}</center></div>
+                    <ion-list class="list" ng-controller="logRepeat" ng-repeat="day in getIndex(option.days,$index)" > 
+                        <ion-item ng-show="{{cur_i==0}}" class="col item item-dark day-title-container">
+                            <span class="day-title">{{day.title ? day.title : day.day}} </span>
+                        </ion-item>
+                    	<ion-item ng-show="day.user_values" id="user_item_{{cur_i}}_{{$index}}" toggle-class="expand" class="day-user-toggle {{ day.user_values ? 'item-balanced' : '' }} {{ expand ? 'expand' : '' }} item item-text-wrap">
+                        	<div class="day-user-value" ng-repeat="user_value in day.user_values">
+                            	<b>{{user_value.label}}</b>: {{user_value.value}}
+                            </div>
+                            <div class="button button-positive"><a href="#/logsheets/logform/{{camper_id}}/{{logForm.id}}/{{option.value}}/{{day.date}}">Tap to edit</a></div>
+                        </ion-item>
+                        <ion-item ng-show="!day.user_values" href="#/logsheets/logform/{{camper_id}}/{{logForm.id}}/{{option.value}}/{{day.date}}">
+                            <span class="day-value no-value">Tap to add</span>
+                        </ion-item>
+                    </ion-list>
+                    </div>
+                </div>
+            </div>
+             
+        </div>
+    </div>
+     
+  </ion-content>
+</ion-view>

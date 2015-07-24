@@ -1,0 +1,54 @@
+<ion-side-menus enable-menu-with-back-views="false">
+  <ion-side-menu-content>
+    <ion-nav-bar class="bar bar-stable {{ global.viewColor }}">
+      <ion-nav-back-button ng-click="setNavColor('back')">
+      </ion-nav-back-button>
+
+      <ion-nav-buttons side="left">
+        <button class="button button-icon button-clear ion-navicon" menu-toggle="left">
+        </button>
+      </ion-nav-buttons>
+    </ion-nav-bar>
+    <ion-nav-view name="menuContent"></ion-nav-view>
+  </ion-side-menu-content>
+
+  <ion-side-menu side="left">
+    <ion-content class="relative-holder">
+      <ion-list class="slide-menu">
+        <ion-item menu-close href="#/dashboard" class="item padding-vertical item-positive">
+          <i class="icon ion-planet"></i> Dashboard
+        </ion-item>
+        <!--ion-item menu-close href="#/campers" class="col column padding-vertical item-positive">
+          <i class="icon ion-person-stalker"></i> Campers
+        </ion-item>
+        <ion-item menu-close href="#/checkin" class="item padding-vertical item-balanced">
+          <i class="icon ion-happy"></i> Check In
+        </ion-item>
+        <ion-item menu-close href="#/logsheets" class="item padding-vertical item-calm">
+          <i class="icon ion-pizza"></i> Log Sheets
+        </ion-item>
+        <ion-item menu-close href="#/checkout" class="item padding-vertical item-energized">
+          <i class="icon ion-sad"></i> Check Out
+        </ion-item-->
+      </ion-list>
+      <ion-list class="list padding-vertical bottom">
+        <ion-item class="item item-divider padding-vertical">
+            <div class="user_info">
+                <div class="user_info_name">Logged in as {{global.userName}}</div>
+            </div>
+        </ion-item>
+        <ion-item menu-close ng-click="logout()" class="item-assertive">
+          <i class="icon ion-log-out"></i> Logout
+        </ion-item>
+        <ion-item class="item item-divider">
+            <div class="camp_info">
+                <div class="user_info_name">Current camp is <div class="navCampName">{{global.camp.title}}</div></div> 
+            </div>
+        </ion-item>
+        <ion-item menu-close ng-href="#/camps" class="item-dark">
+          <i class="icon ion-alert"></i> Change Camp
+        </ion-item>
+      </ion-list>
+    </ion-content>
+  </ion-side-menu>
+</ion-side-menus>

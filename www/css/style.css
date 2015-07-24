@@ -1,1 +1,363 @@
 /* Empty. Add your own CSS if you like */
+@font-face {
+  font-family: 'icomoon';
+  src:url('../fonts/icomoon.eot');
+  src:url('../fonts/icomoon.eot?#iefix') format('embedded-opentype'),
+    url('../fonts/icomoon.woff') format('woff'),
+    url('../fonts/icomoon.ttf') format('truetype'),
+    url('../fonts/icomoon.svg#icomoon') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'montserrat';
+  src:url('../fonts/Montserrat-Regular.ttf');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'montserrat-bold';
+  src:url('../fonts/Montserrat-Bold.ttf');
+  font-weight: 700;
+  font-style: normal;
+}
+
+input, select {
+	width:100%;	
+}
+
+img {
+	width:100%;
+	max-width:100%;
+	height:auto;
+	max-height:auto;	
+}
+
+.input-options {
+	width:100%;
+	text-align:center;	
+}
+.input-options input {
+	width:49.5%;	
+	clear:none;
+}
+
+.list.bottom {
+	width:100%;
+	margin-top:15px;
+	float:left;
+}
+
+.logo {
+	width:100%;
+	text-align:center;	
+	padding:25px 0px;
+}
+.logo-text {
+	color:#0dcecb;
+	font-size:44px;
+}
+.logo-text span {
+	color:#333;	
+	font-size:38px;
+}
+
+.day-user-value {
+	font-size:12px;
+}
+
+.tod-container .item {
+	text-align:center;		
+}
+.tod-container .item-content {
+	padding: 15px 0px;	
+}
+
+.day-user-toggle {
+	height:53px;	
+	overflow:hidden;
+}
+
+.day-user-toggle::before {
+	content: "Tap to view";
+	color:#D6FFDC;
+	font-weight:bold;
+	float:left;
+	width:100%;
+	margin-bottom:5px;
+	position:relative;
+}
+
+.day-user-toggle.expand {
+	height:auto;
+}
+.day-user-toggle.expand .day-user-value {
+	font-size:16px;
+}
+
+.day-user-toggle.expand::before {
+	content: "Tap to hide";
+	color:#D6FFDC;
+	font-weight:bold;
+	float:left;
+	width:100%;
+	margin-bottom:10px;
+	position:relative;
+}
+.results-info {
+	text-align:center;
+	float:left;
+	width:100%;
+	position:relative;
+}
+ .filter_options {
+	padding:0px;
+}
+.filter_options .button {
+	cursor:pointer;
+}
+
+.list_item {
+	float:left;
+	width:30%;
+	margin:15px !important;
+	height:120px;
+	overflow:hidden;
+}
+.list_item_left {
+	float:left;
+	width: 25%;
+}
+.list_item_right {
+	float:left;
+	width:75%;
+}
+.list_item_title, .list_item_dates {
+	float:left;
+	width:100%;
+	padding:0px 15px;
+	padding-top:20px;
+	box-sizing: border-box;
+	font-size:16px;
+	clear:both;
+}
+.list_item_title {
+	font-weight:bolder;	
+}
+.list_item_dates {
+	padding-top:0px;	
+	font-size:14px;
+}
+.list_item_dates span {
+	float:left;
+	width:100%;
+	padding:10px;	
+}
+
+.day-value {
+	font-size:14px;
+	color:#414141;
+	text-align:center;
+}
+.day-value.no-value {
+	color:#ACACAC;	
+	font-weight:bold;
+	opacity: 0.8;
+}
+.day-container {
+	position:relative;	
+}
+.day-title-container {
+	position:absolute;	
+	left:-115px;
+	width:115px;
+	text-transform:capitalize;
+	padding:10px;
+}
+
+.logsheets-container {
+	padding-top:50px;
+}
+
+.checkin_content {
+	float:left;
+	width:100%;	
+	margin-top:10px;
+}
+
+
+#menu-btn { width: 75px; height: 75px; line-height: 75px; margin-left: 20px; color: #fff; font-size: 35px; float: left; }
+#menu {
+	float:left;
+	width:100%;	
+	position:relative;
+	z-index:9;
+}
+#menu ul { width: 100%; margin:0; padding: 0; list-style: none; }
+#menu ul li {float:left; width: 25%; height: 50px; margin:0; list-style: none; }
+#menu ul li:last-child { border-bottom: none; }
+#menu ul li.active a { background-color: #176649; }
+#menu ul li a { float:left; font-family: 'montserrat'; font-size: 20px; color: #fff; text-decoration: none; width:100%;  padding: 10px;  background:#8DC01A;  line-height: 30px;  border-bottom: 1px solid #444;  border-right: 1px solid #444; }
+#menu ul li span { font-size: 20px; color: #fff; margin: 0 20px; }
+
+.main-menu .list, .camper-checkin-buttons .list {
+	width:100%;	
+	
+}
+.flex-container {
+	display:flex;
+	flex-direction:column;
+	flex-wrap: no-wrap;
+}
+.flex-container .flex-column {
+	flex: 1 auto 100%;	
+}
+.main-menu .item {
+	width:50%;
+	clear: none;
+	display:inline-block;
+	margin-top:3px;
+	box-sizing: border-box;
+}
+.main-menu .item a {
+	font-size:38px;
+	padding:100px 0px;
+	width:100%;
+	text-align:center;
+}
+.main-menu .item i {
+	padding:0px 15px;	
+}
+
+.filter-bar-search {
+	
+}
+
+.positive .bar-stable {
+  border-color: #0c63ee;
+  background-color: #387ef5;
+  background-image: linear-gradient(0deg, #0c63ee, #0c63ee 50%, transparent 50%);
+  color: #fff;
+}
+.balanced .bar-stable {
+	border-color: #28A524;
+	background-color: #33cd5f;
+	background-image: linear-gradient(0deg, #28a54c, #28a54c 50%, transparent 50%);
+	color: #fff;
+}
+.calm .bar-stable {
+  border-color: #0a9ec7;
+  background-color: #11c1f3;
+  background-image: linear-gradient(0deg, #0a9ec7, #0a9ec7 50%, transparent 50%);
+  color: #fff;
+}
+.energized .bar-stable {
+  border-color: #e6b400;
+  background-color: #ffc900;
+  background-image: linear-gradient(0deg, #e6b400, #e6b400 50%, transparent 50%);
+  color: #fff;
+}
+
+.selected_camper {
+	width:100%;
+	padding:10px;	
+}
+.selected_camper .image img {
+	width:100%;
+	height:auto;
+	max-width:100%;
+	max-height:200px;
+}
+
+.selected_camper .camper_data {
+	padding:15px 0px;	
+}
+.search-button.bar {
+	position:relative;	
+}
+.camper_list_content .list {
+	width:100%;	
+	margin:0px;
+}
+
+#loading {
+	display:none;
+	position:absolute;
+	top:0px;
+	left:0px;
+	width:100%;
+	height:100%;	
+	z-index:9999;
+	background:rgba(20,20,20,.5);
+}
+#loading span {
+	float:left;
+	width:100%;
+	text-align:center;
+	color:#FFF;
+	position:absolute;
+	top:50%;	
+}
+
+.loader b {
+	position:absolute;
+	font-size:80px;
+	color:#FFF;	
+	top:40px;
+}
+.loader,
+.loader:before,
+.loader:after {
+  border-radius: 50%;
+}
+.loader:before,
+.loader:after {
+  position: absolute;
+  content: '';
+}
+.loader:before {
+  width: 5.2em;
+  height: 10.2em;
+  background: #0dcecb;
+  border-radius: 10.2em 0 0 10.2em;
+  top: -0.1em;
+  left: -0.1em;
+  -webkit-transform-origin: 5.2em 5.1em;
+  transform-origin: 5.2em 5.1em;
+  -webkit-animation: load2 1s infinite ease .5s;
+  animation: load2 1s infinite ease .5s;
+}
+.loader {
+  font-size: 11px;
+  margin: 5em auto;
+  position: relative;
+  width: 10em;
+  height: 10em;
+  box-shadow: inset 0 0 0 1em #FFF;
+  -webkit-transform: translateZ(0);
+  -ms-transform: translateZ(0);
+  transform: translateZ(0);
+  top:150px;
+}
+@-webkit-keyframes load2 {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+@keyframes load2 {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
