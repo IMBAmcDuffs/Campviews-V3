@@ -18,8 +18,7 @@ cvCont.controller('LoginCtrl', ['$scope', '$timeout', '$ionicPopup', 'CV_Account
 cvCont.controller('CampsCtrl', ['$scope', '$document', '$location', '$timeout','camps', function($scope, $document, $location, $timeout, camps) {
 	 
 	$scope.camps = camps; 
-	console.log(JSON.stringify(camps));
-	console.log('Camps');
+	console.log(camps, 'The Camps');
 	
   $('#loading').hide();
 	$scope.selectCamp = function(camp_id) {
@@ -45,7 +44,6 @@ cvCont.controller('AppCtrl', function($scope, $ionicHistory, $ionicModal, $locat
 	global.userData = JSON.parse(localStorage.getItem('user_data'));
 	$scope.global = global;	
   
-	console.log('AppCtrl');
   }
   
   
@@ -129,9 +127,7 @@ cvCont.controller('MainCtrl', ['$scope', '$ionicFilterBar', '$timeout', '$stateP
   }
   
   loadItems();
-  
-  console.log(global);
-  
+    
   $scope.cabins = global.cabins;
 		
     var filterBarInstance;
@@ -268,7 +264,7 @@ cvCont.controller('checkinForms', ['$scope', '$document', '$stateParams', '$loca
 		function onSuccess(imageData) {
 			var image = document.getElementById('noImage');
 			image.src = "data:image/jpeg;base64," + imageData;
-=			var upload = CV_Camper.uploadImage(imageData, $stateParams.camper_id);
+			var upload = CV_Camper.uploadImage(imageData, $stateParams.camper_id);
 		}
 		
 		function onFail(message) {
@@ -309,7 +305,8 @@ cvCont.controller('checkinForm', ['$scope', '$cordovaCamera', '$state', '$docume
 	
 	
 	$scope.saveForm = function(form) {
-		var results = CV_Forms.saveForm(form);
+		var type = 'checkin';
+		var results = CV_Forms.saveForm(form, type);
 	};
 	checkinData = checkinData[0].fields;
 	
@@ -360,7 +357,8 @@ cvCont.controller('logForm', ['$scope', '$cordovaCamera', '$state', '$document',
 	$scope.modal = {};
 	
 	$scope.saveForm = function(form) {
-		var results = CV_Forms.saveForm(form);
+		var type = 'log';
+		var results = CV_Forms.saveForm(form, type);
 	};
 	
 
@@ -395,7 +393,6 @@ cvCont.controller('logForm', ['$scope', '$cordovaCamera', '$state', '$document',
 			if(global.editData !== false){
 				var editData = global.editData;
 				for(var $i = 0; $i<editData.length; $i++){
-					console.log('field_'+field_id,editData[$i].field_id);
 					if(editData[$i].field_id === 'field_'+field_id){
 						if(editData[$i].field_id !== 'field_17440'){
 							_checkinData['field_'+field_id] = editData[$i].value;
@@ -554,14 +551,11 @@ cvCont.controller('logBuilder', ['$scope', '$timeout', 'CV_Camper', '$stateParam
 			if($options>0){
 				for(var $i=1; $i<=$options; $i++){
 					if($opt[$i]){
-						console.log($opt[$i]);
 						var optTime = $opt[$i].value.split(':');
 						var optN = optTime[1].split(' ');
 						optN = optN[1].toLowerCase();
 						
 						optTime = optTime[0];
-						console.log(optTime);
-						console.log(optN);
 					}
 				}
 			}
@@ -645,7 +639,6 @@ cvCont.controller('logBuilder', ['$scope', '$timeout', 'CV_Camper', '$stateParam
 	
 	
 	$scope.cur_i = 0;
-	console.log(timeOfDay);
 	$scope.maxDAYS = global.camp._length-1;
 	$scope.dayOutput = output;
 	$scope.timeOfDay = timeOfDay;
@@ -658,7 +651,6 @@ cvCont.controller('logBuilder', ['$scope', '$timeout', 'CV_Camper', '$stateParam
 	};
 	
 	$scope.showValues = function($data){
-		console.log($data);
 		
 		return $data;	
 	};

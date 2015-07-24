@@ -187,9 +187,9 @@ cvServ.factory('CV_Camps', ['$http', '$q', '$injector', function($http, $q, $inj
 					success(function(data, status, headers, config) {
 						// lets make sure all the data is good to injest
 						var $campers = {};
-					
+						var campers = {};
 						if(data.status === 'success'){
-							var campers = data.campers;
+							campers = data.campers;
 							var _c = Object.keys(campers).length;
 							if( _c > 0){
 								var _i = 0;
@@ -233,7 +233,6 @@ cvServ.factory('CV_Camps', ['$http', '$q', '$injector', function($http, $q, $inj
 		var deferred = $q.defer();
 		var camp_id = global.selectedCamp;
 		$('#loading').show();
-		console.log($('#loading').attr('id'));
 		path = rawpath+'get_single_camp_data/?access_token='+global.accessToken+'&only=camp&camp_id='+camp_id;
 		
 				$http.get(path).
@@ -304,10 +303,9 @@ cvServ.factory('CV_Forms', ['$http', '$q', '$location', '$ionicPopup', function(
 			
 		}; 
 		
-		self.saveForm = function($form) {
+		self.saveForm = function($form, $type) {
 			path = rawpath+'save/?access_token='+global.accessToken;
 		$('#loading').show();
-			console.log(path);
 			var $data = {}; 
 			var form = $(document).find('input, textarea, select');
 			if(form.length>0){
@@ -332,16 +330,21 @@ cvServ.factory('CV_Forms', ['$http', '$q', '$location', '$ionicPopup', function(
 					'Content-Type': 'multipart/form-data' 	
 				} 
 				};
-			console.log($data);
 			$http.post(path,$data,$config).success(function(data,satus){
-				console.log(data);
+				console.log(data, 'Save Form Data');
 				if(data.status === 'success'){
+					
 				   var alertPopup = $ionicPopup.alert({
 					 title: 'Success!',
 					 template: 'The system saved the campers Log entry.'
 				   });
 				   alertPopup.then(function(res) {
-					 $location.path('/logsheets/'+$data.camper_id);
+					   if($type == 'log'){
+						 $location.path('/logsheets/'+$data.camper_id);
+					   }else{
+						 $location.path('/checkin/'+$data.camper_id);
+					   }
+					   
 				   });
 				}else{
 					
@@ -416,7 +419,7 @@ cvServ.factory('CV_Camper', ['$http', '$q', function($http, $q) {
 					'Content-Type': 'multipart/form-data' 	
 				} 
 			};
-		
+			$('#loading').show();
 			path = rawpath+'add_image/?access_token='+global.accessToken;
 			
 			data.image_data = image;
@@ -426,12 +429,13 @@ cvServ.factory('CV_Camper', ['$http', '$q', function($http, $q) {
 				
 				$http.post(path, data, $config)
 					.success(function(data, status, headers) {
-						console.log(data);
+						console.log(data, 'Upload Image');
 						if(data.result === 'success'){
 							// do success on upload here
 						}else{
 							// do fail here	
 						}
+						$('#loading').hide();
 					}).error(function(data, status, headers, config) {
 						deferred.reject('Error happened yo!');
 					});		
@@ -510,8 +514,7 @@ cvServ.factory('CV_Account', ['$http','$location','$ionicPopup', function($http,
 			
 			$http(req).
 			then(function(result) {
-				console.log(result.data);
-				console.log('factory - account');
+				console.log(result.data, 'Account process login');
 				if(result.data.status === 'success'){
 					// save the user data and route the app to the camp selection
 					localStorage.setItem('user_login', result.data.key);
@@ -526,7 +529,6 @@ cvServ.factory('CV_Account', ['$http','$location','$ionicPopup', function($http,
 					 title: 'We could not Log you in...',
 					 template: result.data.message
 				});				
-				   console.log(result.data.message); 
 				}
 			});		
 	};
