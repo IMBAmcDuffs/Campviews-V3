@@ -406,82 +406,38 @@ cvServ.factory('CV_Camper', ['$http', '$q', function($http, $q) {
 			}
 		};
 		
-		self.uint8ToString = function(buf) {
-			var i, length, out = '';
-			for (i = 0, length = buf.length; i < length; i += 1) {
-				out += String.fromCharCode(buf[i]);
-			}
-			return out;
-		};
-		
-				
 		self.uploadImage = function(image, camper) {
 			var deferred = $q.defer();
 			var camper_id = parseInt(camper);
 			var image_data = image;
 			var data = {};
-			path = rawpath+'add_image/?access_token='+global.accessToken;
-			function convertImgToBase64(url, data, callback, outputFormat){
-				var img = new Image();
-				img.crossOrigin = 'Anonymous';
-				img.onload = function(){
-					var canvas = document.createElement('CANVAS');
-					var ctx = canvas.getContext('2d');
-					canvas.height = this.height;
-					canvas.width = this.width;
-					ctx.drawImage(this,0,0);
-					var dataURL = canvas.toDataURL(outputFormat || 'image/png');
-					callback(dataURL, data);
-					canvas = null; 
-				};
-				img.src = url;
-			}
-			
-			function handleEncoded(base64Img, data){
-				var $config = {
-					headers: {
-						'Content-Type': 'multipart/form-data' 	
-					} 
-				};
-			
-				if(data.post_id>0 && data){
-					data.image_data = base64Img;
-					$('.image.no-image img').attr('src', 'data:image/jpeg;base64,'+data.image_data);
-					console.log(data);
-					$http.post(path, data, $config)
-						.success(function(data, status, headers) {
-							console.log(data);
-							if(data.result === 'success'){
-								// do success on upload here
-							}else{
-								// do fail here	
-							}
-						}).error(function(data, status, headers, config) {
-							deferred.reject('Error happened yo!');
-						});		
-				}
-			}
-			
-			data.post_id = camper_id;
-			var reader  = new FileReader();
-			
-			reader.onloadend = function () {
-				console.log(reader.result);
-				var base64 = reader.result;
+			var $config = {
+				headers: {
+					'Content-Type': 'multipart/form-data' 	
+				} 
 			};
+		
+			path = rawpath+'add_image/?access_token='+global.accessToken;
+			var formData = new FormData();
+			formData.append("file", image);
 			
-			$('.image.no-image').before('<div class="test"><img src="'+image+'" /></div>');
+			data.image_data = formData;
+			data.post_id = camper_id;
 			
-			if (image) {
-				console.log(reader);
-				reader.readAsDataURL(image);
-			  } else {
-				var base64 = "";
-			  }
-			
-			//var base64 = convertImgToBase64(image, data, handleEncoded, 'image/png');
-			
-			
+			if(camper_id>0 && data){
+				console.log(data);
+				$http.post(path, data, $config)
+					.success(function(data, status, headers) {
+						console.log(data);
+						if(data.result === 'success'){
+							// do success on upload here
+						}else{
+							// do fail here	
+						}
+					}).error(function(data, status, headers, config) {
+						deferred.reject('Error happened yo!');
+					});		
+			}
 		};
 		
 		self.getCamper = function(params) {
