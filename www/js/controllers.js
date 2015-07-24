@@ -260,7 +260,7 @@ cvCont.controller('checkinForms', ['$scope', '$document', '$stateParams', '$loca
 	$scope.picture = '';
 	
 	$scope.upload = function (file, post_id) {
-        if (files && files.length) {
+        if (file) {
                 Upload.upload({
                     url: global.apiPath+'cv_camper/'+'add_image/?access_token='+global.accessToken,
                     fields: {'post_id': post_id},
