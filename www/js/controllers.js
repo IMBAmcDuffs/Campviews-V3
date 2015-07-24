@@ -42,9 +42,6 @@ cvCont.controller('AppCtrl', function($scope, $ionicHistory, $ionicModal, $locat
 	var $current = localStorage.getItem('user_info');
 	global.userName = $current;	
 	global.userData = localStorage.getItem('user_data');
-	if(global.userData.data.user_nicename){
-		global.userName = global.userData.data.user_nicename;	
-	}
 	$scope.global = global;	
   
 	console.log('AppCtrl');
