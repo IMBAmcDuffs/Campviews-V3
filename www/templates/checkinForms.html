@@ -20,7 +20,7 @@
             
             <ion-item class="item col selected_camper">
             	<div class="image" ng-show="camper.thumbnail">
-                	<img ng-src="{{camper.thumbnail}}">
+                	<img id="hasImage" ng-src="{{camper.thumbnail}}">
     			</div>
                 <div class="image no-image" ng-show="!camper.thumbnail">
                     <img id="noImage" ng-src="http://placehold.it/300x300">
