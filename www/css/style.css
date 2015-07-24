@@ -99,6 +99,11 @@ img {
 }
 .day-user-toggle.expand .day-user-value {
 	font-size:16px;
+	background:#fff;
+	width:100%;
+	float:left;
+	margin:5px 0px;
+	color:#333;
 }
 
 .day-user-toggle.expand::before {

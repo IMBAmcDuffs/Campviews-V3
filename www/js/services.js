@@ -8,11 +8,13 @@ cvDir.directive('toggleClass', function() {
         restrict: 'A',
         link: function(scope, element, attrs) {
             element.bind('click', function() {
+				$('.'+attrs.toggleClass).toggleClass(attrs.toggleClass);
                 element.toggleClass(attrs.toggleClass);
             });
         }
     };
 });
+
 cvServ.service('CV_Camp', ['$http', '$q', '$location', function($http,$q,$location){
 	var path = global.apiPath+'cv_camp/';
 	

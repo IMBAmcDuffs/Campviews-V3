@@ -6,7 +6,8 @@ var global = {
 	loading: false,
 	selectedCamp: 0,
 	navColor : 'bar-stable',
-	camper: {}
+	camper: {},
+	editData: false,
 };
 
 var cache = {

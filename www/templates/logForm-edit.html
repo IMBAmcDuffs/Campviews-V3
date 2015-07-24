@@ -26,8 +26,9 @@
             	<form name="logForm" class="log_form" id="form_{{form_id}}" data-id="{{form_id}}" ng-submit="saveForm(logForm)">
                     <ion-item ng-controller="formBuilder" ng-repeat="field in form.fields" class="form_list_item list" id="form_input_{{field.id}}" ng-model="checkinData" ng-bind-html="fieldHTML">
                     </ion-item>
-                    <ion-item ng-click="showSignature()" class="append-to-signature item padding-verticle item-positive add-signature-button" ng-show="!signatureData">Add a Signature</ion-item>
+                    <ion-item ng-click="showSignature()" class="item padding-verticle item-positive add-signature-button" ng-show="!signatureData">Add a Signature</ion-item>
                     <ion-item>
+                    	<input name="cv_edit" id="edit" type="hidden" value="true" />
                     	<input name="cv_user_id" id="user_id" type="hidden" value="{{user_id}}" />
                     	<input name="cv_camp_id" id="camp_id" type="hidden" value="{{camp_id}}" />
                     	<input name="cv_camper_id"  id="camper_id" type="hidden" value="{{camper_id}}" />

@@ -343,8 +343,23 @@ cvCont.controller('logForm', ['$scope', '$cordovaCamera', '$state', '$document',
 				_checkinData['field_'+field_id] = $scope.date;
 			}
 			
-		}
+			if(global.editData !== false){
+				var editData = global.editData;
+				for(var $i = 0; $i<editData.length; $i++){
+					console.log('field_'+field_id,editData[$i].field_id);
+					if(editData[$i].field_id === 'field_'+field_id){
+						if(editData[$i].field_id !== 'field_17440'){
+							_checkinData['field_'+field_id] = editData[$i].value;
+						}
+					}
+				}
+			}
 	}
+	}
+	
+	
+	// we need to put the correct signature if the doctor has one already
+	
 	
 }]);
 
@@ -364,6 +379,7 @@ cvCont.controller('SignatureCtrl', function($scope) {
 		$('#field_17440').parent().show();
 		$('#field_17440').hide(); // make sure to hide the signature
 		$('.main-signature-pad').slideUp(300);
+		$('.append-to-signature').html('Change Signature');
     };
 });
 
@@ -379,6 +395,7 @@ cvCont.controller('formBuilder', ['$sce','$scope', function($sce, $scope) {
 		field_value = values['field_'+field_id];
 	}
 	
+	
 	$scope.checkinData = _checkinData;
 	var field = formBuilder.makeField($scope.field,field_value);
 	
@@ -387,7 +404,7 @@ cvCont.controller('formBuilder', ['$sce','$scope', function($sce, $scope) {
 	
 }]);
 
-cvCont.controller('logBuilder', ['$scope', '$timeout', 'CV_Camper', '$stateParams', 'logForms', function($scope, $timeout, CV_Camper, $stateParams, logForms) {
+cvCont.controller('logBuilder', ['$scope', '$timeout', 'CV_Camper', '$stateParams', '$location', '$ionicPopup', 'logForms', function($scope, $timeout, CV_Camper, $stateParams, $location, $ionicPopup, logForms) {
 	
 	CV_Camper.getCachedCamper($stateParams.camper_id); 
 	
@@ -419,6 +436,21 @@ cvCont.controller('logBuilder', ['$scope', '$timeout', 'CV_Camper', '$stateParam
 			timeOfDay = $scope.timeOfDay.meta_value;
 		}
 	}
+	
+	$scope.editLogButton = function(editUrl,user_values) {
+		if(editUrl){
+		var confirmPopup = $ionicPopup.confirm({
+			 title: 'Edit',
+			 template: 'Are you sure you want to edit this entry? <br /><small>(This will still keep old data)</small>'
+		   });
+		   confirmPopup.then(function(res) {
+			 if(res) {
+				 global.editData = user_values;
+				 $location.path(editUrl);
+			 }
+		   });	
+		}
+	};
 	
 	function getTimeofDay(fields){
 		if(fields.length>0){
