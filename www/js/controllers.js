@@ -241,7 +241,7 @@ cvCont.controller('MainCtrl', ['$scope', '$ionicFilterBar', '$timeout', '$stateP
 		$scope._c = Object.keys(items).length;
 
  		$scope.items = items;
-		$('#loading').hide();
+		setTimeout(function() { $('#loading').hide(); },1000);
 	  }
 	};
 	
