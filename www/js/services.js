@@ -307,7 +307,7 @@ cvServ.factory('CV_Forms', ['$http', '$q', '$location', '$ionicPopup', function(
 			} 
 			$config = {
 				headers: {
-					'Content-Type': 'application/x-www-form-urlencoded' 	
+					'Content-Type': 'multipart/form-data' 	
 				} 
 				};
 			console.log($data);
