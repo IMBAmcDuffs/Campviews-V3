@@ -137,6 +137,25 @@ cv.config(function($stateProvider, $urlRouterProvider, $httpProvider) {
 		
         return global.camper = CV_Camper.getCamper(camper_id);
     };
+	
+	var requestForms = function(CV_Camps,$stateParams) {
+		var camper_id = $stateParams.camper_id;
+		
+		if(!camper_id) return false;
+		global.camper.requested_forms = CV_Camps.getRequestedForms(camper_id)
+        return global.camper.requested_forms;
+    };
+	
+	// check session and lets make sure to load the actual camp since we always need it...
+	/*
+	var storedCamp = sessionStorage.getItem('campData');
+	
+	if(typeof storedCamp !== "undefined"){
+		global.camp = storedCamp.camp;
+		global.forms = storedCamp.forms;
+		global.cabins = storedCamp.cabins;
+	}
+	*/
 		
   $urlRouterProvider.otherwise(def);
 
@@ -193,13 +212,15 @@ cv.config(function($stateProvider, $urlRouterProvider, $httpProvider) {
 	},
 	require: ['ionList', '^?$ionicScroll'],
   }).state('app.camper', {
-    url: '/camper/:camper_id',
+    url: '/campers/:camper_id',
 	cache: false,
 	views: {
 		'menuContent' : {
-			cache: false,
 		    templateUrl: 'templates/camper.html',	
 			controller: 'CamperCrtl',
+			resolve: {
+				requestedForms : requestForms	
+			}
 		},
 	},
 	require: ['ionList', '^?$ionicScroll'],

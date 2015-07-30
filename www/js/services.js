@@ -175,7 +175,23 @@ cvServ.factory('CV_Camps', ['$http', '$q', '$injector', function($http, $q, $inj
 					});		
 			} 
 			return deferred.promise;
-		}
+		};
+		
+		self.getRequestedForms = function(camper_id) {
+			var deferred = $q.defer();
+			var path = rawpath+'get_form/?access_token='+global.accessToken+'&camper_id='+camper_id+'&type=registration&camp_id='+global.selectedCamp;
+			$('#loading').show();
+			$http.get(path).
+				success(function(data, status, headers, config) {
+					self.logForms = data;
+					deferred.resolve(data);
+					console.log(data,'requested forms');
+				}).error(function(data, status, headers, config) {
+					deferred.reject('Error happened yo!');
+				});		
+				
+				return deferred.promise;
+		};
 		 
 		self.getCampersFromCamp = function(params) {
 			var deferred = $q.defer();
@@ -241,7 +257,9 @@ cvServ.factory('CV_Camps', ['$http', '$q', '$injector', function($http, $q, $inj
 				$http.get(path).
 					success(function(data, status, headers, config) {
 						self.campData = data;
+						
 						deferred.resolve(data);
+						sessionStorage.setItem('campData', data);
 							console.log('The Camp', data);
 					
 					}).error(function(data, status, headers, config) {
@@ -440,7 +458,8 @@ cvServ.factory('CV_Camper', ['$http', '$q', function($http, $q) {
 			
 		var deferred = $q.defer();
 		var campers = global.campers;
-		var _c = Object.keys(campers).length;
+		if(typeof campers === "object"){
+			var _c = Object.keys(campers).length;
 		camper_id = parseInt(camper_id);
 			if(campers.length>0 && typeof(camper_id) === "number"){
 				for(i=0; i<_c; i++) {
@@ -453,6 +472,7 @@ cvServ.factory('CV_Camper', ['$http', '$q', function($http, $q) {
 					}
 				}
 			}
+		}
 		};
 		
 		self.uploadImage = function(image, camper) {

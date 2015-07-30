@@ -87,6 +87,7 @@ cvCont.controller('MainCtrl', ['$scope', '$ionicFilterBar', '$timeout', '$stateP
  
   if(campData){
 	global.campers = campData;  
+	
 	// make sure we remove any campers that come back undefined...
   }else{
 		$location.path('/dashboard');
@@ -108,6 +109,7 @@ cvCont.controller('MainCtrl', ['$scope', '$ionicFilterBar', '$timeout', '$stateP
 	switch(page){
 		case 'campers':
 			$scope.page_title = 'Campers - Select Camper';
+			$scope.items = $items;
 		break;
 		case 'logsheets':
 			$scope.page_title = 'Log Sheets - Select Camper';
@@ -319,6 +321,92 @@ cvCont.controller('checkinForms', ['$scope', '$document', '$stateParams', '$loca
   	$('#loading').hide();
 	
 	$scope.camper = global.camper;
+ 	
+}]);
+
+cvCont.controller('CamperCrtl', ['$scope', '$document', '$stateParams', '$location', 'CV_Camper', 'CV_Forms', '$cordovaCamera', 'requestedForms', function($scope, $document, $stateParams, $location, CV_Camper, CV_Forms, $cordovaCamera, requestedForms) {
+	"use strict";
+	
+	var neededForms = [5,6];
+	var forms = {};
+	
+	if(typeof requestedForms !== "undefined"){
+		var $forms = requestedForms.forms;
+		var _c = Object.keys($forms).length;
+		if(_c>0){
+			var f = 0;
+			for(var i = 0; i<_c; i++){
+				var value = parseInt($forms[i].id);
+				
+				var check = $.inArray(value, neededForms);	
+				if(check>=0){
+					
+					forms[value] = $forms[i];	
+					f++;
+				}
+			}
+		}
+		
+	}
+	
+ 	$scope.camper_id = 0;
+	$scope.global = global;
+	if($stateParams.camper_id){
+		$scope.camper_id = $stateParams.camper_id;
+	}
+	$scope.picture = '';
+	
+	$scope.checked_in = false;
+	
+	
+	$scope.takePicture = function() {
+		navigator.camera.getPicture(onSuccess, onFail, { 
+			quality: 50,
+			destinationType: Camera.DestinationType.DATA_URL,
+			targetWidth: 500,
+		    targetHeight: 500,
+		});
+		
+		function onSuccess(imageData) {
+			var image = document.getElementById('noImage');
+			image.src = "data:image/jpeg;base64," + imageData;
+			var $image = document.getElementById('hasImage');
+			$image.src = "data:image/jpeg;base64," + imageData;
+
+			var upload = CV_Camper.uploadImage(imageData, $stateParams.camper_id);
+		}
+		
+		function onFail(message) {
+			alert('Failed because: ' + message);
+		}
+    };
+	
+	CV_Camper.getCachedCamper($stateParams.camper_id); 
+	
+  	$('#loading').hide();
+	
+	var camper = {};
+	
+	$scope.camper = camper = global.camper;
+	
+	var camper_check_ins = camper.checkins;
+	var total_check_ins = Object.keys(camper_check_ins).length;
+	if(camper.checked_in === total_check_ins){
+		$scope.checked_in = true;	
+	}
+	
+	// lets get this users special form data
+	var parentGuardianForm = forms[5].values[0].value;
+	var emergancyContactForm = forms[6].values[0].value;
+	
+	
+	
+	console.log(parentGuardianForm,emergancyContactForm,forms);
+	
+	
+	$scope.parentGuardianForm = parentGuardianForm;
+	$scope.emergancyContactForm = emergancyContactForm;
+	
  	
 }]);
 

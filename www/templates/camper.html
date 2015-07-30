@@ -1,0 +1,66 @@
+<ion-view view-title="Check In - Camper Selected">
+  <ion-content class="padding">
+  	<div class="row">
+     	<div class="col col-75">
+            
+            
+            <ion-item class="item col selected_camper">
+            	<h3 class="title">General Camper Info:</h3>
+                <div class="camper_data">
+               	 	<p><strong>Name:</strong> {{camper.first_name}} {{camper.last_name}}</p>
+                    <p><strong>Date of Birth:</strong> {{camper.dob}}</p>
+                    <p><strong>Gender:</strong> {{camper.gender}}</p>
+                    <p><strong>I have checked into:</strong> {{camper.checked_in}} out of {{total_check_ins}} stations</p>
+                    <p></p>
+                    <p></p>
+                    <p></p>
+                </div>
+                
+            </ion-item>
+            <ion-item class="item col selected_camper" ng-show="parentGuardianForm">
+                <h3 class="title">Parent and Guardian Info:</h3>
+                <div class="camper_data">
+                	<ion-item ng-repeat="field in parentGuardianForm">
+                    	<strong>{{field.label}}:</strong> {{field.value}}
+                    </ion-item>
+                </div>
+                
+            </ion-item>
+            <ion-item class="item col selected_camper" ng-show="emergancyContactForm">
+                <h3 class="title">Emergancy Contact Info:</h3>
+                <div class="camper_data">
+                	<ion-item ng-repeat="field in emergancyContactForm">
+                    	<strong>{{field.label}}:</strong> {{field.value}}
+                    </ion-item>
+                </div>
+                
+            </ion-item>
+        </div>
+        
+        <div class="col col-25">
+        	<ion-item class="row">
+                <ion-item class="item col camper_actions">
+                    <div class="image" ng-show="camper.thumbnail">
+                        <img id="hasImage" ng-src="{{camper.thumbnail}}">
+                    </div>
+                    <div class="image no-image" ng-show="!camper.thumbnail">
+                        <img id="noImage" ng-src="http://placehold.it/300x300">
+                    </div>
+                    <button ng-click="takePicture()" class="button button-full padding-vertical item-positive" style="text-align:left; width:100%;">
+                        <i class="ion-camera ion-icon"></i> {{camper.thumbnail ? 'Retake Picture' : 'Take Picture'}}
+                    </button>
+                    <button class="button button-full button-balanced" ng-show="{{checked_in === false}}" ng-href="#/checkin/{{camper_id}}">
+                        Check In
+                    </button>
+                    <button class="button button-full button-calm" ng-href="#/logsheets/{{camper_id}}">
+                        Log Sheets
+                    </button>
+                    <button class="button button-full button-energized" ng-href="#/checkout/{{camper_id}}">
+                        Check Out
+                    </button>
+                </ion-item>
+            </ion-item>
+        </div>
+     </div>
+  </ion-content>
+</ion-view>
