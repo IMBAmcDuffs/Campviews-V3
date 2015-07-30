@@ -329,25 +329,42 @@ cvServ.factory('CV_Forms', ['$http', '$q', '$location', '$ionicPopup', function(
 				headers: {
 					'Content-Type': 'multipart/form-data' 	
 				} 
-				};
+			};
+				
 			$http.post(path,$data,$config).success(function(data,satus){
 				console.log(data, 'Save Form Data');
+				var alertPopup;
 				if(data.status === 'success'){
 					
-				   var alertPopup = $ionicPopup.alert({
+				   alertPopup = $ionicPopup.alert({
 					 title: 'Success!',
 					 template: 'The system saved the campers Log entry.'
 				   });
 				   alertPopup.then(function(res) {
-					   if($type == 'log'){
+					   if($type === 'log'){
 						 $location.path('/logsheets/'+$data.camper_id);
 					   }else{
-						 $location.path('/checkin/'+$data.camper_id);
+						 $location.path('/checkin/');
 					   }
 					   
 				   });
 				}else{
-					
+				var $message = 'The system failed to saved the campers Log entry. Please try again...';
+				   if(data.message){
+					$message = data.message;
+				   }
+				   alertPopup = $ionicPopup.alert({
+					 title: 'Sorry it failed Failure..',
+					 template: $message
+				   });
+				   alertPopup.then(function(res) {
+					   if($type === 'log'){
+						 $location.path('/logsheets/'+$data.camper_id);
+					   }else{
+						 $location.path('/checkin/');
+					   }
+					   
+				   });
 				}
 				$('#loading').hide();
 			});
