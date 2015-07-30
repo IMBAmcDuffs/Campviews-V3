@@ -257,8 +257,11 @@ cvCont.controller('checkinForms', ['$scope', '$document', '$stateParams', '$loca
 	
 	
 	$scope.takePicture = function() {
-		navigator.camera.getPicture(onSuccess, onFail, { quality: 50,
-			destinationType: Camera.DestinationType.DATA_URL
+		navigator.camera.getPicture(onSuccess, onFail, { 
+			quality: 50,
+			destinationType: Camera.DestinationType.DATA_URL,
+			targetWidth: 500,
+		    targetHeight: 500,
 		});
 		
 		function onSuccess(imageData) {
