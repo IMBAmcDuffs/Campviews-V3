@@ -341,12 +341,14 @@ cvServ.factory('CV_Forms', ['$http', '$q', '$location', '$ionicPopup', function(
 					 template: 'The system saved the campers Log entry.'
 				   });
 				   alertPopup.then(function(res) {
+					   var $go = '';
 					   if($type === 'log'){
-						 $location.path('/logsheets/'+$data.camper_id);
+						 $go = '/logsheets/';
 					   }else{
-						 $location.path('/checkin/');
-					   }
-					   
+						 $go = '/checkin';
+					   } 
+					   console.log($go);
+					   $location.path($go);
 				   });
 				}else{
 				var $message = 'The system failed to saved the campers Log entry. Please try again...';

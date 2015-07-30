@@ -327,6 +327,7 @@ cvCont.controller('checkinForm', ['$scope', '$cordovaCamera', '$state', '$docume
 		});
 			
 	}
+	console.log(_checkinData);
 	$scope.checkinData = _checkinData;
 	
 }]);
@@ -455,6 +456,8 @@ cvCont.controller('formBuilder', ['$sce','$scope', function($sce, $scope) {
 		values = _checkinData;
 	}
 
+	console.log(_checkinData,field_id, 'checkin builder');
+	
 	field_value = '';
 	if(values['field_'+field_id]){
 		field_value = values['field_'+field_id];
