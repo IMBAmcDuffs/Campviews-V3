@@ -357,14 +357,6 @@ cvServ.factory('CV_Forms', ['$http', '$q', '$location', '$ionicPopup', function(
 					 title: 'Sorry it failed Failure..',
 					 template: $message
 				   });
-				   alertPopup.then(function(res) {
-					   if($type === 'log'){
-						 $location.path('/logsheets/'+$data.camper_id);
-					   }else{
-						 $location.path('/checkin/');
-					   }
-					   
-				   });
 				}
 				$('#loading').hide();
 			});
