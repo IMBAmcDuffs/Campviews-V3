@@ -343,7 +343,7 @@ cvServ.factory('CV_Forms', ['$http', '$q', '$location', '$ionicPopup', function(
 				   alertPopup.then(function(res) {
 					   var $go = '';
 					   if($type === 'log'){
-						 $go = '/logsheets/';
+						 $go = '/logsheets';
 					   }else{
 						 $go = '/checkin';
 					   } 
@@ -358,7 +358,7 @@ cvServ.factory('CV_Forms', ['$http', '$q', '$location', '$ionicPopup', function(
 				   alertPopup = $ionicPopup.alert({
 					 title: 'Sorry it failed Failure..',
 					 template: $message
-				   });
+				   }); 
 				}
 				$('#loading').hide();
 			});
