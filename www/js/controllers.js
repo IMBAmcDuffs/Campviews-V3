@@ -675,7 +675,7 @@ cvCont.controller('logBuilder', ['$scope', '$timeout', 'CV_Camper', '$stateParam
 	
 	
 	$scope.timeOfDay = getTimeofDay($scope.logFields);
-	var timeOfDay = {}
+	var timeOfDay = {};
 	if($scope.timeOfDay) {
 		if($scope.timeOfDay.meta_value && typeof $scope.timeOfDay.meta_value !== 'object'){
 			timeOfDay = JSON.parse($scope.timeOfDay.meta_value);
@@ -775,7 +775,7 @@ cvCont.controller('logBuilder', ['$scope', '$timeout', 'CV_Camper', '$stateParam
 	}
 	
 	var _length = global.camp._length;
-	
+	console.log(global.camp);
 	$('#loading').show();
 	var output = {};
 	dayOutput_length = 0;
@@ -788,6 +788,7 @@ cvCont.controller('logBuilder', ['$scope', '$timeout', 'CV_Camper', '$stateParam
 			var tod = timeOfDay.options[$t].value;
 			
 			if(_length>0){
+				console.log('test');
 				var valueBlock = buildValueBlock($scope.logFields);		
 				// we need to insert the proper data into the proper date so that everything matches up.
 				var day_values = {};
@@ -824,6 +825,7 @@ cvCont.controller('logBuilder', ['$scope', '$timeout', 'CV_Camper', '$stateParam
 		}
 	}
 	
+	console.log(timeOfDay);
 	
 	
 	$scope.cur_i = 0;
@@ -834,6 +836,7 @@ cvCont.controller('logBuilder', ['$scope', '$timeout', 'CV_Camper', '$stateParam
 	$timeout(function(){$('#loading').hide();});
 	  
 	$scope.setIntervalScope = function($index){
+		console.log($index);
 		$scope.cur_i = $index;	
 		
 	};

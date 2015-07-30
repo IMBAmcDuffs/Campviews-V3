@@ -25,7 +25,7 @@
                             	<strong>Log made on <i>{{day.title ? day.title : day.day}}</i> for <i>{{ option.label }}</i></strong>
                             </div>
                         	<div class="day-user-value" ng-repeat="user_value in day.user_values" ng-show="user_value.field_id !== '_user'">
-                            	<div class="col"><strong>{{user_value.label}}</strong></div><div class="col"><img ng-src="{{user_value.value}}" ng-show="user_value.label == 'Signature'" /><span ng-show="user_value.label !== 'Signature'">{{user_value.value}}</span></div>
+                            	<div class="col"><strong>{{user_value.label}}</strong></div><div class="col"><img ng-src="{{user_value.label === 'Signature' ? user_value.value : ''}}" ng-show="user_value.label == 'Signature'" /><span ng-show="user_value.label !== 'Signature'">{{user_value.value}}</span></div>
                             </div>
                         	<button id="edit_button_{{cur_i}}_{{$index}}" class="edit-log-button button button-positive col col-100 ion-arrow-up-c" ng-click="editLogButton('/logsheets/logform/'+camper_id+'/'+logForm.id+'/'+option.value+'/'+day.date,day.user_values)" >Edit Log</button>
                         </ion-item>
