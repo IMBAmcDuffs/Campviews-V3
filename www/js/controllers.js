@@ -369,8 +369,6 @@ cvCont.controller('CamperCrtl', ['$scope', '$document', '$stateParams', '$locati
 	}
 	$scope.picture = '';
 	
-	$scope.checked_in = false;
-	
 	
 	$scope.takePicture = function() {
 		navigator.camera.getPicture(onSuccess, onFail, { 
@@ -401,6 +399,20 @@ cvCont.controller('CamperCrtl', ['$scope', '$document', '$stateParams', '$locati
 	var camper = {};
 	
 	$scope.camper = camper = global.camper;
+	
+	$scope.cabinColor = '';
+	
+	$scope.checked_in = false;
+	console.log(camper.cabin, typeof camper.cabin);
+	if(typeof camper.cabin === "object"){
+		var ccolor = camper.cabin.name;
+		ccolor = ccolor.toLowerCase().split(' ');
+		
+		if(typeof ccolor[1] !== 'undefined') {
+			$scope.cabinColor = ccolor[0];	
+		}
+	
+	}
 	
 	var camper_check_ins = camper.checkins;
 	var total_check_ins = camper_check_ins.length;

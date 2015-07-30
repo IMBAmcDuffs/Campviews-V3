@@ -25,16 +25,16 @@
                 <div class="image no-image" ng-show="!camper.thumbnail">
                     <img id="noImage" ng-src="http://placehold.it/300x300">
                 </div>
-                <ion-item ng-click="takePicture()" class="item padding-vertical item-positive button" style="text-align:left; width:100%;">
-                	<i class="ion-camera ion-icon"></i> Take Picture
+                <ion-item ng-click="takePicture()" ng-href="#" class="button button-full button-positive item-icon-left">
+                    <i class="icon ion-camera"></i> {{camper.thumbnail ? 'Retake' : 'Take Picture'}}
                 </ion-item>
                 <div class="camper_data">
                	 	<p>Name: {{camper.first_name}} {{camper.last_name}}</p>
                     <p>Date of Birth: {{camper.dob}}</p>
                 </div>
                 
-                <ion-item ng-href="#/checkin" class="item padding-vertical item-balanced">
-                  <i class="ion-edit ion-icon"></i> Change Camper
+                <ion-item ng-href="#/checkin" class="item padding-vertical item-balanced item-icon-left">
+                  <i class="ion-edit icon"></i> Change Camper
                 </ion-item>
             </ion-item>
         </div>
