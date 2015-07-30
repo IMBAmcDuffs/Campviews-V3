@@ -124,6 +124,7 @@ cvCont.controller('MainCtrl', ['$scope', '$ionicFilterBar', '$timeout', '$stateP
 			$scope.items = $items;
 		break;	
 		case 'checkout':
+			$scope.page_title = 'Camper Check Out - Select Camper to begin';
 			var checked_in = {};
 			// this should only be a list of campers who have completed a majority of the check in process
 			var _c = Object.keys($items).length;
@@ -146,7 +147,7 @@ cvCont.controller('MainCtrl', ['$scope', '$ionicFilterBar', '$timeout', '$stateP
 			console.log(global);
 			if(typeof global.checked_out_count !== "undefined"){
 				checked_out = global.checked_out_count;	
-				var camper_count = Object.keys(global.campers).length;
+				var camper_count = Object.keys(global.campers).length+checked_out;
 				
 				if(checked_out>0){
 					$scope.secondary_count_message = 'The system can see that '+checked_out+' out of '+camper_count+' campers have been checked out.';
