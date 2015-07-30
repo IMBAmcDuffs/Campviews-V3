@@ -1,7 +1,6 @@
 var cvCont = angular.module('campviews.controllers', []);
 
 cvCont.controller('LoginCtrl', ['$scope', '$timeout', '$ionicPopup', 'CV_Account', function($scope, $timeout, $ionicPopup, CV_Account) {
-	"use strict";
 	CV_Account.check();
   $scope.login = function(user) {
 	  if(user && user.name && user.password){
@@ -17,7 +16,7 @@ cvCont.controller('LoginCtrl', ['$scope', '$timeout', '$ionicPopup', 'CV_Account
 }]);
 
 cvCont.controller('CampsCtrl', ['$scope', '$document', '$location', '$timeout','camps', function($scope, $document, $location, $timeout, camps) {
-	"use strict";
+	 
 	$scope.camps = camps; 
 	console.log(camps, 'The Camps');
 	
@@ -34,7 +33,6 @@ cvCont.controller('CampsCtrl', ['$scope', '$document', '$location', '$timeout','
 }]);
  
 cvCont.controller('AppCtrl', function($scope, $ionicHistory, $ionicModal, $location, $timeout, $location, campData) {
-	"use strict";
   // This is the main controller for the whole app. This will pass globals and is part of the menu scope
   if(campData){
 	global.camp = campData.camp;
@@ -302,7 +300,6 @@ cvCont.controller('MainCtrl', ['$scope', '$ionicFilterBar', '$timeout', '$stateP
 }]);
  
 cvCont.controller('checkinForms', ['$scope', '$document', '$stateParams', '$location', 'CV_Camper', 'CV_Forms', '$cordovaCamera', function($scope, $document, $stateParams, $location, CV_Camper, CV_Forms, $cordovaCamera) {
-	"use strict";
  	$scope.camper_id = 0;
 	$scope.global = global;
 	if($stateParams.camper_id){
@@ -474,7 +471,6 @@ cvCont.controller('checkoutForms', ['$scope', '$document', '$stateParams', '$loc
 }]);
 
 cvCont.controller('checkinForm', ['$scope', '$cordovaCamera', '$state', '$document', '$stateParams', '$location', 'CV_Camper', 'CV_Forms', 'checkinData', function($scope, $cordovaCamera, $state, $document, $stateParams, $location, CV_Camper, CV_Forms, checkinData) {
-	"use strict";
 	
 	CV_Camper.getCachedCamper($stateParams.camper_id); 
 	
@@ -511,7 +507,6 @@ cvCont.controller('checkinForm', ['$scope', '$cordovaCamera', '$state', '$docume
 }]);
 
 cvCont.controller('logForm', ['$scope', '$cordovaCamera', '$state', '$document', '$stateParams', '$location', '$ionicModal', 'CV_Camper', 'CV_Forms', 'logForms', function($scope, $cordovaCamera, $state, $document, $stateParams, $location, $ionicModal, CV_Camper, CV_Forms, logForms) {
-	"use strict";
 	CV_Camper.getCachedCamper($stateParams.camper_id); 
 	
 	var camper = global.camper;
@@ -601,7 +596,6 @@ cvCont.controller('logForm', ['$scope', '$cordovaCamera', '$state', '$document',
 }]);
 
 cvCont.controller('SignatureCtrl', function($scope) {
-	"use strict";
     var canvas = document.getElementById('signatureCanvas');
     var signaturePad = new SignaturePad(canvas);
  
@@ -630,7 +624,6 @@ cvCont.controller('SignatureCtrl', function($scope) {
 });
 
 cvCont.controller('formBuilder', ['$sce','$scope', function($sce, $scope) {
-	"use strict";
 	var field_id = $scope.field.meta_id;
 	var values = {};	
 	var value_data = {};
@@ -660,7 +653,7 @@ cvCont.controller('formBuilder', ['$sce','$scope', function($sce, $scope) {
 }]);
 
 cvCont.controller('logBuilder', ['$scope', '$timeout', 'CV_Camper', '$stateParams', '$location', '$ionicPopup', 'logForms', function($scope, $timeout, CV_Camper, $stateParams, $location, $ionicPopup, logForms) {
-	"use strict";
+	
 	CV_Camper.getCachedCamper($stateParams.camper_id); 
 	
 	var camper = global.camper;
@@ -866,7 +859,6 @@ cvCont.controller('logRepeat', ['$scope','$location', function($scope, $location
 	
 }]);
 cvCont.controller('UserCtrl', ['$scope','$location', function($scope, $location) {
-	"use strict";
 	// set some globals
 	$scope.username = localStorage.getItem('user_info');
   $('#loading').hide();
