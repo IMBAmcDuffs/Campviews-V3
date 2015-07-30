@@ -73,10 +73,23 @@ img {
 }
 
 .tod-container .item {
-	text-align:center;		
+	text-align:center;	
+	padding: 0px;	
 }
 .tod-container .item-content {
 	padding: 15px 0px;	
+}
+.day-user-toggle .day-user-value:first-child {
+	display:none;
+}
+.day-user-toggle.expand .day-user-value:first-child {
+	display:block;	
+}
+.day-user-value .col {
+	float:left;	
+}
+.day-user-value div:first-child {
+	text-align:left;
 }
 
 .day-user-toggle {
