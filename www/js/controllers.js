@@ -84,6 +84,7 @@ cvCont.controller('AppCtrl', function($scope, $ionicHistory, $ionicModal, $locat
 /* main controller unit */
 cvCont.controller('MainCtrl', ['$scope', '$ionicFilterBar', '$timeout', '$stateParams', '$document', '$location', 'campData', 'otherData', function($scope, $ionicFilterBar, $timeout, $stateParams, $document, $location, campData, otherData) {
  "use strict";
+ 
   if(campData){
 	global.campers = campData;  
 	// make sure we remove any campers that come back undefined...
@@ -122,6 +123,41 @@ cvCont.controller('MainCtrl', ['$scope', '$ionicFilterBar', '$timeout', '$stateP
 			// lets apply our filters
 			$scope.items = $items;
 		break;	
+		case 'checkout':
+			var checked_in = {};
+			// this should only be a list of campers who have completed a majority of the check in process
+			var _c = Object.keys($items).length;
+			if(_c>0){
+				var $c = 0;
+				for(var i = 0; i<_c; i++){
+					var filled = Object.keys($items[i].checkins).length-2;
+					
+					if($items[i].checked_in > filled){
+						checked_in[$c] = $items[i];
+						$c++;
+					}
+					
+				}
+			}
+			
+			$scope.end_count_message = 'ready to be checked out.';
+			$scope.secondary_count_message = '';
+			var checked_out = 0;
+			console.log(global);
+			if(typeof global.checked_out_count !== "undefined"){
+				checked_out = global.checked_out_count;	
+				var camper_count = Object.keys(global.campers).length;
+				
+				if(checked_out>0){
+					$scope.secondary_count_message = 'The system can see that '+checked_out+' out of '+camper_count+' campers have been checked out.';
+				}
+			}
+			
+			
+						
+			
+			$scope.items = checked_in;
+		break;
 	}
 	$scope._c = Object.keys($scope.items).length;
   }
@@ -285,24 +321,47 @@ cvCont.controller('checkinForms', ['$scope', '$document', '$stateParams', '$loca
  	
 }]);
 
-cvCont.controller('checkoutForms', ['$scope', '$document', '$stateParams', '$location', 'CV_Camper', 'CV_Forms', function($scope, $document, $stateParams, $location, CV_Camper, CV_Forms) {
- 	$scope.camper_id = 0;
-	$scope.global = global;
-	if($stateParams.camper_id){
+cvCont.controller('checkoutForms', ['$scope', '$document', '$stateParams', '$location', 'CV_Camper', 'CV_Forms', 'exitForms', function($scope, $document, $stateParams, $location, CV_Camper, CV_Forms, exitForms) {
+	"use strict";
+	if(exitForms){
+		CV_Camper.getCachedCamper($stateParams.camper_id); 
+		
+		console.log(exitForms, 'after form pull');
+		$scope.camper_id = 0;
+		$scope.global = global;
+		
+		var $step = 0; // get ready for multiple forms this will be a step
+		
+		var camper = global.camper;
+		$scope.camper = camper; 
+		$scope.form = exitForms.forms[$step]; 
+		$scope.form_id = $scope.form.id;
 		$scope.camper_id = $stateParams.camper_id;
+		$scope.camp_id = global.selectedCamp;
+		
+		
+		console.log($scope.form);
+		if($stateParams.camper_id){
+			$scope.camper_id = $stateParams.camper_id;
+		}
+		
+		
+		$scope.exitForms = exitForms = global.exit_forms;
+		
+		$scope.saveForm = function(form) {
+			var type = 'checkout';
+			var results = CV_Forms.saveForm(form, type);
+		};
+		
 	}
-	
-	CV_Camper.getCachedCamper($stateParams.camper_id); 
-	
-	$scope.camper = global.camper;
 }]);
 
 cvCont.controller('checkinForm', ['$scope', '$cordovaCamera', '$state', '$document', '$stateParams', '$location', 'CV_Camper', 'CV_Forms', 'checkinData', function($scope, $cordovaCamera, $state, $document, $stateParams, $location, CV_Camper, CV_Forms, checkinData) {
 	CV_Camper.getCachedCamper($stateParams.camper_id); 
 	
-	var camper = global.camper;
 	var form = CV_Forms.getCachedForm($stateParams.form_id); 
 	
+	var camper = global.camper;
 	$scope.camper = camper; 
 	$scope.form = form; 
 	$scope.form_id = $stateParams.form_id;
@@ -452,11 +511,17 @@ cvCont.controller('SignatureCtrl', function($scope) {
 cvCont.controller('formBuilder', ['$sce','$scope', function($sce, $scope) {
 	var field_id = $scope.field.meta_id;
 	var values = {};	
-	if(_checkinData!==null) {
-		values = _checkinData;
+	var value_data = {};
+	
+	if(typeof _checkinData !== 'undefined') {
+		value_data = _checkinData;
+	}
+	
+	if(value_data!==null) {
+		values = value_data;
 	}
 
-	console.log(_checkinData,field_id, 'checkin builder');
+	//console.log(_checkinData,field_id, 'checkin builder');
 	
 	field_value = '';
 	if(values['field_'+field_id]){
@@ -464,7 +529,7 @@ cvCont.controller('formBuilder', ['$sce','$scope', function($sce, $scope) {
 	}
 	
 	
-	$scope.checkinData = _checkinData;
+	$scope.checkinData = value_data;
 	var field = formBuilder.makeField($scope.field,field_value);
 	
 	$scope.fieldHTML = $sce.trustAsHtml(field);
@@ -652,7 +717,7 @@ cvCont.controller('logBuilder', ['$scope', '$timeout', 'CV_Camper', '$stateParam
 	$scope.dayOutput = output;
 	$scope.timeOfDay = timeOfDay;
 	
-	  $timeout(function(){$('#loading').hide();});
+	$timeout(function(){$('#loading').hide();});
 	  
 	$scope.setIntervalScope = function($index){
 		$scope.cur_i = $index;	

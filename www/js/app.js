@@ -103,6 +103,11 @@ cv.config(function($stateProvider, $urlRouterProvider, $httpProvider) {
         return forms;
     };
 	
+	var getExitForms = function(CV_Forms) {
+		var forms = CV_Forms.getCheckoutForms();
+        return forms;
+    };
+	
 	var getCamp = function(CV_Camps) {
 		
         return CV_Camps.getCamp();
@@ -279,10 +284,28 @@ cv.config(function($stateProvider, $urlRouterProvider, $httpProvider) {
 	require: ['ionList', '^?$ionicScroll'],
   }).state('app.checkout', {
     url: '/checkout',
+	cache: false,
 	views: {
 		'menuContent' : {
-		    templateUrl: 'templates/checkout.html',	
+		    templateUrl: 'templates/campers.html',	
+			controller: 'MainCtrl',
+			resolve: { 
+				campData: getCampers,
+				otherData : function() { return {}; }	
+			}
+		},
+	},
+	require: ['ionList', '^?$ionicScroll'],
+  }).state('app.checkoutForm', {
+    url: '/checkout/:camper_id',
+	cache: false,
+	views: {
+		'menuContent' : {
+		    templateUrl: 'templates/check_out_forms.html',	
 			controller: 'checkoutForms',
+			resolve: { 
+				exitForms : getExitForms,
+			}
 		},
 	},
 	require: ['ionList', '^?$ionicScroll'],

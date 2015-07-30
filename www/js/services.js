@@ -203,8 +203,11 @@ cvServ.factory('CV_Camps', ['$http', '$q', '$injector', function($http, $q, $inj
 							}
 						}
 						self.campData = campers;
+						
+						global.checked_out_count = data.checked_out_count;
 						deferred.resolve(campers);
-						console.log('Campers from camp', campers);
+						
+						console.log('Campers from camp', data);
 						 $('#loading').hide();
 					}).error(function(data, status, headers, config) {
 						deferred.reject('Error happened yo!');
@@ -335,19 +338,32 @@ cvServ.factory('CV_Forms', ['$http', '$q', '$location', '$ionicPopup', function(
 				console.log(data, 'Save Form Data');
 				var alertPopup;
 				if(data.status === 'success'){
-					
+				var $msg = 'The system saved the campers Log entry. We will now return you to the camper selection screen.';
+				var $title = 'Save Successful!';
+				   switch($type) {
+						case 'log' :
+							 $go = '/logsheets';
+						break;
+						case 'checkin':
+							 $go = '/checkin';
+							 $msg = 'The system saved this check in form. We will now return you to the camper selection screen.';
+						break;
+						case 'checkout':
+							 $go = '/checkout';
+							 $msg = 'The system has checked out this camper. We will now return you to the camper selection screen.';
+						break;
+						default:
+							 $go = '/dashboard';
+							 $msg = 'The system has saved your data. Returning you to the dashboard.';
+						break;   
+				   }
+				   
 				   alertPopup = $ionicPopup.alert({
-					 title: 'Success!',
-					 template: 'The system saved the campers Log entry.'
+					 title: $title,
+					 template: $msg
 				   });
 				   alertPopup.then(function(res) {
-					   var $go = '';
-					   if($type === 'log'){
-						 $go = '/logsheets';
-					   }else{
-						 $go = '/checkin';
-					   } 
-					   console.log($go);
+					   var $go = '/'+$type;
 					   $location.path($go);
 				   });
 				}else{
@@ -383,7 +399,26 @@ cvServ.factory('CV_Forms', ['$http', '$q', '$location', '$ionicPopup', function(
 			} 
 			
 			return deferred.promise;
-		}
+		};
+		
+		self.getCheckoutForms = function() {
+		var deferred = $q.defer();
+		$('#loading').show();
+		path = rawpath+'get_checkout_form/?access_token='+global.accessToken+'&camp_id='+global.selectedCamp;
+		$http.get(path).
+			success(function(data, status, headers, config) {
+				global.checkoutForms = data;
+				console.log(data, 'Check out forms');
+				
+				$('#loading').hide();
+				deferred.resolve(data);
+			}).error(function(data, status, headers, config) {
+				console.log(data);
+				deferred.reject('Error happened yo!');
+			});		
+			
+			return deferred.promise;
+		};
 								
 	}
 	

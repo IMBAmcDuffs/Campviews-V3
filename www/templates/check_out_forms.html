@@ -1,0 +1,52 @@
+<ion-view view-title="Check Out Camper - {{global.camper.first_name}} {{global.camper.last_name}}">
+  <ion-content class="padding">
+  	<div class="row">
+    	<div class="col col-75 padding-horizontal">
+            <div class="checkin_title">
+                <h2 class="sub_title">{{form.name}} Form</h2>
+            </div>
+            
+            <ion-list> 
+            	<form name="checkoutForm" class="checkout_form" id="form_{{form_id}}" data-id="{{form_id}}" ng-submit="saveForm(checkoutForm)">
+                    <ion-item ng-controller="formBuilder" ng-repeat="field in form.fields" class="form_list_item" id="form_input_{{field.id}}" ng-model="checkoutData" ng-bind-html="fieldHTML">
+                    </ion-item>
+                    <ion-item class="button-bar">
+                    	<input name="cv_camp_id" id="camp_id" type="hidden" value="{{camp_id}}" />
+                    	<input name="cv_camper_id"  id="camper_id" type="hidden" value="{{camper_id}}" />
+                    	<input name="cv_form_id"  id="form_id" type="hidden" value="{{form_id}}" />
+                    	<input name="cv_type"  id="form_type" type="hidden" value="checkout" />
+                    	<input name="cv_access_token"  id="access_token" type="hidden" value="diabetes8" />
+                        <button class="button button-block button-assertive" type="reset">
+                          Reset
+                        </button>
+                        <button class="button button-block button-positive" type="submit">
+                          Save Form
+                        </button>
+                    </ion-item>
+                </form>
+            </ion-list>
+        </div>
+     	<div class="col col-25">
+            
+            <ion-item class="item col selected_camper">
+            	<div class="image" ng-show="camper.thumbnail">
+                	<img ng-src="{{camper.thumbnail}}">
+    			</div>
+                <div class="image no-image" ng-show="!camper.thumbnail">
+                    <img ng-src="http://placehold.it/300x300">
+                </div>
+                <div class="camper_data">
+               	 	<p>Name: {{camper.first_name}} {{camper.last_name}}</p>
+                    <p>Date of Birth: {{camper.dob}}</p>
+                </div>
+                
+                <ion-item ng-href="#/checkout" class="item padding-vertical item-balanced">
+                  Change Camper
+                </ion-item>
+            </ion-item>
+        </div>
+        </div>
+    </div>
+     
+  </ion-content>
+</ion-view>
