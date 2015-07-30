@@ -207,6 +207,10 @@ img {
 	margin-top:10px;
 }
 
+.camper_actions a {
+	background-color: none !important;	
+}
+
 
 #menu-btn { width: 75px; height: 75px; line-height: 75px; margin-left: 20px; color: #fff; font-size: 35px; float: left; }
 #menu {

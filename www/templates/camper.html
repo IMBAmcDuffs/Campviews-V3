@@ -46,18 +46,18 @@
                     <div class="image no-image" ng-show="!camper.thumbnail">
                         <img id="noImage" ng-src="http://placehold.it/300x300">
                     </div>
-                    <button ng-click="takePicture()" class="button button-full padding-vertical item-positive" style="text-align:left; width:100%;">
+                    <ion-item ng-click="takePicture()" class="button button-full padding-vertical item-positive icon-left">
                         <i class="ion-camera ion-icon"></i> {{camper.thumbnail ? 'Retake Picture' : 'Take Picture'}}
-                    </button>
-                    <button class="button button-full button-balanced" ng-show="{{checked_in === false}}" ng-href="#/checkin/{{camper_id}}">
-                        Check In
-                    </button>
-                    <button class="button button-full button-calm" ng-href="#/logsheets/{{camper_id}}">
-                        Log Sheets
-                    </button>
-                    <button class="button button-full button-energized" ng-href="#/checkout/{{camper_id}}">
-                        Check Out
-                    </button>
+                    </ion-item>
+                    <ion-item class="button button-full button-balanced icon-left" ng-show="{{checked_in === false}}" ng-href="#/checkin/{{camper_id}}">
+                        <i class="icon ion-android-checkbox-outline"></i> Check In
+                    </ion-item>
+                    <ion-item class="button button-full button-calm icon-left" ng-href="#/logsheets/{{camper_id}}">
+                        <i class="icon ion-pizza"></i> Log Sheets
+                    </ion-item>
+                    <ion-item class="button button-full button-energized icon-left" ng-href="#/checkout/{{camper_id}}">
+                        <i class="icon ion-android-checkbox"></i> Check Out
+                    </ion-item>
                 </ion-item>
             </ion-item>
         </div>

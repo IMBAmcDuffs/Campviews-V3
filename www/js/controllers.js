@@ -42,6 +42,8 @@ cvCont.controller('AppCtrl', function($scope, $ionicHistory, $ionicModal, $locat
 	var $current = localStorage.getItem('user_info');
 	global.userName = $current;	
 	global.userData = JSON.parse(localStorage.getItem('user_data'));
+	// make sure we remove any campers that come back undefined...
+
 	$scope.global = global;	
   
   }
@@ -67,6 +69,7 @@ cvCont.controller('AppCtrl', function($scope, $ionicHistory, $ionicModal, $locat
   $scope.logout = function() {
 	var $current = localStorage.getItem('user_login');
 	if($current){
+		localStorage.removeItem('single_camp_data');
 		localStorage.removeItem('user_login');
 		localStorage.removeItem('user_info');
 		$location.path('/login');
@@ -89,6 +92,16 @@ cvCont.controller('MainCtrl', ['$scope', '$ionicFilterBar', '$timeout', '$stateP
 	global.campers = campData;  
 	
 	// make sure we remove any campers that come back undefined...
+	var savedCampData = JSON.parse(sessionStorage.getItem('single_camp_data'));
+	
+	if(savedCampData){
+		if(!global.camp) {
+			global.camp = savedCampData.camp;
+			global.forms = savedCampData.forms;
+			global.cabins = savedCampData.cabins;
+		}
+	}
+	
   }else{
 		$location.path('/dashboard');
   } 
@@ -390,7 +403,7 @@ cvCont.controller('CamperCrtl', ['$scope', '$document', '$stateParams', '$locati
 	$scope.camper = camper = global.camper;
 	
 	var camper_check_ins = camper.checkins;
-	var total_check_ins = Object.keys(camper_check_ins).length;
+	var total_check_ins = camper_check_ins.length;
 	if(camper.checked_in === total_check_ins){
 		$scope.checked_in = true;	
 	}

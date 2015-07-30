@@ -259,7 +259,7 @@ cvServ.factory('CV_Camps', ['$http', '$q', '$injector', function($http, $q, $inj
 						self.campData = data;
 						
 						deferred.resolve(data);
-						sessionStorage.setItem('campData', data);
+						sessionStorage.setItem('single_camp_data', JSON.stringify(data));
 							console.log('The Camp', data);
 					
 					}).error(function(data, status, headers, config) {
