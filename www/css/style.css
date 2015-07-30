@@ -211,6 +211,11 @@ img {
 	background: none !important;	
 }
 
+.item-select select {
+	height:40px;
+	padding:0px 50px;	
+}
+
 
 #menu-btn { width: 75px; height: 75px; line-height: 75px; margin-left: 20px; color: #fff; font-size: 35px; float: left; }
 #menu {

@@ -142,9 +142,17 @@ cv.config(function($stateProvider, $urlRouterProvider, $httpProvider) {
 		var camper_id = $stateParams.camper_id;
 		
 		if(!camper_id) return false;
-		global.camper.requested_forms = CV_Camps.getRequestedForms(camper_id)
+		global.camper.requested_forms = CV_Camps.getRequestedForms(camper_id);
         return global.camper.requested_forms;
     };
+	
+	var reloadCamper = function(CV_Camper,$stateParams) {
+		var camper_id = $stateParams.camper_id;
+		
+		if(!camper_id) return false;
+		global.camper = CV_Camper.getCamper(camper_id);
+        return global.camper;
+	};
 	
 	// check session and lets make sure to load the actual camp since we always need it...
 	/*
@@ -231,6 +239,10 @@ cv.config(function($stateProvider, $urlRouterProvider, $httpProvider) {
 		'menuContent' : {
 		    templateUrl: 'templates/checkinForms.html',	
 			controller: 'checkinForms',
+			resolve: {
+				camperData : reloadCamper	,
+				otherData : getCheckinForms,	
+			}
  		},
 	},
 	require: ['ionList', '^?$ionicScroll'],

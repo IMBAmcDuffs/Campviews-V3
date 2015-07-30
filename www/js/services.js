@@ -519,7 +519,7 @@ cvServ.factory('CV_Camper', ['$http', '$q', function($http, $q) {
 		
 			// check if the camper data is already within the global array if not load new
 			if(global.campers){
-				self.getCachedCamper(camper_id);	
+				//self.getCachedCamper(camper_id);	
 			}
 			
 			
@@ -545,6 +545,7 @@ cvServ.factory('CV_Camper', ['$http', '$q', function($http, $q) {
 						self.camper = _data;
 						global.camper = _data;
 						deferred.resolve(_data);
+						console.log(_data,'camper');
 					}).error(function(data, status, headers, config) {
 						deferred.reject('Error happened yo!');
 					});		
