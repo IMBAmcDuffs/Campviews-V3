@@ -119,6 +119,15 @@ img {
 	color:#333;
 }
 
+.lognotes {
+	padding:70px 30px;
+}
+
+.note-textarea {
+	width:100%;
+	height:250px;
+}
+
 #form_input_17438, #form_input_17434, #field_17440 {
 	display:none;	
 }

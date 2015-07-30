@@ -506,7 +506,7 @@ cvCont.controller('checkinForm', ['$scope', '$cordovaCamera', '$state', '$docume
 	
 }]);
 
-cvCont.controller('logForm', ['$scope', '$cordovaCamera', '$state', '$document', '$stateParams', '$location', '$ionicModal', 'CV_Camper', 'CV_Forms', 'logForms', function($scope, $cordovaCamera, $state, $document, $stateParams, $location, $ionicModal, CV_Camper, CV_Forms, logForms) {
+cvCont.controller('logForm', ['$scope', '$cordovaCamera', '$state', '$document', '$stateParams', '$location', '$ionicModal', '$ionicPopover', 'CV_Camper', 'CV_Forms', 'logForms', function($scope, $cordovaCamera, $state, $document, $stateParams, $location, $ionicModal, $ionicPopover, CV_Camper, CV_Forms, logForms) {
 	CV_Camper.getCachedCamper($stateParams.camper_id); 
 	
 	var camper = global.camper;
@@ -539,6 +539,7 @@ cvCont.controller('logForm', ['$scope', '$cordovaCamera', '$state', '$document',
 	$scope.saveForm = function(form) {
 		var type = 'log';
 		var results = CV_Forms.saveForm(form, type);
+		global.editData = false;
 	};
 	
 
@@ -591,6 +592,10 @@ cvCont.controller('logForm', ['$scope', '$cordovaCamera', '$state', '$document',
 			_checkinData.field_17440 = $scope.signatureData = signature;	
 		}
 	}
+	
+	$scope.$on('$destroy', function () { 
+		global.editData = false;
+	});
 	
 }]);
 
@@ -651,7 +656,27 @@ cvCont.controller('formBuilder', ['$sce','$scope', function($sce, $scope) {
 	
 }]);
 
-cvCont.controller('logBuilder', ['$scope', '$timeout', 'CV_Camper', '$stateParams', '$location', '$ionicPopup', 'logForms', function($scope, $timeout, CV_Camper, $stateParams, $location, $ionicPopup, logForms) {
+cvCont.controller('logNote', ['$scope', '$timeout', 'CV_Camper', '$stateParams', '$location', function($scope, $timeout, CV_Camper, $stateParams, $location) {
+	$scope.values = {};
+	$scope.values.camper_name = global.camper.first_name+' '+global.camper.last_name;
+	$scope.values.camper_id = $stateParams.camper_id;
+	$scope.values.logForm = form = $scope.logForm;
+	$scope.values.camper = global.camper;
+	$scope.values.access_key = global.access_token;
+	$scope.values.type = 'note';
+	
+	$scope.values.pending_note = '';
+	
+	console.log($scope.camper);
+	
+	$scope.addNote = function() {
+		
+	};
+	
+	
+}]);
+
+cvCont.controller('logBuilder', ['$scope', '$timeout', 'CV_Camper', '$stateParams', '$location', '$ionicPopover', 'logForms', function($scope, $timeout, CV_Camper, $stateParams, $location, $ionicPopover, logForms) {
 	
 	CV_Camper.getCachedCamper($stateParams.camper_id); 
 	
@@ -665,6 +690,7 @@ cvCont.controller('logBuilder', ['$scope', '$timeout', 'CV_Camper', '$stateParam
 	  }
  
 	
+	$scope.camper = global.camper;
 	$scope.camper_name = global.camper;
 	$scope.camper_id = $stateParams.camper_id;
 	$scope.logForm = form = logForms.forms[0];
@@ -673,6 +699,33 @@ cvCont.controller('logBuilder', ['$scope', '$timeout', 'CV_Camper', '$stateParam
 	
 	var logValues = form.values;
 	
+	
+	$ionicPopover.fromTemplateUrl('templates/log-note.html', {
+		scope: $scope
+	}).then(function(popover) {
+		$scope.popover = popover;
+	});
+	
+	
+	$scope.openPopover = function($event) {
+		$scope.popover.show($event);
+	};
+	
+	$scope.closePopover = function() {
+		$scope.popover.hide();
+	};
+	//Cleanup the popover when we're done with it!
+	$scope.$on('$destroy', function() {
+		$scope.popover.remove();
+	});
+	// Execute action on hide popover
+	$scope.$on('popover.hidden', function() {
+	// Execute action
+	});
+	// Execute action on remove popover
+	$scope.$on('popover.removed', function() {
+	// Execute action
+	});
 	
 	$scope.timeOfDay = getTimeofDay($scope.logFields);
 	var timeOfDay = {};
@@ -788,7 +841,6 @@ cvCont.controller('logBuilder', ['$scope', '$timeout', 'CV_Camper', '$stateParam
 			var tod = timeOfDay.options[$t].value;
 			
 			if(_length>0){
-				console.log('test');
 				var valueBlock = buildValueBlock($scope.logFields);		
 				// we need to insert the proper data into the proper date so that everything matches up.
 				var day_values = {};
@@ -825,7 +877,6 @@ cvCont.controller('logBuilder', ['$scope', '$timeout', 'CV_Camper', '$stateParam
 		}
 	}
 	
-	console.log(timeOfDay);
 	
 	
 	$scope.cur_i = 0;
@@ -836,7 +887,6 @@ cvCont.controller('logBuilder', ['$scope', '$timeout', 'CV_Camper', '$stateParam
 	$timeout(function(){$('#loading').hide();});
 	  
 	$scope.setIntervalScope = function($index){
-		console.log($index);
 		$scope.cur_i = $index;	
 		
 	};

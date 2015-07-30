@@ -39,6 +39,21 @@
              
         </div>
     </div>
+    
+    <div class="row">
+    	<div class="col tod-notes flex-container">
+        	<h2 class="title">Log Sheet Notes:</h2>
+            <p><small>These are all time logged and the system will log who posted the note</small></p>
+            <ion-list class="notes-list {{ camper_notes ? 'has_notes' : 'no-notes' }}" ng-repeat="note in camper_notes">
+            	<ion-item>
+                
+                </ion-item>
+            </ion-list>
+            <ion-item class="note-entry">
+                 <button id="" class="add-log-note button button-positive col col-100 ion-arrow-up-c" ng-click="openPopover($event)" >Add a New Note</button>
+            </ion-item>
+        </div>
+    </div>
      
   </ion-content>
 </ion-view>

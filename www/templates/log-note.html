@@ -1,0 +1,30 @@
+<ion-view view-title="Add a Log Note" ng-controller="logNote">
+   	<div class="bar bar-header bar-assertive">
+        <h1 class="title">Log Sheet - Add a Note - {{values.camper_name}}</h1>
+    </div>
+ <ion-content class="lognotes">
+<form name="checkinForm" class="checkin_form" id="form_{{form_id}}" data-id="{{form_id}}" ng-submit="saveForm(checkinForm)">
+ 	<div class="row">
+        <label class="col col-100 item item-input item-stacked-label">
+            <span class="input-label">Add a Note:</span>
+            <textarea class="note-textarea" type="text" ng-model="pending_note" placeholder="Your note will be automatically tied to your account..."></textarea>
+        </label>
+    </div>
+    <div class="row">
+        <ion-item class="button-bar">
+            <input id="camp_id" type="hidden" ng-model="values.camp_id" />
+            <input id="camper_id" type="hidden" ng-model="values.camper_id" />
+            <input id="form_id" type="hidden" ng-model="values.form_id" />
+            <input id="form_type" type="hidden" ng-model="values.type" />
+            <input id="access_token" type="hidden" ng-model="values.access_key" />
+            <button class="button button-block button-assertive" type="reset">
+              Reset
+            </button>
+            <button class="button button-block button-positive" type="submit">
+              Save Form
+            </button>
+        </ion-item>
+    </div>
+    </form>
+ </ion-content>
+</ion-view>
