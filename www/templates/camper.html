@@ -46,16 +46,16 @@
                     <div class="image no-image" ng-show="!camper.thumbnail">
                         <img id="noImage" ng-src="http://placehold.it/300x300">
                     </div>
-                    <ion-item ng-click="takePicture()" class="button button-full padding-vertical item-positive icon-left">
-                        <i class="ion-camera ion-icon"></i> {{camper.thumbnail ? 'Retake Picture' : 'Take Picture'}}
+                    <ion-item ng-click="takePicture()" ng-href="#" class="button button-full button-positive item-icon-left">
+                        <i class="icon ion-camera"></i> {{camper.thumbnail ? 'Retake Picture' : 'Take Picture'}}
                     </ion-item>
-                    <ion-item class="button button-full button-balanced icon-left" ng-show="{{checked_in === false}}" ng-href="#/checkin/{{camper_id}}">
+                    <ion-item class="button button-full button-balanced item-icon-left" ng-show="{{checked_in === false}}" ng-href="#/checkin/{{camper_id}}">
                         <i class="icon ion-android-checkbox-outline"></i> Check In
                     </ion-item>
-                    <ion-item class="button button-full button-calm icon-left" ng-href="#/logsheets/{{camper_id}}">
+                    <ion-item class="button button-full button-calm item-icon-left" ng-href="#/logsheets/{{camper_id}}">
                         <i class="icon ion-pizza"></i> Log Sheets
                     </ion-item>
-                    <ion-item class="button button-full button-energized icon-left" ng-href="#/checkout/{{camper_id}}">
+                    <ion-item class="button button-full button-energized item-icon-left" ng-href="#/checkout/{{camper_id}}">
                         <i class="icon ion-android-checkbox"></i> Check Out
                     </ion-item>
                 </ion-item>
