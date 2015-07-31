@@ -42,6 +42,11 @@
             </ion-list>
         </div>
      	<div class="col col-25">
+        	<ion-list class='list row medical-form'>
+            	<ion-item ng-repeat="item in medicalData" class="item col">
+                	
+                </ion-item>
+            </ion-list>
             
             <ion-item class="item col selected_camper">
             	<div class="image" ng-show="camper.thumbnail">
@@ -55,9 +60,6 @@
                     <p>Date of Birth: {{camper.dob}}</p>
                 </div>
                 
-                <ion-item ng-href="#/checkin" class="item padding-vertical item-balanced">
-                  Change Camper
-                </ion-item>
             </ion-item>
         </div>
     </div>

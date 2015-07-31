@@ -305,6 +305,8 @@ cvCont.controller('checkinForms', ['$scope', '$document', '$stateParams', '$loca
 	if($stateParams.camper_id){
 		$scope.camper_id = $stateParams.camper_id;
 	}
+	
+	CV_Camper.getCachedCamper($stateParams.camper_id); 
 	$scope.picture = '';
 	
 	
@@ -330,7 +332,6 @@ cvCont.controller('checkinForms', ['$scope', '$document', '$stateParams', '$loca
 		}
     };
 	
-	CV_Camper.getCachedCamper($stateParams.camper_id); 
   	$('#loading').hide();
 	
 	$scope.camper = global.camper;
@@ -532,6 +533,9 @@ cvCont.controller('logForm', ['$scope', '$cordovaCamera', '$state', '$document',
 	$scope.date = $stateParams.day;
 	$scope.user_id = global.userData.ID;
 	
+	
+	$scope.medicalData = {};
+	
 	$scope.signatureData = false;
 	
 	$scope.modal = {};
@@ -584,6 +588,25 @@ cvCont.controller('logForm', ['$scope', '$cordovaCamera', '$state', '$document',
 	}
 	}
 	
+
+	$scope.checkin_forms = {};
+	if(typeof global.camper.checkins !== 'undefined' && global.camper.checkins !== null){
+	    var checkin_forms = global.camper.checkins;
+		console.log(checkin_forms);
+		var medForms = {};
+		var $form_id = "333"; // medical information form
+		var _c = checkin_forms.length;
+		if(_c > 0) {
+			for(var i = 0; i<_c; i++){
+				var form_id = checkin_forms[i].post_id;
+				if(form_id === $form_id){
+					$scope.checkin_forms = checkin_forms[i];
+				}
+			}
+		}
+		
+	}
+	console.log($scope.checkin_forms, 'forms');
 	
 	// we need to put the correct signature if the doctor has one already
 	if(global.userData.data){
@@ -699,7 +722,7 @@ cvCont.controller('logNote', ['$scope', '$timeout', 'CV_Camper', 'CV_Forms', '$s
 	
 }]);
 
-cvCont.controller('logBuilder', ['$scope', '$timeout', 'CV_Camper', '$stateParams', '$location', '$ionicPopover', 'logForms', function($scope, $timeout, CV_Camper, $stateParams, $location, $ionicPopover, logForms) {
+cvCont.controller('logBuilder', ['$scope', '$timeout', 'CV_Camper', '$stateParams', '$location', '$ionicPopup', '$ionicPopover', 'logForms', function($scope, $timeout, CV_Camper, $stateParams, $location, $ionicPopup, $ionicPopover, logForms) {
 	
 	CV_Camper.getCachedCamper($stateParams.camper_id); 
 	

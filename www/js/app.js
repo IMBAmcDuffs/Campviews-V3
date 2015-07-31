@@ -113,13 +113,16 @@ cv.config(function($stateProvider, $urlRouterProvider, $httpProvider) {
         return CV_Camps.getCamp();
     };
 		
-	var getCampers = function(CV_Camps) {
-        return CV_Camps.getCampersFromCamp();
+	var getCampers = function(CV_Camps, $location) {
+		var page = $location.$$path.replace('/','');
+		var params = page.split('/');
+		if(params.length > 1){
+			page = params[0];	
+		}
+		console.log(page);
+        return CV_Camps.getCampersFromCamp(page);
     };
 	
-	var getAllCamperData = function() { 
-		return {};
-	}
 	
 	var getCheckinData = function(CV_Forms,$stateParams) {
 		
@@ -150,8 +153,10 @@ cv.config(function($stateProvider, $urlRouterProvider, $httpProvider) {
 		var camper_id = $stateParams.camper_id;
 		
 		if(!camper_id) return false;
-		global.camper = CV_Camper.getCamper(camper_id);
-        return global.camper;
+		
+			//var camper = CV_Camper.getCamper({ id : camper_id, checkin : true });
+			var camper = false;
+        return camper;
 	};
 	
 	// check session and lets make sure to load the actual camp since we always need it...

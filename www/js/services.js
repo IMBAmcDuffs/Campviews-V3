@@ -197,7 +197,7 @@ cvServ.factory('CV_Camps', ['$http', '$q', '$injector', function($http, $q, $inj
 			var deferred = $q.defer();
 			var camp_id = global.selectedCamp;
 			$('#loading').show();
-			var path = rawpath+'get_single_camp_data/?access_token='+global.accessToken+'&camp_id='+camp_id+'&only=campers';
+			var path = rawpath+'get_single_camp_data/?access_token='+global.accessToken+'&camp_id='+camp_id+'&only=campers&page='+params;
 			
 				$http.get(path).
 					success(function(data, status, headers, config) {
@@ -206,23 +206,11 @@ cvServ.factory('CV_Camps', ['$http', '$q', '$injector', function($http, $q, $inj
 						var campers = {};
 						if(data.status === 'success'){
 							campers = data.campers;
-							var _c = Object.keys(campers).length;
-							if( _c > 0){
-								var _i = 0;
-								for(var i=0; i<_c; i++){
-									if(typeof(campers[i]) === 'undefined'){
-										if(!campers[i].id){
-											delete campers[i];
-										}
-									}
-								}
-							}
-						}
-						self.campData = campers;
+							self.campData = campers;
 						
 						global.checked_out_count = data.checked_out_count;
 						deferred.resolve(campers);
-						
+						}
 						console.log('Campers from camp', data);
 						 $('#loading').hide();
 					}).error(function(data, status, headers, config) {
@@ -367,7 +355,7 @@ cvServ.factory('CV_Forms', ['$http', '$q', '$location', '$ionicPopup', '$ionicPo
 				var $action = '';
 				   switch($type) {
 						case 'log' :
-							 $go = '/logsheets';
+							 $go = '/logsheets/';
 						break;
 						case 'checkin':
 							 $go = '/checkin';
@@ -395,11 +383,10 @@ cvServ.factory('CV_Forms', ['$http', '$q', '$location', '$ionicPopup', '$ionicPo
 				   });
 				   alertPopup.then(function(res) {
 					   if($go){
-						   var $go = '/'+$type;
 						   $location.path($go);
-					   }else{
-						   deferred.resolve($action);
 					   }
+						deferred.resolve($action);
+					   
 				   });
 				}else{
 				var $message = 'The system failed to saved the campers Log entry. Please try again...';
@@ -528,45 +515,30 @@ cvServ.factory('CV_Camper', ['$http', '$q', function($http, $q) {
 		self.getCamper = function(params) {
 		var deferred = $q.defer();
 		
-		var camper_id = parseInt(params);
+		var camper_id = parseInt(params.id);
+		var add;
+		if(typeof params.checkin !== 'undefined'){
+			add = '&checkin=true';
+		}
 		
 		global.camper = {};
 			
-			path = rawpath+'get/?access_token='+global.accessToken+'&id='+camper_id;
+			path = rawpath+'get/?access_token='+global.accessToken+'&camp_id='+global.selectedCamp+'&id='+camper_id+add;
 		
 			// check if the camper data is already within the global array if not load new
 			if(global.campers){
 				//self.getCachedCamper(camper_id);	
 			}
+			console.log(path);
 			
-			
-			if(self.camper !== null){ 
-				
-				deferred.resolve(global.camper);
-			} else {
-				$http.get(path).
-					success(function(data, status, headers, config) {
-						var _data = {};
-						
-						if(data.status === 'success'){
-							_data = {
-								'id' : data.camper.id,	
-								'first_name' : data.camper.camper_first_name,	
-								'last_name' : data.camper.camper_last_name,	
-								'thumbnail' : data.camper.thumbnail,	
-								'dob' : data.camper.camper_dob,	
-								'gender' : data.camper.camper_gender,	
-							};
-						}
-						
-						self.camper = _data;
-						global.camper = _data;
-						deferred.resolve(_data);
-						console.log(_data,'camper');
-					}).error(function(data, status, headers, config) {
-						deferred.reject('Error happened yo!');
-					});		
-			} 
+			$http.get(path).
+				success(function(data, status, headers, config) {					
+					self.camper = data.camper;
+					deferred.resolve(data.camper);
+					console.log(data,'camper');
+				}).error(function(data, status, headers, config) {
+					deferred.reject('Error happened yo!');
+				});		
 			
 			return deferred.promise;
 		};
