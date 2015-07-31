@@ -142,6 +142,7 @@ cvCont.controller('MainCtrl', ['$scope', '$ionicFilterBar', '$timeout', '$stateP
 			$scope.page_title = 'Camper Check Out - Select Camper to begin';
 			var checked_in = {};
 			// this should only be a list of campers who have completed a majority of the check in process
+			/*
 			var _c = Object.keys($items).length;
 			if(_c>0){
 				var $c = 0;
@@ -155,6 +156,7 @@ cvCont.controller('MainCtrl', ['$scope', '$ionicFilterBar', '$timeout', '$stateP
 					
 				}
 			}
+			*/
 			
 			$scope.end_count_message = 'ready to be checked out.';
 			$scope.secondary_count_message = '';
@@ -172,7 +174,7 @@ cvCont.controller('MainCtrl', ['$scope', '$ionicFilterBar', '$timeout', '$stateP
 			
 						
 			
-			$scope.items = checked_in;
+			$scope.items = $items;
 		break;
 	}
 	$scope._c = Object.keys($scope.items).length;
@@ -507,7 +509,7 @@ cvCont.controller('checkinForm', ['$scope', '$cordovaCamera', '$state', '$docume
 	
 }]);
 
-cvCont.controller('logForm', ['$scope', '$cordovaCamera', '$state', '$document', '$stateParams', '$location', '$ionicModal', '$ionicPopover', 'CV_Camper', 'CV_Forms', 'logForms', function($scope, $cordovaCamera, $state, $document, $stateParams, $location, $ionicModal, $ionicPopover, CV_Camper, CV_Forms, logForms) {
+cvCont.controller('logForm', ['$scope', '$cordovaCamera', '$state', '$document', '$stateParams', '$location', '$ionicModal', '$ionicPopover', 'CV_Camper', 'CV_Forms', 'logForms', 'checkinForms', function($scope, $cordovaCamera, $state, $document, $stateParams, $location, $ionicModal, $ionicPopover, CV_Camper, CV_Forms, logForms, checkinForms) {
 	CV_Camper.getCachedCamper($stateParams.camper_id); 
 	
 	var camper = global.camper;
@@ -521,6 +523,15 @@ cvCont.controller('logForm', ['$scope', '$cordovaCamera', '$state', '$document',
 		global.camp.logForms = logForms.forms;
 		$scope.logFroms = logForms.forms;
 	  }
+	var medicalForm = false;
+	if(typeof checkinForms !== 'undefined') {
+		medicalForm = checkinForms[0];
+	}
+	 console.log(medicalForm,checkinForms,checkinForms[0]);
+	$scope.medical_form = {};
+	if(medicalForm){
+		$scope.medical_form = medicalForm;
+	}
 
 	var form = logForms.forms[0]; 
 
@@ -589,7 +600,7 @@ cvCont.controller('logForm', ['$scope', '$cordovaCamera', '$state', '$document',
 	}
 	
 
-	$scope.checkin_forms = {};
+	/*
 	if(typeof global.camper.checkins !== 'undefined' && global.camper.checkins !== null){
 	    var checkin_forms = global.camper.checkins;
 		console.log(checkin_forms);
@@ -606,7 +617,8 @@ cvCont.controller('logForm', ['$scope', '$cordovaCamera', '$state', '$document',
 		}
 		
 	}
-	console.log($scope.checkin_forms, 'forms');
+	*/
+	console.log($scope.medical, 'forms');
 	
 	// we need to put the correct signature if the doctor has one already
 	if(global.userData.data){

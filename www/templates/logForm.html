@@ -21,11 +21,11 @@
             <h2 class="sub_title">Log Form Entry on {{date}} at {{time_of_day}}</h2>
         </div>
   	<div class="row logsheets-container">
-    	<div class="col col-75 padding-horizontal">
+    	<div class="col col-67 padding-horizontal">
             <ion-list> 
             	<form name="logForm" class="log_form" id="form_{{form_id}}" data-id="{{form_id}}" ng-submit="saveForm(logForm)">
-                    <ion-item ng-controller="formBuilder" ng-repeat="field in form.fields" class="form_list_item list" id="form_input_{{field.meta_id}}" ng-model="checkinData" ng-bind-html="fieldHTML">
-                    </ion-item>
+                    <div ng-controller="formBuilder" ng-repeat="field in form.fields" class="form_list_item col col-100" id="form_input_{{field.meta_id}}" ng-model="checkinData" ng-bind-html="fieldHTML">
+                    </div>
                     <ion-item ng-click="showSignature()" class="append-to-signature padding-verticle item-positive add-signature-button"><span ng-show="signatureData">Change Account Signature</span><span ng-show="!signatureData">Add a Signature</span></ion-item>
                     <ion-item>
                     	<input name="cv_user_id" id="user_id" type="hidden" value="{{user_id}}" />
@@ -41,26 +41,25 @@
                 </form>
             </ion-list>
         </div>
-     	<div class="col col-25">
-        	<ion-list class='list row medical-form'>
-            	<ion-item ng-repeat="item in medicalData" class="item col">
-                	
+     	<div class="col col-33">
+        	<ion-list class="list row medical-form">
+            	<div class="log-image-container" toggle-class="full-img">
+                    <div class="image" ng-show="camper.thumbnail">
+                        <img ng-src="{{camper.thumbnail}}">
+                    </div>
+                    <div class="image no-image" ng-show="!camper.thumbnail">
+                        <img ng-src="http://placehold.it/300x300">
+                    </div>
+                </div>
+
+            	<div class="bar bar-balanced" style="position:relative;"><h2 class="title">{{camper.first_name}} {{camper.last_name}}</h2></div>
+            	<div class="bar bar-positive" style="position:relative;"><h2 class="title">Medical Check In Data</h2></div>
+            	<ion-item ng-repeat="item in medical_form.fields" class="item row">
+                	<div class="col col-75 med-field-label">{{item.label}}</div>
+                    <div class="col col-25 med-field-value">{{item.user_value}}</div>
                 </ion-item>
             </ion-list>
             
-            <ion-item class="item col selected_camper">
-            	<div class="image" ng-show="camper.thumbnail">
-                	<img ng-src="{{camper.thumbnail}}">
-    			</div>
-                <div class="image no-image" ng-show="!camper.thumbnail">
-                    <img ng-src="http://placehold.it/300x300">
-                </div>
-                <div class="camper_data">
-               	 	<p>Name: {{camper.first_name}} {{camper.last_name}}</p>
-                    <p>Date of Birth: {{camper.dob}}</p>
-                </div>
-                
-            </ion-item>
         </div>
     </div>
      

@@ -124,8 +124,15 @@ cv.config(function($stateProvider, $urlRouterProvider, $httpProvider) {
     };
 	
 	
-	var getCheckinData = function(CV_Forms,$stateParams) {
-		
+	var getCheckinData = function(CV_Forms,$stateParams, $location) {
+		var page = $location.$$path.replace('/','');
+		var params = page.split('/');
+		if(params.length > 1){
+			page = params[0];	
+		}
+		if(page === 'logsheets'){
+			$stateParams.form_id = 333;
+		}
         return CV_Forms.getCheckinValues($stateParams.form_id,$stateParams.camper_id);
     };
 		
@@ -314,7 +321,8 @@ cv.config(function($stateProvider, $urlRouterProvider, $httpProvider) {
 		    templateUrl: 'templates/logForm.html',	
 			controller: 'logForm',
 			resolve: {
-				logForms : getLogForms	
+				logForms : getLogForms,
+				checkinForms : getCheckinData	
 			}
 		},
 	},
