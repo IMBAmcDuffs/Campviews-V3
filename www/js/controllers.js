@@ -656,21 +656,44 @@ cvCont.controller('formBuilder', ['$sce','$scope', function($sce, $scope) {
 	
 }]);
 
-cvCont.controller('logNote', ['$scope', '$timeout', 'CV_Camper', '$stateParams', '$location', function($scope, $timeout, CV_Camper, $stateParams, $location) {
-	$scope.values = {};
-	$scope.values.camper_name = global.camper.first_name+' '+global.camper.last_name;
-	$scope.values.camper_id = $stateParams.camper_id;
-	$scope.values.logForm = form = $scope.logForm;
-	$scope.values.camper = global.camper;
-	$scope.values.access_key = global.access_token;
-	$scope.values.type = 'note';
+cvCont.controller('logNote', ['$scope', '$timeout', 'CV_Camper', 'CV_Forms', '$stateParams', '$location', function($scope, $timeout, CV_Camper, CV_Forms, $stateParams, $location) {
+	CV_Camper.getCachedCamper($stateParams.camper_id); 
+	var values = {};
+	values.camper_name = global.camper.first_name+' '+global.camper.last_name;
+	values.camper_id = global.camper.id;
+	values.camp_id = global.selectedCamp;
+	var form = $scope.logForm;
+	$scope.camper = global.camper;
+	values.access_key = global.accessToken;
+	values.form_type = 'note';
+	values.user_id = global.userData.data.ID;
 	
-	$scope.values.pending_note = '';
-	
-	console.log($scope.camper);
+	console.log(global,'globals');
+	$scope.noteData = values;
+	$scope.noteData.form_values = {};
+	$scope.noteData.form_values.note = '';
 	
 	$scope.addNote = function() {
+		var noteData = $scope.noteData;
+		if(typeof noteData !== 'undefined'){
+			if(typeof noteData.form_values.note !== 'undefined') {
+				if(noteData.form_values.note !== ''){
+					// now we must save the note and refresh the note data
+					var save;
+					$scope.$watch(CV_Forms.saveForm(noteData, 'note'),
+					function () {
+						 $timeout(function() {$scope.closePopover()}, 1000);	
+					}
+					);
+					
+					if(save === 'closePopover'){
+						$scope.closePopover();	
+					}
+				}
+			}
+		}
 		
+		console.log(noteData, $scope, 'addNote');
 	};
 	
 	
@@ -681,6 +704,10 @@ cvCont.controller('logBuilder', ['$scope', '$timeout', 'CV_Camper', '$stateParam
 	CV_Camper.getCachedCamper($stateParams.camper_id); 
 	
 	var camper = global.camper;
+	
+	if(typeof camper.id === 'undefined'){
+		$location.path('#/logsheets');
+	}
 		
 	  if(logForms.status === 'success'){	
 	  if(!global.camp) global.camp = {}
@@ -699,16 +726,18 @@ cvCont.controller('logBuilder', ['$scope', '$timeout', 'CV_Camper', '$stateParam
 	
 	var logValues = form.values;
 	
-	
-	$ionicPopover.fromTemplateUrl('templates/log-note.html', {
-		scope: $scope
-	}).then(function(popover) {
-		$scope.popover = popover;
-	});
+	$scope.noteData = {};
 	
 	
+		$ionicPopover.fromTemplateUrl('templates/log-note.html', {
+                scope: $scope,
+		}).then(function(popover) {
+                $scope.popover = popover;
+		});
+
 	$scope.openPopover = function($event) {
-		$scope.popover.show($event);
+                $scope.popover.show($event);
+		
 	};
 	
 	$scope.closePopover = function() {

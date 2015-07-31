@@ -277,7 +277,7 @@ cvServ.factory('CV_Camps', ['$http', '$q', '$injector', function($http, $q, $inj
 	
 }]);
 
-cvServ.factory('CV_Forms', ['$http', '$q', '$location', '$ionicPopup', function($http, $q, $location, $ionicPopup) {
+cvServ.factory('CV_Forms', ['$http', '$q', '$location', '$ionicPopup', '$ionicPopover', function($http, $q, $location, $ionicPopup, $ionicPopover) {
 	
 	var rawpath = global.apiPath+'cv_form/';
 	
@@ -329,24 +329,28 @@ cvServ.factory('CV_Forms', ['$http', '$q', '$location', '$ionicPopup', function(
 			path = rawpath+'save/?access_token='+global.accessToken;
 		$('#loading').show();
 			var $data = {}; 
-			var form = $(document).find('input, textarea, select');
-			if(form.length>0){
-				form.each(function(i,e){
-					if(!$data.form_values){
-						$data.form_values = {};	
-					}
-					var value = $(this).val();
-					if(value!==''){
-					var name = $(this).attr('id');
-					var check = $(this).data('field');  
-						if(check){
-							$data.form_values[name] =  value ;
-						}else{
-							$data[name] =  value ;
+			if($type!=='note'){
+				var form = $(document).find('input, textarea, select');
+				if(form.length>0){
+					form.each(function(i,e){
+						if(!$data.form_values){
+							$data.form_values = {};	
 						}
-					}
-				});
-			} 
+						var value = $(this).val();
+						if(value!==''){
+						var name = $(this).attr('id');
+						var check = $(this).data('field');  
+							if(check){
+								$data.form_values[name] =  value ;
+							}else{
+								$data[name] =  value ;
+							}
+						}
+					});
+				} 
+			}else{
+				$data = $form;	
+			}
 			$config = {
 				headers: {
 					'Content-Type': 'multipart/form-data' 	
@@ -356,9 +360,11 @@ cvServ.factory('CV_Forms', ['$http', '$q', '$location', '$ionicPopup', function(
 			$http.post(path,$data,$config).success(function(data,satus){
 				console.log(data, 'Save Form Data');
 				var alertPopup;
+				var deferred = $q.defer();
 				if(data.status === 'success'){
 				var $msg = 'The system saved the campers Log entry. We will now return you to the camper selection screen.';
 				var $title = 'Save Successful!';
+				var $action = '';
 				   switch($type) {
 						case 'log' :
 							 $go = '/logsheets';
@@ -371,6 +377,12 @@ cvServ.factory('CV_Forms', ['$http', '$q', '$location', '$ionicPopup', function(
 							 $go = '/checkout';
 							 $msg = 'The system has checked out this camper. We will now return you to the camper selection screen.';
 						break;
+						case 'note':
+							 $go = false;
+							 $msg = 'Your note has been saved to '+global.camper.first_name+' '+global.camper.last_name;
+							 $action = 'closePopOver';
+							 routing = false;
+						break;
 						default:
 							 $go = '/dashboard';
 							 $msg = 'The system has saved your data. Returning you to the dashboard.';
@@ -382,8 +394,12 @@ cvServ.factory('CV_Forms', ['$http', '$q', '$location', '$ionicPopup', function(
 					 template: $msg
 				   });
 				   alertPopup.then(function(res) {
-					   var $go = '/'+$type;
-					   $location.path($go);
+					   if($go){
+						   var $go = '/'+$type;
+						   $location.path($go);
+					   }else{
+						   deferred.resolve($action);
+					   }
 				   });
 				}else{
 				var $message = 'The system failed to saved the campers Log entry. Please try again...';

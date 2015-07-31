@@ -300,7 +300,7 @@ cv.config(function($stateProvider, $urlRouterProvider, $httpProvider) {
 			}
 	},
 	},
-	require: ['ionList', '^?$ionicScroll'],
+	require: ['ionList', '^?$ionicScroll', '$ionicPopover'],
   }).state('app.logForm', {
     url: '/logsheets/logform/:camper_id/:form_id/:time_of_day/:day',
 	cache: false,
