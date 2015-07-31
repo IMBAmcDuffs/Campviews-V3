@@ -78,6 +78,21 @@ img {
 .log-image-container div {
 	margin-top:-75px;	
 }
+.log-image-container div:before {
+	content: 'Tap for full image..';
+	position:absolute;
+	top:5px;
+	opacity:0.8;
+	width:100%;
+	font-size:16px;
+	font-weight:bold;
+	color:#fff;
+	text-align:center;	
+	text-shadow:#000 1px 1px 0px;
+}
+.log-image-container.full-img div:before {
+	content: 'Tap for smaller image..';	
+}
 .log-image-container.full-img div {
 	margin-top:0px;	
 }

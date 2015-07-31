@@ -741,7 +741,7 @@ cvCont.controller('logBuilder', ['$scope', '$timeout', 'CV_Camper', '$stateParam
 	var camper = global.camper;
 	
 	if(typeof camper.id === 'undefined'){
-		$location.path('#/logsheets');
+		$location.path('/logsheets');
 	}
 		
 	  if(logForms.status === 'success'){	

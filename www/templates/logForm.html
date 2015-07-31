@@ -55,8 +55,8 @@
             	<div class="bar bar-balanced" style="position:relative;"><h2 class="title">{{camper.first_name}} {{camper.last_name}}</h2></div>
             	<div class="bar bar-positive" style="position:relative;"><h2 class="title">Medical Check In Data</h2></div>
             	<ion-item ng-repeat="item in medical_form.fields" class="item row">
-                	<div class="col col-75 med-field-label">{{item.label}}</div>
-                    <div class="col col-25 med-field-value">{{item.user_value}}</div>
+                	<div class="col col-50 med-field-label item-text-wrap">{{item.label}}</div>
+                    <div class="col col-50 med-field-value item-text-wrap">{{item.user_value}}</div>
                 </ion-item>
             </ion-list>
             
