@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<widget id="com.ionicframework.campviewsv3951987" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0" xmlns:gap="http://phonegap.com/ns/1.0">
-  <name>CampViews Version 3</name>
+<widget id="com.ionicframework.campviewsv3951987" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0" xmlns:gap="http://phonegap.com/ns/1.0">
+  <name>CampViews - NDA</name>
   <description>
-        An Ionic Framework and Cordova project.
-    </description>
+        The app built for the Nevada Diabetes Association. This app allows for the NDA to create and run camps with campers. They can check in, create log forms and check out the campers dynamically across all iPads. This build is built on Ionic.
+  </description>
   <author email="mcduffs.crapfling@gmail.com" href="http://nda.campviews.com">
       Christopher mcDuffs Crevling
-    </author>
+  </author>
   <content src="index.html"/>
   <access origin="*" subdomains="true"/>
   <access origin="http://nda.campviews.com/"/>
