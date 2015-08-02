@@ -22,7 +22,7 @@
          <div ng-show="page == 'checkin' && secondary_count_message!==''" class="results-info checked-out-notice bar bar-dark">{{secondary_count_message}}</div>
          <div ng-show="_c==0" class="results-info no-results bar bar-assertive">No Campers found for your selection...</div>
            <ion-item ng-repeat="item in items| orderBy:'last_name' " ng-show="item.id > 0" class="col list_item item card item-thumbnail-left {{ item.checked_in>0 && page=='checkin' ? 'item-balanced' : '' }}" ng-href="#/{{URI}}/{{item.id}}">
-                	<img ng-src="{{item.thumbnail ? item.thumbnail : '/img/noimg.png'}}" />
+                	<img ng-src="{{item.thumbnail ? item.thumbnail : 'img/noimg.png'}}" />
 
                     <div class="list_item_title row">
                         {{item.first_name}} {{item.last_name}}

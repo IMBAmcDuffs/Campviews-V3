@@ -44,7 +44,7 @@
                         <img id="hasImage" ng-src="{{camper.thumbnail}}">
                     </div>
                     <div class="image no-image" ng-show="!camper.thumbnail">
-                        <img id="noImage" ng-src="http://placehold.it/300x300">
+                        <img id="noImage" ng-src="img/noimg.png">
                     </div>
                     <ion-item ng-click="takePicture()" ng-href="#" class="button button-full button-positive item-icon-left">
                         <i class="icon ion-camera"></i> {{camper.thumbnail ? 'Retake Picture' : 'Take Picture'}}
