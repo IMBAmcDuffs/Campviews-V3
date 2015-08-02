@@ -243,7 +243,7 @@ cvServ.factory('CV_Camps', ['$http', '$q', '$injector', function($http, $q, $inj
 			success(function(data, status, headers, config) {
 				self.logForms = data;
 				deferred.resolve(data);
-				//console.log(data, 'log data');
+				console.log(data, 'log data');
 			}).error(function(data, status, headers, config) {
 				deferred.reject('Error happened yo!');
 			});		
@@ -316,6 +316,7 @@ cvServ.factory('CV_Forms', ['$http', '$q', '$location', '$ionicPopup', '$ionicPo
 				$http.get(path).
 					success(function(data, status, headers, config) {
 						self.checkinData = data;
+						console.log(data);
 						deferred.resolve(data.forms);
 						  $('#loading').hide();
  
@@ -336,6 +337,7 @@ cvServ.factory('CV_Forms', ['$http', '$q', '$location', '$ionicPopup', '$ionicPo
 				var form = $(document).find('input, textarea, select');
 				if(form.length>0){
 					form.each(function(i,e){
+						console.log($(this).attr('name'),$(this).val());
 						if(!$data.form_values){
 							$data.form_values = {};	
 						}
@@ -359,17 +361,19 @@ cvServ.factory('CV_Forms', ['$http', '$q', '$location', '$ionicPopup', '$ionicPo
 					'Content-Type': 'multipart/form-data' 	
 				} 
 			};
-				
+			console.log($data);
+			
 			$http.post(path,$data,$config).success(function(data,satus){
 				console.log(data, 'Save Form Data');
 				var alertPopup;
+				var $go = false;
 				if(data.status === 'success'){
 				var $msg = 'The system saved the campers Log entry. We will now return you to the camper selection screen.';
 				var $title = 'Save Successful!';
 				var $action = '';
 				   switch($type) {
 						case 'log' :
-							 $go = '/logsheets/';
+							 $go = '/logsheets/'+$data.camper_id;
 						break;
 						case 'checkin':
 							 $go = '/checkin';
@@ -397,6 +401,7 @@ cvServ.factory('CV_Forms', ['$http', '$q', '$location', '$ionicPopup', '$ionicPo
 					 template: $msg
 				   });
 				   alertPopup.then(function(res) {
+					   
 					   if($go){
 						   $location.path($go);
 					   }
@@ -416,6 +421,7 @@ cvServ.factory('CV_Forms', ['$http', '$q', '$location', '$ionicPopup', '$ionicPo
 				}
 				$('#loading').hide();
 			});
+			
 			
 			return deferred.promise;
 		};

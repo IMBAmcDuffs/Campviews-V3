@@ -527,9 +527,10 @@ cvCont.controller('logForm', ['$scope', '$cordovaCamera', '$state', '$document',
 	  }
 	var medicalForm = false;
 	if(typeof checkinForms !== 'undefined') {
-		medicalForm = checkinForms[0];
+		if(typeof checkinForms[0] !== 'undefined'){
+			medicalForm = checkinForms[0];
+		}
 	}
-	 console.log(medicalForm,checkinForms,checkinForms[0]);
 	$scope.medical_form = {};
 	if(medicalForm){
 		$scope.medical_form = medicalForm;
@@ -541,7 +542,7 @@ cvCont.controller('logForm', ['$scope', '$cordovaCamera', '$state', '$document',
 	$scope.form = form; 
 	$scope.camper_id = $stateParams.camper_id;
 	$scope.camp_id = global.selectedCamp;
-	$scope.form_id = $stateParams.form_id;
+	$scope.form_id = 331;
 	$scope.time_of_day = $stateParams.time_of_day;
 	$scope.date = $stateParams.day;
 	$scope.user_id = global.userData.ID;
