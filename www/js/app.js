@@ -28,10 +28,10 @@ var appdb = {
         },function() { appdb.errorCB('db init errors') }, function() { appdb.successCB('db init complete') });
     },
     successCB: function(msg) {
-        console.log(msg);
+        //console.log(msg);
     },
     errorCB: function(error) {
-        console.log(error);
+        //console.log(error);
     }
 };
 	
@@ -124,7 +124,7 @@ cv.config(function($stateProvider, $urlRouterProvider, $httpProvider) {
 		if(params.length > 1){
 			page = params[0];	
 		}
-		console.log(page);
+		//console.log(page);
         return CV_Camps.getCampersFromCamp(page);
     };
 	

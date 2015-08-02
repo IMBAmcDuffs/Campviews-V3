@@ -74,7 +74,7 @@ var formBuilder = {
 	var value = formBuilder.value;
 	for(var key in field.meta_value.options){
 		 var option = field.meta_value.options[key];
-		 console.log(value);
+		 //console.log(value);
 		 var checked = '';
 		 if( option.value == value ) checked = 'checked="checked"';
 		output += '<li class="item item-toggle">'+option.label+'<label for="field_'+field.meta_id+'_'+i+'" class="toggle"><input name="form_values[field_'+field.meta_id+'['+i+']]" type="checkbox" '+checked+' value="'+option.value+'" data-field="true"  id="field_'+field.meta_id+'_'+i+'" ng-model="checkinData.field_'+field.meta_id+'_'+i+'"><div class="track"><div class="handle"></div></div></label></li>';

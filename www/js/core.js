@@ -11,7 +11,7 @@ var testData = {
  
 var core = {
 	debug: function(data,name){
-		console.log(name, JSON.stringify(data));
+		//console.log(name, JSON.stringify(data));
 	},
 	getCurrentCamp: function(){
 		var camp_id = 0;
@@ -28,10 +28,10 @@ var core = {
 		$http(req).
 		success(function(data, status, headers, config) {
 			cache.request = data;
-			console.log(data.status);
-			console.log('ajaxpost - status');
-			console.log(data.key);
-			console.log('ajaxpost - key');
+			//console.log(data.status);
+			//console.log('ajaxpost - status');
+			//console.log(data.key);
+			//console.log('ajaxpost - key');
 		}).
 		error(function(data, status, headers, config) {
 			

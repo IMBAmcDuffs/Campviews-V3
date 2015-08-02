@@ -185,7 +185,7 @@ cvServ.factory('CV_Camps', ['$http', '$q', '$injector', function($http, $q, $inj
 				success(function(data, status, headers, config) {
 					self.logForms = data;
 					deferred.resolve(data);
-					console.log(data,'requested forms');
+					//console.log(data,'requested forms');
 				}).error(function(data, status, headers, config) {
 					deferred.reject('Error happened yo!');
 				});		
@@ -210,7 +210,7 @@ cvServ.factory('CV_Camps', ['$http', '$q', '$injector', function($http, $q, $inj
 						global.checked_out_count = data.checked_out_count;
 						deferred.resolve(campers);
 						}
-						console.log('Campers from camp', data);
+						//console.log('Campers from camp', data);
 						 $('#loading').hide();
 					}).error(function(data, status, headers, config) {
 						deferred.reject('Error happened yo!');
@@ -227,7 +227,7 @@ cvServ.factory('CV_Camps', ['$http', '$q', '$injector', function($http, $q, $inj
 				success(function(data, status, headers, config) {
 					self.logForms = data;
 					deferred.resolve(data);
-					//console.log(data, 'note data');
+					////console.log(data, 'note data');
 				}).error(function(data, status, headers, config) {
 					deferred.reject('Error happened yo!');
 				});		
@@ -243,7 +243,7 @@ cvServ.factory('CV_Camps', ['$http', '$q', '$injector', function($http, $q, $inj
 			success(function(data, status, headers, config) {
 				self.logForms = data;
 				deferred.resolve(data);
-				console.log(data, 'log data');
+				//console.log(data, 'log data');
 			}).error(function(data, status, headers, config) {
 				deferred.reject('Error happened yo!');
 			});		
@@ -263,7 +263,7 @@ cvServ.factory('CV_Camps', ['$http', '$q', '$injector', function($http, $q, $inj
 						
 						deferred.resolve(data);
 						sessionStorage.setItem('single_camp_data', JSON.stringify(data));
-							console.log('The Camp', data);
+							//console.log('The Camp', data);
 					
 					}).error(function(data, status, headers, config) {
 						deferred.reject('Error happened yo!');
@@ -316,7 +316,7 @@ cvServ.factory('CV_Forms', ['$http', '$q', '$location', '$ionicPopup', '$ionicPo
 				$http.get(path).
 					success(function(data, status, headers, config) {
 						self.checkinData = data;
-						console.log(data);
+						//console.log(data);
 						deferred.resolve(data.forms);
 						  $('#loading').hide();
  
@@ -337,7 +337,7 @@ cvServ.factory('CV_Forms', ['$http', '$q', '$location', '$ionicPopup', '$ionicPo
 				var form = $(document).find('input, textarea, select');
 				if(form.length>0){
 					form.each(function(i,e){
-						console.log($(this).attr('name'),$(this).val());
+						//console.log($(this).attr('name'),$(this).val());
 						if(!$data.form_values){
 							$data.form_values = {};	
 						}
@@ -361,10 +361,10 @@ cvServ.factory('CV_Forms', ['$http', '$q', '$location', '$ionicPopup', '$ionicPo
 					'Content-Type': 'multipart/form-data' 	
 				} 
 			};
-			console.log($data);
+			//console.log($data);
 			
 			$http.post(path,$data,$config).success(function(data,satus){
-				console.log(data, 'Save Form Data');
+				//console.log(data, 'Save Form Data');
 				var alertPopup;
 				var $go = false;
 				if(data.status === 'success'){
@@ -453,7 +453,7 @@ cvServ.factory('CV_Forms', ['$http', '$q', '$location', '$ionicPopup', '$ionicPo
 				
 				$http.get(path).
 					success(function(data, status, headers, config) {
-						//console.log(data, 'checkin');
+						////console.log(data, 'checkin');
 						//global.checkinForms = self.checkinForms = data;
 						deferred.resolve(data.forms);
 					}).error(function(data, status, headers, config) {
@@ -470,12 +470,12 @@ cvServ.factory('CV_Forms', ['$http', '$q', '$location', '$ionicPopup', '$ionicPo
 		$http.get(path).
 			success(function(data, status, headers, config) {
 				global.checkoutForms = data;
-				console.log(data, 'Check out forms');
+				//console.log(data, 'Check out forms');
 				
 				$('#loading').hide();
 				deferred.resolve(data);
 			}).error(function(data, status, headers, config) {
-				console.log(data);
+				//console.log(data);
 				deferred.reject('Error happened yo!');
 			});		
 			
@@ -539,7 +539,7 @@ cvServ.factory('CV_Camper', ['$http', '$q', function($http, $q) {
 				
 				$http.post(path, data, $config)
 					.success(function(data, status, headers) {
-						console.log(data, 'Upload Image');
+						//console.log(data, 'Upload Image');
 						if(data.result === 'success'){
 							// do success on upload here
 						}else{
@@ -569,13 +569,13 @@ cvServ.factory('CV_Camper', ['$http', '$q', function($http, $q) {
 			if(global.campers){
 				//self.getCachedCamper(camper_id);	
 			}
-			console.log(path);
+			//console.log(path);
 			
 			$http.get(path).
 				success(function(data, status, headers, config) {					
 					self.camper = data.camper;
 					deferred.resolve(data.camper);
-					console.log(data,'camper');
+					//console.log(data,'camper');
 				}).error(function(data, status, headers, config) {
 					deferred.reject('Error happened yo!');
 				});		
@@ -610,7 +610,7 @@ cvServ.factory('CV_Account', ['$http','$location','$ionicPopup', function($http,
 			
 			$http(req).
 			then(function(result) {
-				console.log(result.data, 'Account process login');
+				//console.log(result.data, 'Account process login');
 				if(result.data.status === 'success'){
 					// save the user data and route the app to the camp selection
 					localStorage.setItem('user_login', result.data.key);
