@@ -257,7 +257,7 @@ cv.config(function($stateProvider, $urlRouterProvider, $httpProvider) {
 		    templateUrl: 'templates/checkinForms.html',	
 			controller: 'checkinForms',
 			resolve: {
-				camperData : reloadCamper	
+				camperData : function() { return false; }	
 			}
  		},
 	},
