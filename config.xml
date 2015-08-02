@@ -7,7 +7,7 @@
   <author email="mcduffs.crapfling@gmail.com" href="http://nda.campviews.com">
       Christopher mcDuffs Crevling
     </author>
-  <content src="index.html"/>
+  <content src="http://192.168.1.136:8100" original-src="index.html"/>
   <access origin="*" subdomains="true"/>
   <access origin="http://nda.campviews.com/"/>
   <preference name="webviewbounce" value="false"/>

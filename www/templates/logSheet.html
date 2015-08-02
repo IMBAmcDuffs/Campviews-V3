@@ -17,7 +17,7 @@
                 <div ng-repeat="option in timeOfDay.options" class="col" data-tod="{{option.value}}">
               		<div ng-init="setIntervalScope($index)" class="heading item item-divider">{{ option.label }}<br /><center>{{option.value}}</center></div>
                     <ion-list class="list" ng-controller="logRepeat" ng-repeat="day in getIndex(option.days,$index)" > 
-                        <ion-item ng-if="{{cur_i==0}}" class="col item item-dark day-title-container">
+                        <ion-item ng-show="{{cur_i==0}}" class="col item item-dark day-title-container">
                             <span class="day-title">{{day.title ? day.title : day.day}} </span>
                         </ion-item>
                     	<ion-item ng-if="day.user_values" id="user_item_{{cur_i}}_{{$index}}" toggle-class="expand" class="day-user-toggle {{ day.user_values ? 'item-balanced' : '' }} {{ expand ? 'expand' : '' }} item item-text-wrap">
