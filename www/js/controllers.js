@@ -382,6 +382,7 @@ cvCont.controller('CamperCrtl', ['$scope', '$document', '$stateParams', '$locati
 		});
 		
 		function onSuccess(imageData) {
+			console.log(imageData);
 			var image = document.getElementById('noImage');
 			image.src = "data:image/jpeg;base64," + imageData;
 			var $image = document.getElementById('hasImage');
@@ -391,7 +392,7 @@ cvCont.controller('CamperCrtl', ['$scope', '$document', '$stateParams', '$locati
 		}
 		
 		function onFail(message) {
-			
+			alert('Failed because: ' + message);
 		}
     };
 	
