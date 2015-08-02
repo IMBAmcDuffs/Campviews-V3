@@ -474,11 +474,11 @@ cvCont.controller('checkoutForms', ['$scope', '$document', '$stateParams', '$loc
 	}
 }]);
 
-cvCont.controller('checkinForm', ['$scope', '$cordovaCamera', '$state', '$document', '$stateParams', '$location', 'CV_Camper', 'CV_Forms', 'checkinData', function($scope, $cordovaCamera, $state, $document, $stateParams, $location, CV_Camper, CV_Forms, checkinData) {
+cvCont.controller('checkinForm', ['$scope', '$cordovaCamera', '$state', '$document', '$stateParams', '$location', 'CV_Camper', 'CV_Forms', 'checkinData', 'checkinForm', function($scope, $cordovaCamera, $state, $document, $stateParams, $location, CV_Camper, CV_Forms, checkinData, checkinForm) {
 	
 	CV_Camper.getCachedCamper($stateParams.camper_id); 
 	
-	var form = CV_Forms.getCachedForm($stateParams.form_id); 
+	var form = checkinForm[0]; 
 	
 	var camper = global.camper;
 	$scope.camper = camper; 
@@ -603,25 +603,6 @@ cvCont.controller('logForm', ['$scope', '$cordovaCamera', '$state', '$document',
 	}
 	
 
-	/*
-	if(typeof global.camper.checkins !== 'undefined' && global.camper.checkins !== null){
-	    var checkin_forms = global.camper.checkins;
-		console.log(checkin_forms);
-		var medForms = {};
-		var $form_id = "333"; // medical information form
-		var _c = checkin_forms.length;
-		if(_c > 0) {
-			for(var i = 0; i<_c; i++){
-				var form_id = checkin_forms[i].post_id;
-				if(form_id === $form_id){
-					$scope.checkin_forms = checkin_forms[i];
-				}
-			}
-		}
-		
-	}
-	*/
-	console.log($scope.medical, 'forms');
 	
 	// we need to put the correct signature if the doctor has one already
 	if(global.userData.data){

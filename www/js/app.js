@@ -103,6 +103,11 @@ cv.config(function($stateProvider, $urlRouterProvider, $httpProvider) {
         return forms;
     };
 	
+	var getCheckinForm = function(CV_Forms, $stateParams) {
+		var form = CV_Forms.getCheckinForm($stateParams);
+        return form;
+    };
+	
 	var getExitForms = function(CV_Forms) {
 		var forms = CV_Forms.getCheckoutForms();
         return forms;
@@ -281,6 +286,7 @@ cv.config(function($stateProvider, $urlRouterProvider, $httpProvider) {
 		    templateUrl: 'templates/checkinForm.html',	
 			controller: 'checkinForm',
 			resolve: { 
+				checkinForm: getCheckinForm,
 				checkinData: getCheckinData,
 			}
 		},

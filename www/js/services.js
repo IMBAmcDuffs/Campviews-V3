@@ -446,6 +446,23 @@ cvServ.factory('CV_Forms', ['$http', '$q', '$location', '$ionicPopup', '$ionicPo
 			return deferred.promise;
 		};
 		
+		self.getCheckinForm = function(params) {
+		var deferred = $q.defer();
+		$('#loading').show();
+		path = rawpath+'get_checkin_form/?access_token='+global.accessToken+'&form_id='+params.form_id+'&camp_id='+global.selectedCamp;
+				
+				$http.get(path).
+					success(function(data, status, headers, config) {
+						//console.log(data, 'checkin');
+						//global.checkinForms = self.checkinForms = data;
+						deferred.resolve(data.forms);
+					}).error(function(data, status, headers, config) {
+						deferred.reject('Error happened yo!');
+					});		
+			
+			return deferred.promise;
+		};
+		
 		self.getCheckoutForms = function() {
 		var deferred = $q.defer();
 		$('#loading').show();
