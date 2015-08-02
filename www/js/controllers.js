@@ -416,6 +416,7 @@ cvCont.controller('CamperCrtl', ['$scope', '$document', '$stateParams', '$locati
 		}
 	
 	}
+	console.log(camper);
 	
 	var camper_check_ins = camper.checkins;
 	var total_check_ins = camper_check_ins.length;
@@ -486,6 +487,7 @@ cvCont.controller('checkinForm', ['$scope', '$cordovaCamera', '$state', '$docume
 	$scope.camper_id = $stateParams.camper_id;
 	$scope.camp_id = global.selectedCamp;
 	
+	console.log(checkinData);
 	
 	$scope.saveForm = function(form) {
 		var type = 'checkin';

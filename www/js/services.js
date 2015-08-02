@@ -198,7 +198,6 @@ cvServ.factory('CV_Camps', ['$http', '$q', '$injector', function($http, $q, $inj
 			var camp_id = global.selectedCamp;
 			$('#loading').show();
 			var path = rawpath+'get_single_camp_data/?access_token='+global.accessToken+'&camp_id='+camp_id+'&only=campers&page='+params;
-			console.log(path);
 				$http.get(path).
 					success(function(data, status, headers, config) {
 						// lets make sure all the data is good to injest
@@ -228,7 +227,7 @@ cvServ.factory('CV_Camps', ['$http', '$q', '$injector', function($http, $q, $inj
 				success(function(data, status, headers, config) {
 					self.logForms = data;
 					deferred.resolve(data);
-					console.log(data, 'note data');
+					//console.log(data, 'note data');
 				}).error(function(data, status, headers, config) {
 					deferred.reject('Error happened yo!');
 				});		
@@ -244,7 +243,7 @@ cvServ.factory('CV_Camps', ['$http', '$q', '$injector', function($http, $q, $inj
 			success(function(data, status, headers, config) {
 				self.logForms = data;
 				deferred.resolve(data);
-				console.log(data, 'log data');
+				//console.log(data, 'log data');
 			}).error(function(data, status, headers, config) {
 				deferred.reject('Error happened yo!');
 			});		

@@ -24,8 +24,25 @@
   font-style: normal;
 }
 
+body {
+  font-family: 'Montserrat', sans-serif;
+  background-color:#FFF7D9;	
+}
+
+.pane, .view, .list-inset {
+  background-color:#EFE8DF;	
+}
+
+.login-form {
+}
+
 input, select {
 	width:100%;	
+}
+.input-row input {
+	text-align:center;
+	font-size:16px;
+	padding:5px 0px;	
 }
 
 .hidden {
@@ -97,9 +114,21 @@ img {
 	margin-top:0px;	
 }
 
+.camper_list_content .col {
+	padding:0px;	
+}
+
 .day-user-value {
 	font-size:12px;
 	line-height:10px;
+	padding:0px 5px;
+}
+.day-user-value .col {
+	padding:5px 0px;	
+}
+
+.signatureImage, .form_list_item {
+	background:#fff;	
 }
 .expand .day-user-value {
 	line-height:16px;
@@ -206,7 +235,7 @@ img {
 	cursor:pointer;
 	clear:none;
 	float:left;
-	border:5px #fff solid;
+	border:5px #EFE8DF solid;
 	padding:0px 30px;
 	box-sizing: border-box;
 }
@@ -215,7 +244,7 @@ img {
 	float:left;
 	width:30%;
 	margin:15px !important;
-	height:120px;
+	height:100px;
 	overflow:hidden;
 }
 .list_item_left {
