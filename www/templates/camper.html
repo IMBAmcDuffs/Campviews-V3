@@ -17,7 +17,7 @@
                 </ion-item>
                 
             </ion-item>
-            <ion-item class="item col selected_camper" ng-show="parentGuardianForm">
+            <ion-item class="item col selected_camper" ng-if="parentGuardianForm">
                 <h3 class="title">Parent and Guardian Info:</h3>
                 <div class="camper_data">
                 	<ion-item ng-repeat="field in parentGuardianForm">
@@ -26,7 +26,7 @@
                 </div>
                 
             </ion-item>
-            <ion-item class="item col selected_camper" ng-show="emergancyContactForm">
+            <ion-item class="item col selected_camper" ng-if="emergancyContactForm">
                 <h3 class="title">Emergancy Contact Info:</h3>
                 <div class="camper_data">
                 	<ion-item ng-repeat="field in emergancyContactForm">
@@ -40,16 +40,16 @@
         <div class="col col-25">
         	<ion-item class="row">
                 <ion-item class="item col camper_actions">
-                    <div class="image" ng-show="camper.thumbnail">
+                    <div class="image" ng-if="camper.thumbnail">
                         <img id="hasImage" ng-src="{{camper.thumbnail}}">
                     </div>
-                    <div class="image no-image" ng-show="!camper.thumbnail">
+                    <div class="image no-image" ng-if="!camper.thumbnail">
                         <img id="noImage" ng-src="img/noimg.png">
                     </div>
                     <ion-item ng-click="takePicture()" ng-href="#" class="button button-full button-positive item-icon-left">
                         <i class="icon ion-camera"></i> {{camper.thumbnail ? 'Retake Picture' : 'Take Picture'}}
                     </ion-item>
-                    <ion-item class="button button-full button-balanced item-icon-left" ng-show="{{checked_in === false}}" ng-href="#/checkin/{{camper_id}}">
+                    <ion-item class="button button-full button-balanced item-icon-left" ng-if="{{checked_in === false}}" ng-href="#/checkin/{{camper_id}}">
                         <i class="icon ion-android-checkbox-outline"></i> Check In
                     </ion-item>
                     <ion-item class="button button-full button-calm item-icon-left" ng-href="#/logsheets/{{camper_id}}">

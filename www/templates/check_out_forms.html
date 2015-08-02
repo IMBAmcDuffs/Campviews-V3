@@ -29,10 +29,10 @@
      	<div class="col col-25">
             
             <ion-item class="item col selected_camper">
-            	<div class="image" ng-show="camper.thumbnail">
+            	<div class="image" ng-if="camper.thumbnail">
                 	<img ng-src="{{camper.thumbnail}}">
     			</div>
-                <div class="image no-image" ng-show="!camper.thumbnail">
+                <div class="image no-image" ng-if="!camper.thumbnail">
                     <img ng-src="img/noimg.png">
                 </div>
                 <div class="camper_data">

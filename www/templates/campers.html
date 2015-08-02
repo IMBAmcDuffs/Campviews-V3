@@ -6,29 +6,29 @@
         <ion-refresher pulling-icon="ion-arrow-down-b" on-refresh="refreshItems()">
         </ion-refresher> 
    	<div class="camper_list_content">
-        <div class="filter_options button-bar" ng-show="page == 'checkin'">
+        <div class="filter_options button-bar" ng-if="page == 'checkin'">
         	<a class="button filter icon-left ion-ios-people {{ activeFilter=='everyone' || !activeFilter ? 'active' : '' }}" ng-click="filterResults('everyone')">Everyone</a>
         	<a class="button filter icon-left ion-ios-checkmark-outline {{ activeFilter=='not_checked' ? 'active' : '' }}" ng-click="filterResults('not_checked')" data-filter="not-checked">Not Checked In</a>
         	<a class="button filter icon-left ion-ios-checkmark-outline {{ activeFilter=='checking_in'  ? 'active' : '' }}" ng-click="filterResults('checking_in')" data-filter="checking-in">Checking In</a>
         	<a class="button filter icon-left ion-android-checkbox {{ activeFilter=='checked_in' ? 'active' : '' }}" ng-click="filterResults('checked_in')" data-filter="checked-in">Checked In</a>
         </div>
-        <div class="filter_options" ng-show="page == 'logsheets'">
+        <div class="filter_options" ng-if="page == 'logsheets'">
         	<div class="col col-100 bar" style="position:relative;"><h2 class="title">Select a cabin</h2></div>
         	<a class="button filter col col-20 icon-left ion-ios-people {{ activeFilter=='everyone' || !activeFilter ? 'active' : '' }}" ng-click="filterResults('everyone')">Everyone</a>
             <a class="button filter col col-20 icon-left ion-ios-home {{ cabin.id==activeFilter ? 'active' : '' }}" ng-repeat="cabin in cabins" id="cabin_filter_{{cabin.id}}" ng-click="filterResults(cabin.id)">{{cabin.name}}</a>
         </div>
     	<ion-list class="row list list-inset"> 
-         <div ng-show="_c" class="results-info results-found bar bar-positive">There are {{_c}} campers {{ end_count_message ? end_count_message : 'in our list' }}.</div>
-         <div ng-show="page == 'checkin' && secondary_count_message!==''" class="results-info checked-out-notice bar bar-dark">{{secondary_count_message}}</div>
-         <div ng-show="_c==0" class="results-info no-results bar bar-assertive">No Campers found for your selection...</div>
-           <ion-item ng-repeat="item in items| orderBy:'last_name' " ng-show="item.id > 0" class="col list_item item card item-thumbnail-left {{ item.checked_in>0 && page=='checkin' ? 'item-balanced' : '' }}" ng-href="#/{{URI}}/{{item.id}}">
+         <div ng-if="_c" class="results-info results-found bar bar-positive">There are {{_c}} campers {{ end_count_message ? end_count_message : 'in our list' }}.</div>
+         <div ng-if="page == 'checkin' && secondary_count_message!==''" class="results-info checked-out-notice bar bar-dark">{{secondary_count_message}}</div>
+         <div ng-if="_c==0" class="results-info no-results bar bar-assertive">No Campers found for your selection...</div>
+           <ion-item ng-repeat="item in items| orderBy:'last_name' " ng-if="item.id > 0" class="col list_item item card item-thumbnail-left {{ item.checked_in>0 && page=='checkin' ? 'item-balanced' : '' }}" ng-href="#/{{URI}}/{{item.id}}">
                 	<img ng-src="{{item.thumbnail ? item.thumbnail : 'img/noimg.png'}}" />
 
                     <div class="list_item_title row">
                         {{item.first_name}} {{item.last_name}}
                     </div>
-                    <div ng-show="page=='checkin'">
-                        <div class="list_item_title row" ng-show="item.checked_in>0">
+                    <div ng-if="page=='checkin'">
+                        <div class="list_item_title row" ng-if="item.checked_in>0">
                             Checked in {{item.checked_in}} out of {{item.checkins.length}}
                         </div>
                     </div>
