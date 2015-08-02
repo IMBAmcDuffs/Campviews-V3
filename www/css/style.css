@@ -172,6 +172,16 @@ img {
 	display:none;	
 }
 
+.notes-list {
+	float:left;
+	width:100%;	
+}
+
+.notes-list .card {
+	float:left;
+	margin:5px 0px;	
+}
+
 .day-user-toggle.expand::before {
 	content: "Tap to hide";
 	color:#D6FFDC;

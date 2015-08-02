@@ -198,7 +198,7 @@ cvServ.factory('CV_Camps', ['$http', '$q', '$injector', function($http, $q, $inj
 			var camp_id = global.selectedCamp;
 			$('#loading').show();
 			var path = rawpath+'get_single_camp_data/?access_token='+global.accessToken+'&camp_id='+camp_id+'&only=campers&page='+params;
-			
+			console.log(path);
 				$http.get(path).
 					success(function(data, status, headers, config) {
 						// lets make sure all the data is good to injest
@@ -219,6 +219,21 @@ cvServ.factory('CV_Camps', ['$http', '$q', '$injector', function($http, $q, $inj
 			
 				
 			return deferred.promise;
+		};
+		
+		self.getLogNotes = function(params) {
+			var deferred = $q.defer();
+			path = rawpath+'get_notes/?access_token='+global.accessToken+'&camper_id='+params.camper_id+'&camp_id='+global.selectedCamp;
+			$http.get(path).
+				success(function(data, status, headers, config) {
+					self.logForms = data;
+					deferred.resolve(data);
+					console.log(data, 'note data');
+				}).error(function(data, status, headers, config) {
+					deferred.reject('Error happened yo!');
+				});		
+				
+				return deferred.promise;
 		};
 		
 		self.getLogForms = function(params) {
@@ -314,7 +329,8 @@ cvServ.factory('CV_Forms', ['$http', '$q', '$location', '$ionicPopup', '$ionicPo
 		}; 
 		
 		self.saveForm = function($form, $type) {
-			path = rawpath+'save/?access_token='+global.accessToken;
+		var deferred = $q.defer();
+		path = rawpath+'save/?access_token='+global.accessToken;
 		$('#loading').show();
 			var $data = {}; 
 			if($type!=='note'){
@@ -348,7 +364,6 @@ cvServ.factory('CV_Forms', ['$http', '$q', '$location', '$ionicPopup', '$ionicPo
 			$http.post(path,$data,$config).success(function(data,satus){
 				console.log(data, 'Save Form Data');
 				var alertPopup;
-				var deferred = $q.defer();
 				if(data.status === 'success'){
 				var $msg = 'The system saved the campers Log entry. We will now return you to the camper selection screen.';
 				var $title = 'Save Successful!';
@@ -368,8 +383,9 @@ cvServ.factory('CV_Forms', ['$http', '$q', '$location', '$ionicPopup', '$ionicPo
 						case 'note':
 							 $go = false;
 							 $msg = 'Your note has been saved to '+global.camper.first_name+' '+global.camper.last_name;
-							 $action = 'closePopOver';
+							 $action = data;
 							 routing = false;
+							 
 						break;
 						default:
 							 $go = '/dashboard';
@@ -385,6 +401,7 @@ cvServ.factory('CV_Forms', ['$http', '$q', '$location', '$ionicPopup', '$ionicPo
 					   if($go){
 						   $location.path($go);
 					   }
+					   
 						deferred.resolve($action);
 					   
 				   });
@@ -400,7 +417,8 @@ cvServ.factory('CV_Forms', ['$http', '$q', '$location', '$ionicPopup', '$ionicPo
 				}
 				$('#loading').hide();
 			});
-			 
+			
+			return deferred.promise;
 		};
 		 
 		self.getCheckinForms = function() {
