@@ -322,10 +322,14 @@ cvCont.controller('checkinForms', ['$scope', '$document', '$stateParams', '$loca
 		
 		function onSuccess(imageData) {
 			var image = document.getElementById('noImage');
-			image.src = "data:image/jpeg;base64," + imageData;
+			if(image){
+				image.src = "data:image/jpeg;base64," + imageData;
+			}
 			var $image = document.getElementById('hasImage');
-			$image.src = "data:image/jpeg;base64," + imageData;
-
+			if($image){
+				$image.src = "data:image/jpeg;base64," + imageData;
+			}
+	
 			var upload = CV_Camper.uploadImage(imageData, $stateParams.camper_id);
 		}
 		
@@ -382,15 +386,16 @@ cvCont.controller('CamperCrtl', ['$scope', '$document', '$stateParams', '$locati
 		});
 		
 		function onSuccess(imageData) {
-			console.log(imageData);
-			if(imageData){
-				var image = document.getElementById('noImage');
+			var image = document.getElementById('noImage');
+			if(image){
 				image.src = "data:image/jpeg;base64," + imageData;
-				var $image = document.getElementById('hasImage');
-				$image.src = "data:image/jpeg;base64," + imageData;
-	
-				var upload = CV_Camper.uploadImage(imageData, $stateParams.camper_id);
 			}
+			var $image = document.getElementById('hasImage');
+			if($image){
+				$image.src = "data:image/jpeg;base64," + imageData;
+			}
+	
+			var upload = CV_Camper.uploadImage(imageData, $stateParams.camper_id);
 		}
 		
 		function onFail(message) {
