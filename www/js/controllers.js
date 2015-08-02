@@ -383,12 +383,14 @@ cvCont.controller('CamperCrtl', ['$scope', '$document', '$stateParams', '$locati
 		
 		function onSuccess(imageData) {
 			console.log(imageData);
-			var image = document.getElementById('noImage');
-			image.src = "data:image/jpeg;base64," + imageData;
-			var $image = document.getElementById('hasImage');
-			$image.src = "data:image/jpeg;base64," + imageData;
-
-			var upload = CV_Camper.uploadImage(imageData, $stateParams.camper_id);
+			if(imageData){
+				var image = document.getElementById('noImage');
+				image.src = "data:image/jpeg;base64," + imageData;
+				var $image = document.getElementById('hasImage');
+				$image.src = "data:image/jpeg;base64," + imageData;
+	
+				var upload = CV_Camper.uploadImage(imageData, $stateParams.camper_id);
+			}
 		}
 		
 		function onFail(message) {
