@@ -48,9 +48,9 @@
                  <button id="" class="add-log-note button button-positive col col-100 icon-left" ng-click="openPopover(body)" ><i class="ion-chatbox-working icon"></i> Add a New Note</button>
             </ion-item>
             <ion-list class="notes-list {{ camper_notes ? 'has_notes' : 'no-notes' }}" >
-            	<ion-item class="card col" ng-repeat="note in camper_notes"  >
+            	<ion-item class="card col wrap" ng-repeat="note in camper_notes"  >
                 	<div class="note-author">Note added by <b>{{note.username}}</b> on {{note.timestamp}}</div>
-                	<div class="note" ng-bind-html="processNote(note.note)">{{note.note}}</div>
+                	<div class="note" ng-bind-html="processNote(note.note)" style="white-space: normal !important;"">{{note.note}}</div>
                 </ion-item>
             </ion-list>
         </div>
