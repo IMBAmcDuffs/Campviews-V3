@@ -36,7 +36,11 @@ var formBuilder = {
     if (field.meta_value.required == 'required') {
       classOutput = 'validate[required]';
     }
-		return '<label class="item item-input item-stacked-label"><span class="input-label">'+field.meta_value.label+'</span><input type="text" class="' + classOutput + '" name="form_values[field_'+field.meta_id+']" data-field="true" id="field_'+field.meta_id+'" value="'+formBuilder.value+'" placeholder="'+field.meta_value.placeholder+'"></label>';
+	var _type = 'text';
+	if(field.meta_value.label === 'Blood / Glucose' || field.meta_value.label === 'Carbs Eaten (gm)' || field.meta_value.label === 'Insulin'){
+		_type = 'number';	
+	}
+		return '<label class="item item-input item-stacked-label"><span class="input-label">'+field.meta_value.label+'</span><input type="'+_type+'" class="' + classOutput + '" name="form_values[field_'+field.meta_id+']" data-field="true" id="field_'+field.meta_id+'" value="'+formBuilder.value+'" placeholder="'+field.meta_value.placeholder+'"></label>';
   },
   textAreaField: function(field) {
     var classOutput = "";

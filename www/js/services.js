@@ -338,7 +338,7 @@ cvServ.factory('CV_Forms', ['$http', '$q', '$location', '$ionicPopup', '$ionicPo
 				
 				if(form.length>0){
 					form.each(function(i,e){
-						console.log($(this).attr('name'),$(this).val());
+						//console.log($(this).attr('name'),$(this).val());
 						if(!$data.form_values){
 							$data.form_values = {};	
 						}
@@ -362,10 +362,10 @@ cvServ.factory('CV_Forms', ['$http', '$q', '$location', '$ionicPopup', '$ionicPo
 					//'Content-Type': 'multipart/form-data' 	
 				} 
 			};
-			console.log($data);
+			//console.log($data);
 			
 			$http.post(path,$data,$config).success(function(data,satus){
-				console.log(data, 'Save Form Data');
+				//console.log(data, 'Save Form Data');
 				var alertPopup;
 				var $go = false;
 				if(data.status === 'success'){
