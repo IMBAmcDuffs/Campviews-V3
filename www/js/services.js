@@ -335,7 +335,7 @@ cvServ.factory('CV_Forms', ['$http', '$q', '$location', '$ionicPopup', '$ionicPo
 			var $data = {}; 
 			if($type!=='note'){
 				var form = $(document).find('input, textarea, select');
-				console.log(form);
+				
 				if(form.length>0){
 					form.each(function(i,e){
 						console.log($(this).attr('name'),$(this).val());
@@ -359,13 +359,13 @@ cvServ.factory('CV_Forms', ['$http', '$q', '$location', '$ionicPopup', '$ionicPo
 			}
 			$config = {
 				headers: {
-					'Content-Type': 'multipart/form-data' 	
+					//'Content-Type': 'multipart/form-data' 	
 				} 
 			};
-			//console.log($data);
+			console.log($data);
 			
 			$http.post(path,$data,$config).success(function(data,satus){
-				//console.log(data, 'Save Form Data');
+				console.log(data, 'Save Form Data');
 				var alertPopup;
 				var $go = false;
 				if(data.status === 'success'){
