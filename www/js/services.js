@@ -335,9 +335,10 @@ cvServ.factory('CV_Forms', ['$http', '$q', '$location', '$ionicPopup', '$ionicPo
 			var $data = {}; 
 			if($type!=='note'){
 				var form = $(document).find('input, textarea, select');
+				console.log(form);
 				if(form.length>0){
 					form.each(function(i,e){
-						//console.log($(this).attr('name'),$(this).val());
+						console.log($(this).attr('name'),$(this).val());
 						if(!$data.form_values){
 							$data.form_values = {};	
 						}
