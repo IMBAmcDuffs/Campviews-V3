@@ -36,11 +36,11 @@ var formBuilder = {
     if (field.meta_value.required == 'required') {
       classOutput = 'validate[required]';
     }
-	var _type = 'text';
-	if(field.meta_value.label === 'Blood / Glucose' || field.meta_value.label === 'Carbs Eaten (gm)' || field.meta_value.label === 'Insulin'){
-		_type = 'number';	
+	var _pattern_ = '';
+	if(field.meta_value.label === 'Blood / Glucose' || field.meta_value.label === 'Carbs Eaten (gm)' || field.meta_value.label === 'Insulin '){
+		_pattern_ = 'pattern="\d*"';	
 	}
-		return '<label class="item item-input item-stacked-label"><span class="input-label">'+field.meta_value.label+'</span><input type="'+_type+'" class="' + classOutput + '" name="form_values[field_'+field.meta_id+']" data-field="true" id="field_'+field.meta_id+'" value="'+formBuilder.value+'" placeholder="'+field.meta_value.placeholder+'"></label>';
+		return '<label class="item item-input item-stacked-label"><span class="input-label">'+field.meta_value.label+'</span><input type="text" '+_pattern_+' class="' + classOutput + '" name="form_values[field_'+field.meta_id+']" data-field="true" id="field_'+field.meta_id+'" value="'+formBuilder.value+'" placeholder="'+field.meta_value.placeholder+'"></label>';
   },
   textAreaField: function(field) {
     var classOutput = "";
