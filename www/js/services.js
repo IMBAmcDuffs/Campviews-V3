@@ -357,11 +357,21 @@ cvServ.factory('CV_Forms', ['$http', '$q', '$location', '$ionicPopup', '$ionicPo
 			}else{
 				$data = $form;	
 			}
-			$config = {
-				headers: {
-					'Content-Type': 'application/x-www-form-urlencoded' 	 	
-				} 
-			};
+			
+			if($type === 'log'){
+				$config = {
+					headers: { 
+						'Content-Type': 'multipart/form-data' 	
+					} 
+				};
+			}else{
+				$config = {
+					headers: {
+						'Content-Type': 'application/x-www-form-urlencoded' 	
+					} 
+				};
+			}
+			
 			//console.log($data);
 			
 			$http.post(path,$data,$config).success(function(data,satus){

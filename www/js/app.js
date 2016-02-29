@@ -81,8 +81,7 @@ cv.config(function($stateProvider, $urlRouterProvider, $httpProvider) {
         }];
 
     $httpProvider.interceptors.push(interceptor);
- 
-
+	
 	var def = '/login';
 	var $current = localStorage.getItem('user_login');
 	if(global.selectedCamp>0 || localStorage.getItem('selectedCamp')){
@@ -380,6 +379,10 @@ cv.config(function($stateProvider, $urlRouterProvider, $httpProvider) {
 });
 
 cv.run(function($rootScope, $ionicPlatform) {
+	$rootScope.Utils = {
+		 keys : Array.keys
+	}
+	
   appdb.initialize();
   
   $rootScope.global = global;

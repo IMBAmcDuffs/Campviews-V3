@@ -17,9 +17,12 @@
                 <div ng-repeat="option in timeOfDay.options" class="col" data-tod="{{option.value}}">
               		<div ng-init="setIntervalScope($index)" class="heading item item-divider">{{ option.label }}<br /><center>{{option.value}}</center></div>
                     <ion-list class="list" ng-controller="logRepeat" ng-repeat="day in getIndex(option.days,$index)" > 
+                        
+                        
                         <ion-item ng-show="{{cur_i==0}}" class="col item item-dark day-title-container">
                             <span class="day-title">{{day.title ? day.title : day.day}} </span>
                         </ion-item>
+                        
                     	<ion-item ng-if="day.user_values" id="user_item_{{cur_i}}_{{$index}}" toggle-class="expand" class="day-user-toggle {{ day.user_values ? 'item-balanced' : '' }} {{ expand ? 'expand' : '' }} item item-text-wrap">
                         	<div class="day-user-value row">
                             	<strong>Log made on <i>{{day.title ? day.title : day.day}}</i> for <i>{{ option.label }}</i></strong>
@@ -29,9 +32,13 @@
                             </div>
                         	<button id="edit_button_{{cur_i}}_{{$index}}" class="edit-log-button button button-positive col col-100 ion-arrow-up-c" ng-click="editLogButton('/logsheets/logform/'+camper_id+'/'+logForm.id+'/'+option.value+'/'+day.date,day.user_values)" >Edit Log</button>
                         </ion-item>
+                        
+                        
                         <ion-item ng-if="!day.user_values" href="#/logsheets/logform/{{camper_id}}/{{logForm.id}}/{{option.value}}/{{day.date}}">
                             <span class="day-value no-value">Tap to add</span>
                         </ion-item>
+                        
+                        
                     </ion-list>
                     </div>
                 </div>
