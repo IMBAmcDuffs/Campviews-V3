@@ -1,7 +1,7 @@
 
 var global = {
 	userData: {},
-	apiPath: 'https://nda.campviews.com/api/',
+	apiPath: 'http://nda.campviews.com/api/',
 	accessToken: 'diabetes8',
 	loading: false,
 	selectedCamp: 0,

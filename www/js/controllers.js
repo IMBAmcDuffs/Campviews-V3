@@ -13,7 +13,7 @@ cvCont.controller('LoginCtrl', ['$scope', '$timeout', '$ionicPopup', 'CV_Account
 	  }
   }
   
-}]);
+}]); 
 
 cvCont.controller('CampsCtrl', ['$scope', '$document', '$location', '$timeout','camps', function($scope, $document, $location, $timeout, camps) {
 	 
