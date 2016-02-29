@@ -7,9 +7,11 @@ var formBuilder = {
 	  if(field_value){
 		formBuilder.value = field_value;  
 	  }
+	  //console.log(field_obj, field_value);
 	  var fo = field_obj.meta_value;
 	  if(!fo.label)
-    field_obj.meta_value = JSON.parse(fo);
+    	field_obj.meta_value = JSON.parse(fo);
+		
     switch(field_obj.meta_value.field_type){
       case 'text':
         return formBuilder.textField(field_obj);
@@ -66,7 +68,13 @@ var formBuilder = {
     if (field.meta_value.required == 'required') {
       classOutput = 'validate[required]';
     }
-    return '<ul class="list"><li class="item item-toggle">'+field.meta_value.label+'<label for="field_'+field.meta_id+'" class="toggle"><input name="form_values[field_'+field.meta_id+']" class="' + classOutput + '" type="checkbox" data-field="true"  value="'+field.meta_value.value+'" id="field_'+field.meta_id+'" ng-model="checkinData.field_'+field.meta_id+'"><div class="track"><div class="handle"></div></div></label></li></ul>';
+	var value = formBuilder.value;
+	var checked = '';
+	
+		if(field.meta_value.value === value)
+			checked = 'checked="checked"';
+	
+    return '<ul class="list"><li class="item item-toggle">'+field.meta_value.label+'<label for="field_'+field.meta_id+'" class="toggle"><input name="form_values[field_'+field.meta_id+']" class="' + classOutput + '" type="checkbox" data-field="true" '+checked+' value="'+field.meta_value.value+'" id="field_'+field.meta_id+'" ng-model="checkinData.field_'+field.meta_id+'"><div class="track"><div class="handle"></div></div></label></li></ul>';
   },
   checkboxGroupField: function(field) {
 	var output;
@@ -75,10 +83,12 @@ var formBuilder = {
 	var value = formBuilder.value;
 	for(var key in field.meta_value.options){
 		 var option = field.meta_value.options[key];
-		 //console.log(value);
+		 console.log('ckgp', option, value);
 		 var checked = '';
 		 if( option.value == value ) checked = 'checked="checked"';
-		output += '<li class="item item-toggle">'+option.label+'<label for="field_'+field.meta_id+'_'+i+'" class="toggle"><input name="form_values[field_'+field.meta_id+'['+i+']]" type="checkbox" '+checked+' value="'+option.value+'" data-field="true"  id="field_'+field.meta_id+'_'+i+'" ng-model="checkinData.field_'+field.meta_id+'_'+i+'"><div class="track"><div class="handle"></div></div></label></li>';
+		output += '<li class="item item-toggle">'+option.label+'<label for="field_'+field.meta_id+'_'+i+'" class="toggle">';
+			output += '<input name="form_values[field_'+field.meta_id+'['+i+']]" type="checkbox" '+checked+' value="'+option.value+'" data-field="true"  id="field_'+field.meta_id+'_'+i+'" ng-model="checkinData.field_'+field.meta_id+'_'+i+'"><div class="track"><div class="handle"></div></div>';
+		output += '</label></li>';
 		i++;
 	}
 	output+= '</ul></div>';

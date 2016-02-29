@@ -130,6 +130,13 @@ img {
 .signatureImage, .form_list_item {
 	background:#fff;	
 }
+
+.signatureImage {
+	width: 35%;
+	float:none;
+	margin:0px auto;
+}
+
 .expand .day-user-value {
 	line-height:16px;
 	padding:5px 0px;	
@@ -153,6 +160,8 @@ img {
 .day-user-toggle.expand .day-user-value:first-child {
 	display:block;	
 }
+
+
 .day-user-value .col {
 	float:left;	
 }
@@ -283,7 +292,8 @@ input[type="search"] {
 .list_item_dates span {
 	float:left;
 	width:100%;
-	padding:10px;	
+	padding:10px;
+	font-size:24px;	
 }
 
 .day-value {
@@ -308,7 +318,101 @@ input[type="search"] {
 }
 
 .logsheets-container {
-	padding-top:50px;
+	padding-top:15px;
+}
+
+.bar.checkin_title {
+	position:relative; 
+	float:left; 
+	width:100%;	
+}
+.bar.checkin_title h2 {
+	font-size:26px;	
+}
+
+.previous-log-notes {
+	float:left;
+	width:100%;
+	position: relative;
+	z-index: 99;
+}
+.previous-log-notes.large {
+	background: rgba(50,50,50,0.8);	
+	height:100%;
+	padding:15px;	
+}
+
+.previous-log-notes.small .bar {
+	float: left;
+	width: 100%;
+	padding: 0px;
+	height: auto !important;
+}
+.previous-log-notes.small .bar h1 {
+	height: auto !important;
+	padding: 0px;
+	margin: 0px !important;
+	position:relative;
+	width:100%;	
+}
+
+.previous-log-notes .note-list {
+	float:left;
+	width:100%;	
+}
+
+.previous-log-notes .note-item {
+	padding: 30px 15px;
+	text-align: center;
+	font-size:16px;
+}
+.small.previous-log-notes .note-item {
+	padding:5px 0px;	
+}
+
+.previous-log-notes .log-sheet.note {
+	font-weight: normal;
+	font-size: 16px;
+	float: left;
+	width: 100%;
+	text-align: center;
+}
+
+.previous-log-notes h3 {
+	float: left;
+	width: 35%;
+	padding: 0px;
+	font-size: 26px;
+	color: #26791F;
+}
+
+.previous-log-notes h3 span {
+	float:left;
+	width:100%;
+	margin:5px 0px;	
+}
+.previous-log-notes h3 span:last-child {
+	font-size:20px;
+	color:#2A889B;	
+}
+
+.previous-log-notes .note-content {
+	text-align:left;
+	white-space:normal !important;
+	word-break:normal;
+	word-wrap:break-word;
+	float:right;
+	width: 65%;
+	height: 100%;
+	transform: translateY(50%);
+}
+
+.previous-log-notes .button-bar {
+	
+}
+
+.previous-log-notes .button-bar a {
+	
 }
 
 .checkin_content {

@@ -13,7 +13,7 @@ cvCont.controller('LoginCtrl', ['$scope', '$timeout', '$ionicPopup', 'CV_Account
 	  }
   }
   
-}]);
+}]); 
 
 cvCont.controller('CampsCtrl', ['$scope', '$document', '$location', '$timeout','camps', function($scope, $document, $location, $timeout, camps) {
 	 
@@ -543,7 +543,6 @@ cvCont.controller('logForm', ['$scope', '$cordovaCamera', '$state', '$document',
 	if(medicalForm){
 		$scope.medical_form = medicalForm;
 	}
-
 	var form = logForms.forms[0]; 
 
 	$scope.camper = camper; 
@@ -551,11 +550,46 @@ cvCont.controller('logForm', ['$scope', '$cordovaCamera', '$state', '$document',
 	$scope.camper_id = $stateParams.camper_id;
 	$scope.camp_id = global.selectedCamp;
 	$scope.form_id = 331;
-	$scope.time_of_day = $stateParams.time_of_day;
-	$scope.date = $stateParams.day;
-	$scope.user_id = global.userData.ID;
+	$scope.time_of_day = TOD = $stateParams.time_of_day;
+	$scope.date = DATE = $stateParams.day;
+	$scope.user_id = global.userData.ID;	
 	
+	$scope.todNotes = [];
+
+	if(form.values.length>0){
+		var _values = $(form.values);
+		$scope.todNotes = {};
+		var $i = 0;
+		_values.each(function() {
+			// since we are buliding out Time of day notes we need to match it up properly
+			var $value = $(this._v);
+			var _tod = this.time_of_day;
+			var _date = this.date;
+			
+			if($value.length > 0 && TOD === _tod) {
+				// run through each of teh values to find out what one is the notes section
+				$value.each(function(v) {
+					var _label = this.label;
+					
+					if(_label === 'Notes'){
+						$scope.todNotes[$i] = this;	
+						$scope.todNotes[$i].tod = _tod;	
+						$scope.todNotes[$i].date = _date;	
+						$scope.todNotes[$i].ID = $i+'_'+_date;
+						$i++;
+					}
+				});
+			}
+		});
+	}
 	
+	$scope.todNoteCount = 0;
+	
+	$scope.limit = 2;
+	
+	if($scope.todNotes){
+		$scope.todNoteCount = $($scope.todNotes).length;
+	}
 	$scope.medicalData = {};
 	
 	$scope.signatureData = false;
@@ -566,6 +600,14 @@ cvCont.controller('logForm', ['$scope', '$cordovaCamera', '$state', '$document',
 		var type = 'log';
 		var results = CV_Forms.saveForm(form, type);
 		global.editData = false;
+	};
+	
+	$scope.openLogNotes = function() {
+		$('.previous-log-notes.large').removeClass('hidden').slideDown(500).stop();	
+	};
+	
+	$scope.closeLogNotes = function() {
+		$('.previous-log-notes.large').addClass('hidden').slideUp(500).stop();	
 	};
 	
 
@@ -626,6 +668,10 @@ cvCont.controller('logForm', ['$scope', '$cordovaCamera', '$state', '$document',
 	
 }]);
 
+cvCont.controller('previousLogNotes', function($scope) {
+	console.log($scope);
+});
+
 cvCont.controller('SignatureCtrl', function($scope) {
     var canvas = document.getElementById('signatureCanvas');
     var signaturePad = new SignaturePad(canvas);
@@ -666,12 +712,30 @@ cvCont.controller('formBuilder', ['$sce','$scope', function($sce, $scope) {
 	if(value_data!==null) {
 		values = value_data;
 	}
-
-	////console.log(_checkinData,field_id, 'checkin builder');
 	
 	field_value = '';
+	// search the values for 
+	var $values = $(values);
+	if($values.length > 0) {
+		var keys = Object.keys(values);
+		if(keys.length > 0){
+			for(i=0; i<keys.length; i++){
+				var is_key = keys[i].search(field_id);
+				
+				if(typeof is_key === 'number' && is_key && is_key >= 0){
+					field_id = keys[i];
+				}
+			}
+		}
+	}
+	
+	
 	if(values['field_'+field_id]){
 		field_value = values['field_'+field_id];
+	}
+	
+	if(values[field_id]){
+		field_value = values[field_id];	
 	}
 	
 	
@@ -756,6 +820,8 @@ cvCont.controller('logBuilder', ['$scope', '$sce', '$timeout', 'CV_Camper', '$st
 	if(typeof logForms.forms[0].notes !== 'undefined'){
 		$scope.camper_notes = logForms.forms[0].notes;
 	}
+	
+	console.log('notes', $scope.camper_notes, logForms);
 
 	$scope.logFields = form.fields;
 	
