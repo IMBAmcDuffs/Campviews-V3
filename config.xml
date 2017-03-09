@@ -4,8 +4,8 @@
   <description>
         An Ionic Framework and Cordova project.
     </description>
-  <author email="mcduffs.crapfling@gmail.com" href="http://nda.campviews.com">
-      Christopher mcDuffs Crevling
+  <author email="nate@diabetesnv.org" href="http://nda.campviews.com">
+      NVDA
     </author>
   <content src="index.html"/>
   <access origin="*" subdomains="true"/>
