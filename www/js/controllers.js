@@ -495,12 +495,12 @@ cvCont.controller('checkinForm', ['$scope', '$cordovaCamera', '$state', '$docume
 	$scope.camper_id = $stateParams.camper_id;
 	$scope.camp_id = global.selectedCamp;
 	
-	////console.log(checkinData);
+	console.log(checkinData);
 	
 	$scope.saveForm = function(form) {
 		var type = 'checkin';
 		var results = CV_Forms.saveForm(form, type);
-		console.log(results);
+		//console.log(results);
 	};
 	checkinData = checkinData[0].fields;
 	
