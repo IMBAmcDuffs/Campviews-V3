@@ -500,6 +500,7 @@ cvCont.controller('checkinForm', ['$scope', '$cordovaCamera', '$state', '$docume
 	$scope.saveForm = function(form) {
 		var type = 'checkin';
 		var results = CV_Forms.saveForm(form, type);
+		console.log(results);
 	};
 	checkinData = checkinData[0].fields;
 	
