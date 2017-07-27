@@ -4,8 +4,8 @@
   <description>
         The app built for the Nevada Diabetes Association. This app allows for the NDA to create and run camps with campers. They can check in, create log forms and check out the campers dynamically across all iPads. This build is built on Ionic.
   </description>
-  <author email="mcduffs.crapfling@gmail.com" href="http://nda.campviews.com">
-      Christopher mcDuffs Crevling
+  <author email="design@bdgwebdesign.com" href="http://nda.campviews.com">
+     Brandon Gottier
   </author>
   <content src="index.html"/>
   <access origin="*" subdomains="true"/>
@@ -20,7 +20,8 @@
   <preference name="SplashScreen" value="screen"/>
   <preference name="SplashScreenDelay" value="3000"/>
   <preference name="orientation" value="landscape"/>
-  <plugin name="cordova-plugin-camera" spec="~2.4.1" />
+  <!-- <plugin name="cordova-plugin-camera" spec="~2.4.1" /> -->
+  <preference name="deployment-target" value="9.0" />
   <!-- <gap:plugin name="com.logilite.vision.camera" version="0.2.11" /> -->
     <preference name="ios-statusbarstyle" value="black-opaque" />
 
