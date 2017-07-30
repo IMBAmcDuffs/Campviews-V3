@@ -433,7 +433,7 @@ cvCont.controller('CamperCrtl', ['$scope', '$document', '$stateParams', '$locati
 	}
 	
 	// lets get this users special form data
-	var parentGuardianForm = forms[5].values[0].value;
+	//var parentGuardianForm = forms[5].values[0].value;
 	var emergancyContactForm = forms[6].values[0].value;
 	
 	
@@ -441,7 +441,7 @@ cvCont.controller('CamperCrtl', ['$scope', '$document', '$stateParams', '$locati
 	//console.log(parentGuardianForm,emergancyContactForm,forms);
 	
 	
-	$scope.parentGuardianForm = parentGuardianForm;
+	//$scope.parentGuardianForm = parentGuardianForm;
 	$scope.emergancyContactForm = emergancyContactForm;
 	
  	
