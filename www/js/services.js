@@ -316,7 +316,7 @@ cvServ.factory('CV_Forms', ['$http', '$q', '$location', '$ionicPopup', '$ionicPo
 				$http.get(path).
 					success(function(data, status, headers, config) {
 						self.checkinData = data;
-						//console.log(data);
+						console.log(data);
 						deferred.resolve(data.forms);
 						  $('#loading').hide();
  
