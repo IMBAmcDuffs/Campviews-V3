@@ -514,7 +514,9 @@ cvCont.controller('checkinForm', ['$scope', '$cordovaCamera', '$state', '$docume
 			_checkinData[name] = value;
 		});
 			
-	}
+	}	
+
+	console.log(_checkinData);
 
 	$scope.checkinData = _checkinData;
 	
@@ -739,10 +741,12 @@ cvCont.controller('formBuilder', ['$sce','$scope', function($sce, $scope) {
 		field_value = values[field_id];	
 	}
 	
+	console.log(field_value);
 	
 	$scope.checkinData = value_data;
+
 	var field = formBuilder.makeField($scope.field,field_value);
-	
+	console.log(field);
 	$scope.fieldHTML = $sce.trustAsHtml(field);
   $('#loading').hide();
 	
