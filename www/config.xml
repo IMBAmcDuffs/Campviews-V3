@@ -35,7 +35,8 @@
 
     <gap:splash src="res/screen/ipad_landscape.png" gap:platform="ios" width="1024" height="768" />
 
-    <gap:splash src="res/screen/ipad_retina_landscape.png" gap:platform="ios" width="2048" height="1496" />  <feature name="StatusBar">
-    <param name="ios-package" value="CDVStatusBar" onload="true"/>
-  </feature>
+    <gap:splash src="res/screen/ipad_retina_landscape.png" gap:platform="ios" width="2048" height="1496" /> 
+    <feature name="StatusBar">
+      <param name="ios-package" value="CDVStatusBar" onload="true"/>
+    </feature>
 </widget>

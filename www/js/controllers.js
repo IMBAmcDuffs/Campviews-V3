@@ -443,8 +443,46 @@ cvCont.controller('CamperCrtl', ['$scope', '$document', '$stateParams', '$locati
 	
 	//$scope.parentGuardianForm = parentGuardianForm;
 	$scope.emergancyContactForm = emergancyContactForm;
+
+	var dexcomapi = {
+	    authorize: function(options) {
+	        var deferred = $.Deferred();
+	         //Build the OAuth consent page URL
+	        var authUrl = 'https://api.dexcom.com/v1/oauth2/login?' + $.param({
+	            client_id: options.client_id,
+	            redirect_uri: options.redirect_uri,
+	            response_type: options.response_type,
+	            scope: options.scope
+	        });
+
+	        //Open the OAuth consent page in the InAppBrowser
+	        var authWindow = window.open(authUrl, '_blank', 'location=no,toolbar=no');
+
+	        
+
+	        // return deferred.promise();
+	        return true;
+	    }
+	};
 	
- 	
+ 	function callDexcomLogin() {
+	    alert('starting');
+	    dexcomapi.authorize({
+	        client_id: 'YpNZIG56O4uPVe7hDAjdyyyINN3wwP6f',
+	        redirect_uri: 'https://campviews.com/oauth',
+	        response_type: 'code'.
+	        scope: 'offline_access'
+	    }).done(function(data) {
+	        // accessToken = data.access_token;
+	        // alert(accessToken);
+	        // $loginStatus.html('Access Token: ' + data.access_token);
+	        // console.log(data.access_token);
+	        // console.log(JSON.stringify(data));
+	        // getDataProfile();
+	        console.log('finished');
+	    });
+
+	}
 }]);
 
 cvCont.controller('checkoutForms', ['$scope', '$document', '$stateParams', '$location', 'CV_Camper', 'CV_Forms', 'exitForms', function($scope, $document, $stateParams, $location, CV_Camper, CV_Forms, exitForms) {
