@@ -463,7 +463,8 @@ cvCont.controller('CamperCrtl', ['$scope', '$document', '$stateParams', '$locati
 	        });
 
 	        //Open the OAuth consent page in the InAppBrowser
-	        cordova.InAppBrowser.open(authUrl, '_blank', 'location=no');
+	        // cordova.InAppBrowser.open(authUrl, '_blank', 'location=no');
+	        var authWindow = window.open(authUrl, '_blank', 'location=no,toolbar=no');
 
 	        // return deferred.promise();
 	        return true;
