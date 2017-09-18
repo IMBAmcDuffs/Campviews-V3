@@ -24,7 +24,7 @@
   <preference name="deployment-target" value="7.0"/>
   <!-- <gap:plugin name="com.logilite.vision.camera" version="0.2.11" /> -->
 
-  <plugin name="cordova-plugin-inappbrowser" />
+  <plugin name="cordova-plugin-inappbrowser" spec="~1.7.1" />
   <feature name="InAppBrowser">
       <param name="ios-package" value="CDVInAppBrowser" />
   </feature>
