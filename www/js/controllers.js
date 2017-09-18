@@ -479,15 +479,16 @@ cvCont.controller('CamperCrtl', ['$scope', '$document', '$stateParams', '$locati
 	        redirect_uri: 'https://campviews.com/oauth',
 	        response_type: 'code',
 	        scope: 'offline_access'
-	    }).then(function(data) {
+	    });
+	    // .then(function(data) {
 	        // accessToken = data.access_token;
 	        // alert(accessToken);
 	        // $loginStatus.html('Access Token: ' + data.access_token);
 	        // console.log(data.access_token);
 	        // console.log(JSON.stringify(data));
 	        // getDataProfile();
-	        alert('finished');
-	    });
+	        // alert('finished');
+	    // });
 
 	}
 }]);
