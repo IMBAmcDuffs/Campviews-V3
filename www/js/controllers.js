@@ -465,7 +465,7 @@ cvCont.controller('CamperCrtl', ['$scope', '$document', '$stateParams', '$locati
 	    }
 	};
 	
- 	function callDexcomLogin() {
+ 	$scope.callDexcomLogin = function() {
 	    alert('starting');
 	    dexcomapi.authorize({
 	        client_id: 'YpNZIG56O4uPVe7hDAjdyyyINN3wwP6f',

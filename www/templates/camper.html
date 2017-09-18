@@ -46,7 +46,7 @@
                     <div class="image no-image" ng-if="!camper.thumbnail">
                         <img id="noImage" ng-src="img/noimg.png">
                     </div>
-                    <ion-item ng-click="takePicture()" ng-href="#" class="button button-fullbutton-positive item-icon-left">
+                    <ion-item ng-click="takePicture()" ng-href="#" class="button button-full button-positive item-icon-left">
                         <i class="icon ion-camera"></i> {{camper.thumbnail ? 'Retake Picture' : 'Take Picture'}}
                     </ion-item>
                     <ion-item class="button button-full button-balanced item-icon-left" ng-if="{{checked_in === false}}" ng-href="#/checkin/{{camper_id}}">
@@ -59,7 +59,7 @@
                         <i class="icon ion-android-checkbox"></i> Check Out
                     </ion-item>
                     
-                    <ion-item ng-click="callDexcomLogin()" ng-href="#" class="button button-fullbutton-positive item-icon-left">
+                    <ion-item ng-click="callDexcomLogin()" ng-href="#" class="button button-full button-positive item-icon-left">
                         <i class="ion-log-in icon"></i> Dexcom Login
                     </ion-item>
                     
