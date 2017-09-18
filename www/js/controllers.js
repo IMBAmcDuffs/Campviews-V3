@@ -448,7 +448,14 @@ cvCont.controller('CamperCrtl', ['$scope', '$document', '$stateParams', '$locati
 	    authorize: function(options) {
 	        var deferred = $.Deferred();
 	         //Build the OAuth consent page URL
-	        var authUrl = 'https://api.dexcom.com/v1/oauth2/login?' + $.param({
+	        // var authUrl = 'https://api.dexcom.com/v1/oauth2/login?' + $.param({
+	        //     client_id: options.client_id,
+	        //     redirect_uri: options.redirect_uri,
+	        //     response_type: options.response_type,
+	        //     scope: options.scope
+	        // });
+
+	        var authUrl = 'https://prod-33-dev-portal-410672946.us-east-1.elb.amazonaws.com/sandbox-login?' + $.param({
 	            client_id: options.client_id,
 	            redirect_uri: options.redirect_uri,
 	            response_type: options.response_type,
