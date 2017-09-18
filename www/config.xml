@@ -23,20 +23,23 @@
   <!-- <plugin name="cordova-plugin-camera" spec="~2.4.1" /> -->
   <preference name="deployment-target" value="7.0"/>
   <!-- <gap:plugin name="com.logilite.vision.camera" version="0.2.11" /> -->
-    <preference name="ios-statusbarstyle" value="black-opaque" />
+  
+  <gap:plugin name="cordova-plugin-inappbrowser" />
 
-    <preference name="show-splash-screen-spinner" value="false" />
+  <preference name="ios-statusbarstyle" value="black-opaque" />
 
-    <preference name="auto-hide-splash-screen" value="false" />
+  <preference name="show-splash-screen-spinner" value="false" />
 
-    <icon src="res/icon/ios_72.png" gap:platform="ios" width="72" height="72" />
+  <preference name="auto-hide-splash-screen" value="false" />
 
-    <icon src="res/icon/ios_144.png" gap:platform="ios" width="144" height="144" />
+  <icon src="res/icon/ios_72.png" gap:platform="ios" width="72" height="72" />
 
-    <gap:splash src="res/screen/ipad_landscape.png" gap:platform="ios" width="1024" height="768" />
+  <icon src="res/icon/ios_144.png" gap:platform="ios" width="144" height="144" />
 
-    <gap:splash src="res/screen/ipad_retina_landscape.png" gap:platform="ios" width="2048" height="1496" /> 
-    <feature name="StatusBar">
-      <param name="ios-package" value="CDVStatusBar" onload="true"/>
-    </feature>
+  <gap:splash src="res/screen/ipad_landscape.png" gap:platform="ios" width="1024" height="768" />
+
+  <gap:splash src="res/screen/ipad_retina_landscape.png" gap:platform="ios" width="2048" height="1496" /> 
+  <feature name="StatusBar">
+    <param name="ios-package" value="CDVStatusBar" onload="true"/>
+  </feature>
 </widget>
