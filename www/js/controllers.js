@@ -464,21 +464,23 @@ cvCont.controller('CamperCrtl', ['$scope', '$document', '$stateParams', '$locati
 	        });
 
 	        //Open the OAuth consent page in the InAppBrowser
-	        cordova.InAppBrowser.open('https://prod-33-dev-portal-410672946.us-east-1.elb.amazonaws.com/sandbox-login?client_id=YpNZIG56O4uPVe7hDAjdyyyINN3wwP6f&redirect_uri=https://campviews.com/oauth&response_type=code&scope=offline_access', '_blank', 'location=no');
+	        // cordova.InAppBrowser.open('https://prod-33-dev-portal-410672946.us-east-1.elb.amazonaws.com/sandbox-login?client_id=YpNZIG56O4uPVe7hDAjdyyyINN3wwP6f&redirect_uri=https://campviews.com/oauth&response_type=code&scope=offline_access', '_blank', 'location=no');
 
-	        $(authWindow).on('loadstart', function(e) {
-	            var url = e.originalEvent.url;
-	            var code = /\?code=(.+)$/.exec(url);
-	            var error = /\?error=(.+)$/.exec(url);
+	       	// var authWindow = window.open(authUrl, '_blank', 'location=no,toolbar=no');
 
-	            if (code || error) {
-	                // Close the browser when match is found
-	                authWindow.close();
-	            }
-	        });
+	        // $(authWindow).on('loadstart', function(e) {
+	        //     var url = e.originalEvent.url;
+	        //     var code = /\?code=(.+)$/.exec(url);
+	        //     var error = /\?error=(.+)$/.exec(url);
 
-	        return deferred.promise();
-	        // return true;
+	        //     if (code || error) {
+	        //         // Close the browser when match is found
+	        //         authWindow.close();
+	        //     }
+	        // });
+
+	        // return deferred.promise();
+	        return true;
 	    }
 	};
 	
