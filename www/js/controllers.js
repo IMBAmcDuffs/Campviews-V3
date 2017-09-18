@@ -447,16 +447,8 @@ cvCont.controller('CamperCrtl', ['$scope', '$document', '$stateParams', '$locati
 	var dexcomapi = {
 	    authorize: function(options) {
 	        var deferred = $.Deferred();
-	        //Build the OAuth consent page URL
-	        // var authUrl = 'https://api.dexcom.com/v1/oauth2/login?' + $.param({
-	        //     client_id: options.client_id,
-	        //     redirect_uri: options.redirect_uri,
-	        //     response_type: options.response_type,
-	        //     scope: options.scope
-	        // });
-
-	        // sandbox oauth consent
-	        var authUrl = 'https://prod-33-dev-portal-410672946.us-east-1.elb.amazonaws.com/sandbox-login?' + $.param({
+	         //Build the OAuth consent page URL
+	        var authUrl = 'https://api.dexcom.com/v1/oauth2/login?' + $.param({
 	            client_id: options.client_id,
 	            redirect_uri: options.redirect_uri,
 	            response_type: options.response_type,
@@ -464,20 +456,7 @@ cvCont.controller('CamperCrtl', ['$scope', '$document', '$stateParams', '$locati
 	        });
 
 	        //Open the OAuth consent page in the InAppBrowser
-	        // cordova.InAppBrowser.open('https://prod-33-dev-portal-410672946.us-east-1.elb.amazonaws.com/sandbox-login?client_id=YpNZIG56O4uPVe7hDAjdyyyINN3wwP6f&redirect_uri=https://campviews.com/oauth&response_type=code&scope=offline_access', '_blank', 'location=no');
-
-	       	// var authWindow = window.open(authUrl, '_blank', 'location=no,toolbar=no');
-
-	        // $(authWindow).on('loadstart', function(e) {
-	        //     var url = e.originalEvent.url;
-	        //     var code = /\?code=(.+)$/.exec(url);
-	        //     var error = /\?error=(.+)$/.exec(url);
-
-	        //     if (code || error) {
-	        //         // Close the browser when match is found
-	        //         authWindow.close();
-	        //     }
-	        // });
+	        cordova.InAppBrowser.open(authUrl, '_blank', 'location=no');
 
 	        // return deferred.promise();
 	        return true;
