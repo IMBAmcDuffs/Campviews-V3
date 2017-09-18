@@ -448,12 +448,23 @@ cvCont.controller('CamperCrtl', ['$scope', '$document', '$stateParams', '$locati
 	    authorize: function(options) {
 	        var deferred = $.Deferred();
 	        // Build the OAuth consent page URL
-	        // var authUrl = 'https://api.dexcom.com/v1/oauth2/login?' + $.param({
-	        //     client_id: options.client_id,
-	        //     redirect_uri: options.redirect_uri,
-	        //     response_type: options.response_type,
-	        //     scope: options.scope
-	        // });
+	        var authUrl = 'https://api.dexcom.com/v1/oauth2/login?' + $.param({
+	            client_id: options.client_id,
+	            redirect_uri: options.redirect_uri,
+	            response_type: options.response_type,
+	            scope: options.scope
+	        });
+
+	        //Open the OAuth consent page in the InAppBrowser
+	        cordova.InAppBrowser.open(authUrl, '_blank', 'location=no');
+	        // var authWindow = window.open(authUrl, '_blank', 'location=no,toolbar=no');
+
+	        // return deferred.promise();
+	        return true;
+	    },
+	    sanboxAuthorize: function(options) {
+	        var deferred = $.Deferred();
+	        // Build the OAuth consent page URL
 
 	        // sanbox authentication endpoint
 	        var authUrl = 'https://prod-33-dev-portal-410672946.us-east-1.elb.amazonaws.com/sandbox-login?' + $.param({
@@ -480,7 +491,27 @@ cvCont.controller('CamperCrtl', ['$scope', '$document', '$stateParams', '$locati
 	        response_type: 'code',
 	        scope: 'offline_access'
 	    });
-	    // .then(function(data) {
+	    // .done(function(data) {
+	        // accessToken = data.access_token;
+	        // alert(accessToken);
+	        // $loginStatus.html('Access Token: ' + data.access_token);
+	        // console.log(data.access_token);
+	        // console.log(JSON.stringify(data));
+	        // getDataProfile();
+	        // alert('finished');
+	    // });
+
+	}
+
+	$scope.callDexcomSandboxLogin = function() {
+	    alert('starting');
+	    dexcomapi.sanboxAuthorize({
+	        client_id: 'YpNZIG56O4uPVe7hDAjdyyyINN3wwP6f',
+	        redirect_uri: 'https://campviews.com/oauth',
+	        response_type: 'code',
+	        scope: 'offline_access'
+	    });
+	    // .done(function(data) {
 	        // accessToken = data.access_token;
 	        // alert(accessToken);
 	        // $loginStatus.html('Access Token: ' + data.access_token);
