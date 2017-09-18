@@ -470,7 +470,7 @@ cvCont.controller('CamperCrtl', ['$scope', '$document', '$stateParams', '$locati
 	    dexcomapi.authorize({
 	        client_id: 'YpNZIG56O4uPVe7hDAjdyyyINN3wwP6f',
 	        redirect_uri: 'https://campviews.com/oauth',
-	        response_type: 'code'.
+	        response_type: 'code',
 	        scope: 'offline_access'
 	    }).done(function(data) {
 	        // accessToken = data.access_token;
