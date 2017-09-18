@@ -447,7 +447,7 @@ cvCont.controller('CamperCrtl', ['$scope', '$document', '$stateParams', '$locati
 	var dexcomapi = {
 	    authorize: function(options) {
 	        var deferred = $.Deferred();
-	         //Build the OAuth consent page URL
+	        // Build the OAuth consent page URL
 	        // var authUrl = 'https://api.dexcom.com/v1/oauth2/login?' + $.param({
 	        //     client_id: options.client_id,
 	        //     redirect_uri: options.redirect_uri,
@@ -455,6 +455,7 @@ cvCont.controller('CamperCrtl', ['$scope', '$document', '$stateParams', '$locati
 	        //     scope: options.scope
 	        // });
 
+	        // sanbox authentication endpoint
 	        var authUrl = 'https://prod-33-dev-portal-410672946.us-east-1.elb.amazonaws.com/sandbox-login?' + $.param({
 	            client_id: options.client_id,
 	            redirect_uri: options.redirect_uri,
@@ -463,8 +464,8 @@ cvCont.controller('CamperCrtl', ['$scope', '$document', '$stateParams', '$locati
 	        });
 
 	        //Open the OAuth consent page in the InAppBrowser
-	        // cordova.InAppBrowser.open(authUrl, '_blank', 'location=no');
-	        var authWindow = window.open(authUrl, '_blank', 'location=no,toolbar=no');
+	        cordova.InAppBrowser.open(authUrl, '_blank', 'location=no');
+	        // var authWindow = window.open(authUrl, '_blank', 'location=no,toolbar=no');
 
 	        // return deferred.promise();
 	        return true;
@@ -478,7 +479,7 @@ cvCont.controller('CamperCrtl', ['$scope', '$document', '$stateParams', '$locati
 	        redirect_uri: 'https://campviews.com/oauth',
 	        response_type: 'code',
 	        scope: 'offline_access'
-	    }).done(function(data) {
+	    }).then(function(data) {
 	        // accessToken = data.access_token;
 	        // alert(accessToken);
 	        // $loginStatus.html('Access Token: ' + data.access_token);
