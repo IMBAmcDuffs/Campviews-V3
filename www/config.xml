@@ -24,7 +24,7 @@
   <preference name="deployment-target" value="7.0"/>
   <!-- <gap:plugin name="com.logilite.vision.camera" version="0.2.11" /> -->
 
-  <gap:plugin name="cordova-plugin-inappbrowser" />
+  <plugin name="cordova-plugin-inappbrowser" />
   <feature name="InAppBrowser">
     <param name="android-package" value="org.apache.cordova.inappbrowser.InAppBrowser"/>
   </feature>
