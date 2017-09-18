@@ -23,8 +23,11 @@
   <!-- <plugin name="cordova-plugin-camera" spec="~2.4.1" /> -->
   <preference name="deployment-target" value="7.0"/>
   <!-- <gap:plugin name="com.logilite.vision.camera" version="0.2.11" /> -->
-  
+
   <gap:plugin name="cordova-plugin-inappbrowser" />
+  <feature name="InAppBrowser">
+    <param name="android-package" value="org.apache.cordova.inappbrowser.InAppBrowser"/>
+  </feature>
 
   <preference name="ios-statusbarstyle" value="black-opaque" />
 
