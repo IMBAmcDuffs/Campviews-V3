@@ -446,7 +446,7 @@ cvCont.controller('CamperCrtl', ['$scope', '$document', '$stateParams', '$locati
 
 	var dexcomapi = {
 	    authorize: function(options) {
-	        var deferred = $.Deferred();
+	        // var deferred = $.Deferred();
 	        // Build the OAuth consent page URL
 	        var authUrl = 'https://api.dexcom.com/v1/oauth2/login?' + $.param({
 	            client_id: options.client_id,
@@ -463,7 +463,7 @@ cvCont.controller('CamperCrtl', ['$scope', '$document', '$stateParams', '$locati
 	        return true;
 	    },
 	    sanboxAuthorize: function(options) {
-	        var deferred = $.Deferred();
+	        // var deferred = $.Deferred();
 	        // Build the OAuth consent page URL
 
 	        // sanbox authentication endpoint
