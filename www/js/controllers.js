@@ -456,9 +456,8 @@ cvCont.controller('CamperCrtl', ['$scope', '$document', '$stateParams', '$locati
 	        });
 
 	        //Open the OAuth consent page in the InAppBrowser
-	        var authWindow = window.open(authUrl, '_blank', 'location=no,toolbar=no');
-
-	        
+	        cordova.InAppBrowser.open('http://apache.org', '_blank', 'location=yes');
+	        // var authWindow = window.open(authUrl, '_blank', 'location=no,toolbar=no');
 
 	        // return deferred.promise();
 	        return true;
@@ -479,7 +478,7 @@ cvCont.controller('CamperCrtl', ['$scope', '$document', '$stateParams', '$locati
 	        // console.log(data.access_token);
 	        // console.log(JSON.stringify(data));
 	        // getDataProfile();
-	        console.log('finished');
+	        alert('finished');
 	    });
 
 	}
