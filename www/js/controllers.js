@@ -498,15 +498,15 @@ cvCont.controller('CamperCrtl', ['$scope', '$http', '$document', '$stateParams',
 	                data = {
 	                	code: code[1],
 	                    camper_id: 19891989
-	                };
+	                }; 
 	                $http.post('https://campviews.com/oauth', data)
 			            .success(function (data, status, headers, config) {
-			            	alert('successful code exchange! ' + code[1]);
+			            	alert('successful code exchange! ' + data);
 	                    	// deferred.resolve(data);
 			            })
 			            .error(function (data, status, header, config) {
 			            	// deferred.reject(response.responseJSON);
-	                    	alert('An error occured!' + respnose);
+	                    	alert('An error occured!');
 			            });
 	            } else if (error) {
 	                //The user denied access to the app
