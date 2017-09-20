@@ -490,31 +490,27 @@ cvCont.controller('CamperCrtl', ['$scope', '$document', '$stateParams', '$locati
 	            var error = /\?error=(.+)$/.exec(url);
 
 	            if (code || error) {
-	                //Always close the browser when match is found
+	                // Always close the browser when match is found
 	                ref.close();
 	            }
 
-	            /*if (code) {
-	                //Exchange the authorization code for an access token
-	                $.post('https://accounts.google.com/o/oauth2/token', {
+	            if (code) {
+	                // Exchange the authorization code for an access token and save in db
+	                $.post('https://campviews.com/oauth', {
 	                    code: code[1],
-	                    client_id: options.client_id,
-	                    client_secret: options.client_secret,
-	                    redirect_uri: options.redirect_uri,
-	                    grant_type: 'authorization_code'
+	                    camper_id: 19891989
 	                }).done(function(data) {
 	                    deferred.resolve(data);
-
-	                    $("#loginStatus").html('Name: ' + data.given_name);
 	                }).fail(function(response) {
 	                    deferred.reject(response.responseJSON);
+	                    alert('An error occured!')
 	                });
 	            } else if (error) {
 	                //The user denied access to the app
 	                deferred.reject({
 	                    error: error[1]
 	                });
-	            }*/
+	            }
 	        });
 
 	        return deferred.promise();
