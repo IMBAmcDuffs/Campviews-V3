@@ -186,18 +186,14 @@ cvCont.controller('MainCtrl', ['$scope', '$ionicFilterBar', '$timeout', '$stateP
   }
 
   function getSingleDexcomData(camperData, camperArrayKey, callback){
-  	callback(camperArrayKey, 'test 1.99' + camperData.id);
-  	// $http({
-   //      url: "http://campviews.com/oauth/getDexcomEgvs.php",
-   //      method: 'GET',
-   //      params: {
-   //          camper_id: camperData.id
-   //      }
-   //  }).then(
-   //      function(response){
-   //      	callback(camperArrayKey, respnse);
-   //      }
-   //  );
+  	// callback(camperArrayKey, 'test 1.99' + camperData.id);
+  	$http.get('http://campviews.com/oauth/getDexcomEgvs.php?camper_id=' + camperData.id)
+  		.success(function(data, status, headers, config) {
+  			callback(camperArrayKey, 'test 1.99' + camperData.id);
+		}).error(function(data, status, headers, config) {
+			// show some error
+			callback(camperArrayKey, 'error returned');
+		});	
   }
 
   function getDexcomData(){
