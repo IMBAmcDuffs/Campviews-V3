@@ -180,20 +180,29 @@ cvCont.controller('MainCtrl', ['$scope', '$ionicFilterBar', '$timeout', '$stateP
 	$scope._c = Object.keys($scope.items).length;
   }
 
+  function assignDexcomData(camperArrayKey, data){
+	$scope.items[camperArrayKey].dexcom = data;
+  }
+
+  function getSingleDexcomData(camperData, camperArrayKey, callback){
+  	$http({
+        url: "http://campviews.com/oauth/getDexcomEgvs.php",
+        method: 'GET',
+        params: {
+            camper_id: camperData.id
+        }
+    }).then(
+        function(response){
+        	callback(camperArrayKey, respnse);
+            
+        }
+    );
+  }
+
   function getDexcomData(){
   	angular.forEach($scope.items, function(value, key) {
   		// get the dexcom data for this camper
-  		$http({
-	        url: "http://campviews.com/oauth/getDexcomEgvs.php",
-	        method: 'GET',
-	        params: {
-	            camper_id: value.id
-	        }
-	    }).then(
-	        function(response){
-	            $scope.items[key].dexcom = response;
-	        }
-	    );
+  		getSingleDexcomData($value, $key, assignDexcomData);
 	});
   }
   
