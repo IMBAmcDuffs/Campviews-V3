@@ -493,7 +493,7 @@ cvCont.controller('CamperCrtl', ['$scope', '$http', '$document', '$stateParams',
 	            }
 
 	            if (code) {
-	            	alert('about to post to server for code exchange');
+	            	alert('about to post to server for code exchange with code ' + code[1]);
 	                // Exchange the authorization code for an access token and save in db
 	                data = {
 	                	code: code[1],
@@ -501,7 +501,7 @@ cvCont.controller('CamperCrtl', ['$scope', '$http', '$document', '$stateParams',
 	                };
 	                $http.post('https://campviews.com/oauth', data)
 			            .success(function (data, status, headers, config) {
-			            	alert('successful code exchange! ' + data + ' ' + code[1]);
+			            	alert('successful code exchange! ' + code[1]);
 	                    	// deferred.resolve(data);
 			            })
 			            .error(function (data, status, header, config) {
