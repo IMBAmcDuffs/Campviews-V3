@@ -202,7 +202,8 @@ cvCont.controller('MainCtrl', ['$scope', '$ionicFilterBar', '$timeout', '$stateP
   function getDexcomData(){
   	angular.forEach($scope.items, function(value, key) {
   		// get the dexcom data for this camper
-  		getSingleDexcomData($value, $key, assignDexcomData);
+  		// getSingleDexcomData(value, key, assignDexcomData);
+  		$scope.items[key].dexcom = 'test 1.35';
 	});
   }
   
