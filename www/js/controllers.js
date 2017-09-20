@@ -181,19 +181,18 @@ cvCont.controller('MainCtrl', ['$scope', '$http', '$ionicFilterBar', '$timeout',
   }
 
   function assignDexcomData(camperArrayKey, data){
-	$scope.items[camperArrayKey].dexcom = data;
-	// angular.toJson();
+	$scope.items[camperArrayKey].dexcom = angular.toJson(data);
   }
 
   function getSingleDexcomData(camperData, camperArrayKey, callback){
-  	callback(camperArrayKey, 'test 1.99' + camperData.id);
-  // 	$http.get('http://campviews.com/oauth/getDexcomEgvs.php?camper_id=' + camperData.id)
-  // 		.success(function(data, status, headers, config) {
-  // 			callback(camperArrayKey, 'test 1.99' + camperData.id);
-		// }).error(function(data, status, headers, config) {
-		// 	// show some error
-		// 	callback(camperArrayKey, 'error returned');
-		// });	
+  	// callback(camperArrayKey, 'test 1.99' + camperData.id);
+  	$http.get('http://campviews.com/oauth/getDexcomEgvs.php?camper_id=' + camperData.id)
+  		.success(function(data, status, headers, config) {
+  			callback(camperArrayKey, data);
+		}).error(function(data, status, headers, config) {
+			// show some error
+			callback(camperArrayKey, 'error returned');
+		});	
   }
 
   function getDexcomData(){
@@ -457,8 +456,8 @@ cvCont.controller('CamperCrtl', ['$scope', '$document', '$stateParams', '$locati
 	}
 	
 	// lets get this users special form data
-	//var parentGuardianForm = forms[5].values[0].value;
-	var emergancyContactForm = forms[6].values[0].value;
+	// var parentGuardianForm = forms[5].values[0].value;
+	// var emergancyContactForm = forms[6].values[0].value;
 	
 	
 	
