@@ -482,9 +482,7 @@ cvCont.controller('CamperCrtl', ['$scope', '$document', '$stateParams', '$locati
 	        var ref = cordova.InAppBrowser.open(authUrl, '_blank', 'location=no');
 	        // var authWindow = window.open(authUrl, '_blank', 'location=no,toolbar=no');
 
-	        ref.addEventListener('loadstart', function(event) { 
-	        	alert(event.url);
-
+	        ref.addEventListener('loadstart', function(event) {
 			  	var url = event.url;
 	            var code = /\?code=(.+)$/.exec(url);
 	            var error = /\?error=(.+)$/.exec(url);
@@ -495,14 +493,16 @@ cvCont.controller('CamperCrtl', ['$scope', '$document', '$stateParams', '$locati
 	            }
 
 	            if (code) {
+	            	alert('about to post to server for code exchange');
 	                // Exchange the authorization code for an access token and save in db
 	                $.post('https://campviews.com/oauth', {
 	                    code: code[1],
 	                    camper_id: 19891989
 	                }).done(function(data) {
-	                    deferred.resolve(data);
+	                	alert('successful code exchange!');
+	                    // deferred.resolve(data);
 	                }).fail(function(response) {
-	                    deferred.reject(response.responseJSON);
+	                    // deferred.reject(response.responseJSON);
 	                    alert('An error occured!')
 	                });
 	            } else if (error) {
