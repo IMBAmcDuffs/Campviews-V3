@@ -367,7 +367,7 @@ cvCont.controller('checkinForms', ['$scope', '$document', '$stateParams', '$loca
  	
 }]);
 
-cvCont.controller('CamperCrtl', ['$scope', '$document', '$stateParams', '$location', 'CV_Camper', 'CV_Forms', '$cordovaCamera', 'requestedForms', function($scope, $document, $stateParams, $location, CV_Camper, CV_Forms, $cordovaCamera, requestedForms) {
+cvCont.controller('CamperCrtl', ['$scope', '$http', '$document', '$stateParams', '$location', 'CV_Camper', 'CV_Forms', '$cordovaCamera', 'requestedForms', function($scope, $http, $document, $stateParams, $location, CV_Camper, CV_Forms, $cordovaCamera, requestedForms) {
 	"use strict";
 	
 	var neededForms = [5,6];
@@ -495,16 +495,19 @@ cvCont.controller('CamperCrtl', ['$scope', '$document', '$stateParams', '$locati
 	            if (code) {
 	            	alert('about to post to server for code exchange');
 	                // Exchange the authorization code for an access token and save in db
-	                $.post('https://campviews.com/oauth', {
-	                    code: code[1],
+	                data = {
+	                	code: code[1],
 	                    camper_id: 19891989
-	                }).done(function(data) {
-	                	alert('successful code exchange!' + data);
-	                    // deferred.resolve(data);
-	                }).fail(function(response) {
-	                    // deferred.reject(response.responseJSON);
-	                    alert('An error occured!' + respnose);
-	                });
+	                };
+	                $http.post('https://campviews.com/oauth', data)
+			            .success(function (data, status, headers, config) {
+			            	alert('successful code exchange! ' + data + ' ' + code[1]);
+	                    	// deferred.resolve(data);
+			            })
+			            .error(function (data, status, header, config) {
+			            	// deferred.reject(response.responseJSON);
+	                    	alert('An error occured!' + respnose);
+			            });
 	            } else if (error) {
 	                //The user denied access to the app
 	                deferred.reject({
