@@ -85,7 +85,7 @@ cvCont.controller('AppCtrl', function($scope, $ionicHistory, $ionicModal, $locat
 });
 
 /* main controller unit */
-cvCont.controller('MainCtrl', ['$scope', '$ionicFilterBar', '$timeout', '$stateParams', '$document', '$location', 'campData', 'otherData', function($scope, $ionicFilterBar, $timeout, $stateParams, $document, $location, campData, otherData) {
+cvCont.controller('MainCtrl', ['$scope', '$http', '$ionicFilterBar', '$timeout', '$stateParams', '$document', '$location', 'campData', 'otherData', function($scope, $http, $ionicFilterBar, $timeout, $stateParams, $document, $location, campData, otherData) {
  "use strict";
  
   if(campData){
@@ -186,14 +186,14 @@ cvCont.controller('MainCtrl', ['$scope', '$ionicFilterBar', '$timeout', '$stateP
   }
 
   function getSingleDexcomData(camperData, camperArrayKey, callback){
-  	// callback(camperArrayKey, 'test 1.99' + camperData.id);
-  	$http.get('http://campviews.com/oauth/getDexcomEgvs.php?camper_id=' + camperData.id)
-  		.success(function(data, status, headers, config) {
-  			callback(camperArrayKey, 'test 1.99' + camperData.id);
-		}).error(function(data, status, headers, config) {
-			// show some error
-			callback(camperArrayKey, 'error returned');
-		});	
+  	callback(camperArrayKey, 'test 1.99' + camperData.id);
+  // 	$http.get('http://campviews.com/oauth/getDexcomEgvs.php?camper_id=' + camperData.id)
+  // 		.success(function(data, status, headers, config) {
+  // 			callback(camperArrayKey, 'test 1.99' + camperData.id);
+		// }).error(function(data, status, headers, config) {
+		// 	// show some error
+		// 	callback(camperArrayKey, 'error returned');
+		// });	
   }
 
   function getDexcomData(){
