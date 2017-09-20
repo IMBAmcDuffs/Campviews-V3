@@ -182,7 +182,18 @@ cvCont.controller('MainCtrl', ['$scope', '$ionicFilterBar', '$timeout', '$stateP
 
   function getDexcomData(){
   	angular.forEach($scope.items, function(value, key) {
-	  $scope.items[key].dexcom = 'test 1.25';
+  		// get the dexcom data for this camper
+  		$http({
+	        url: "http://campviews.com/oauth/getDexcomEgvs.php",
+	        method: 'GET',
+	        params: {
+	            camper_id: value.id
+	        }
+	    }).then(
+	        function(response){
+	            $scope.items[key].dexcom = response;
+	        }
+	    );
 	});
   }
   

@@ -157,9 +157,9 @@ cvServ.factory('CV_Camps', ['$http', '$q', '$injector', function($http, $q, $inj
 		self.logForms = null;
 		
 		self.getCamps = function() {
-		var deferred = $q.defer();
-		$('#loading').show();
-		path = rawpath+'get_all/?access_token='+global.accessToken;
+			var deferred = $q.defer();
+			$('#loading').show();
+			path = rawpath+'get_all/?access_token='+global.accessToken;
 			
 			if(self.camps.length>0){ 
 				$('#loading').hide();
@@ -207,8 +207,8 @@ cvServ.factory('CV_Camps', ['$http', '$q', '$injector', function($http, $q, $inj
 							campers = data.campers;
 							self.campData = campers;
 						
-						global.checked_out_count = data.checked_out_count;
-						deferred.resolve(campers);
+							global.checked_out_count = data.checked_out_count;
+							deferred.resolve(campers);
 						}
 						//console.log('Campers from camp', data);
 						 $('#loading').hide();
@@ -236,39 +236,40 @@ cvServ.factory('CV_Camps', ['$http', '$q', '$injector', function($http, $q, $inj
 		};
 		
 		self.getLogForms = function(params) {
-		var deferred = $q.defer();
-		path = rawpath+'get_form/?access_token='+global.accessToken+'&camper_id='+params.camper_id+'&type=log&camp_id='+global.selectedCamp;
-		$('#loading').show();
-		$http.get(path).
-			success(function(data, status, headers, config) {
-				self.logForms = data;
-				deferred.resolve(data);
-				//console.log(data, 'log data');
-			}).error(function(data, status, headers, config) {
-				deferred.reject('Error happened yo!');
-			});		
+			var deferred = $q.defer();
+			path = rawpath+'get_form/?access_token='+global.accessToken+'&camper_id='+params.camper_id+'&type=log&camp_id='+global.selectedCamp;
+			$('#loading').show();
 			
-			return deferred.promise;
+			$http.get(path).
+				success(function(data, status, headers, config) {
+					self.logForms = data;
+					deferred.resolve(data);
+					//console.log(data, 'log data');
+				}).error(function(data, status, headers, config) {
+					deferred.reject('Error happened yo!');
+				});		
+				
+				return deferred.promise;
 		}
 				
 		self.getCamp = function() {
-		var deferred = $q.defer();
-		var camp_id = global.selectedCamp;
-		$('#loading').show();
-		path = rawpath+'get_single_camp_data/?access_token='+global.accessToken+'&only=camp&camp_id='+camp_id;
+			var deferred = $q.defer();
+			var camp_id = global.selectedCamp;
+			$('#loading').show();
+			path = rawpath+'get_single_camp_data/?access_token='+global.accessToken+'&only=camp&camp_id='+camp_id;
 		
-				$http.get(path).
-					success(function(data, status, headers, config) {
-						self.campData = data;
-						
-						deferred.resolve(data);
-						sessionStorage.setItem('single_camp_data', JSON.stringify(data));
-							//console.log('The Camp', data);
+			$http.get(path).
+				success(function(data, status, headers, config) {
+					self.campData = data;
 					
-					}).error(function(data, status, headers, config) {
-						deferred.reject('Error happened yo!');
-					});		
-			
+					deferred.resolve(data);
+					sessionStorage.setItem('single_camp_data', JSON.stringify(data));
+						//console.log('The Camp', data);
+				
+				}).error(function(data, status, headers, config) {
+					deferred.reject('Error happened yo!');
+				});		
+		
 				
 			return deferred.promise;
 		}
