@@ -118,7 +118,6 @@ cvCont.controller('MainCtrl', ['$scope', '$ionicFilterBar', '$timeout', '$stateP
 	
 	var $items = $scope.items;
 	
-	
 	switch(page){
 		case 'campers':
 			$scope.page_title = 'Campers - Select Camper';
@@ -179,8 +178,15 @@ cvCont.controller('MainCtrl', ['$scope', '$ionicFilterBar', '$timeout', '$stateP
 	}
 	$scope._c = Object.keys($scope.items).length;
   }
+
+  function getDexcomData(){
+  	$scope.items.forEach(function(item) {
+    	item.dexcom = 'test 1.25';
+  	});
+  }
   
   loadItems();
+  getDexcomData();
     
   $scope.cabins = global.cabins;
 		
