@@ -181,7 +181,8 @@ cvCont.controller('MainCtrl', ['$scope', '$http', '$ionicFilterBar', '$timeout',
   }
 
   function assignDexcomData(camperArrayKey, data){
-	$scope.items[camperArrayKey].dexcom = angular.toJson(data);
+	$scope.items[camperArrayKey].dexcom = data;
+	// $scope.items[camperArrayKey].dexcom = angular.toJson(data);
   }
 
   function getSingleDexcomData(camperData, camperArrayKey, callback){
