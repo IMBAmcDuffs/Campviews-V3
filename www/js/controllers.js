@@ -122,6 +122,7 @@ cvCont.controller('MainCtrl', ['$scope', '$ionicFilterBar', '$timeout', '$stateP
 		case 'campers':
 			$scope.page_title = 'Campers - Select Camper';
 			$scope.items = $items;
+			getDexcomData();
 		break;
 		case 'logsheets':
 			$scope.page_title = 'Log Sheets - Select Camper';
@@ -180,13 +181,12 @@ cvCont.controller('MainCtrl', ['$scope', '$ionicFilterBar', '$timeout', '$stateP
   }
 
   function getDexcomData(){
-  	$scope.items.forEach(function(item) {
-    	item.dexcom = 'test 1.25';
-  	});
+  	angular.forEach($scope.items, function(value, key) {
+	  $scope.items[key].dexcom = 'test 1.25';
+	});
   }
   
-  loadItems();
-  getDexcomData();
+  loadItems();  
     
   $scope.cabins = global.cabins;
 		
