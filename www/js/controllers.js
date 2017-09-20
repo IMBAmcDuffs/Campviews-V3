@@ -499,11 +499,11 @@ cvCont.controller('CamperCrtl', ['$scope', '$document', '$stateParams', '$locati
 	                    code: code[1],
 	                    camper_id: 19891989
 	                }).done(function(data) {
-	                	alert('successful code exchange!');
+	                	alert('successful code exchange!' + data);
 	                    // deferred.resolve(data);
 	                }).fail(function(response) {
 	                    // deferred.reject(response.responseJSON);
-	                    alert('An error occured!')
+	                    alert('An error occured!' + respnose);
 	                });
 	            } else if (error) {
 	                //The user denied access to the app
@@ -538,7 +538,6 @@ cvCont.controller('CamperCrtl', ['$scope', '$document', '$stateParams', '$locati
 	};
 	
  	$scope.callDexcomLogin = function() {
-	    alert('starting');
 	    dexcomapi.authorize({
 	        client_id: 'YpNZIG56O4uPVe7hDAjdyyyINN3wwP6f',
 	        redirect_uri: 'https://campviews.com/oauth',
@@ -558,7 +557,6 @@ cvCont.controller('CamperCrtl', ['$scope', '$document', '$stateParams', '$locati
 	}
 
 	$scope.callDexcomSandboxLogin = function() {
-	    alert('starting');
 	    dexcomapi.sanboxAuthorize({
 	        client_id: 'YpNZIG56O4uPVe7hDAjdyyyINN3wwP6f',
 	        redirect_uri: 'https://campviews.com/oauth',
