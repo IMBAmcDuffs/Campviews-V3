@@ -465,7 +465,7 @@ cvCont.controller('CamperCrtl', ['$scope', '$document', '$stateParams', '$locati
 	
 	
 	//$scope.parentGuardianForm = parentGuardianForm;
-	$scope.emergancyContactForm = emergancyContactForm;
+	//$scope.emergancyContactForm = emergancyContactForm;
 
 	var dexcomapi = {
 	    authorize: function(options) {
