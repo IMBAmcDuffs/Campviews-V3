@@ -485,16 +485,16 @@ cvCont.controller('CamperCrtl', ['$scope', '$document', '$stateParams', '$locati
 	        ref.addEventListener('loadstart', function(event) { 
 	        	alert(event.url);
 
-			  /* var url = e.originalEvent.url;
+			  	var url = event.url;
 	            var code = /\?code=(.+)$/.exec(url);
 	            var error = /\?error=(.+)$/.exec(url);
 
 	            if (code || error) {
 	                //Always close the browser when match is found
-	                authWindow.close();
+	                ref.close();
 	            }
 
-	            if (code) {
+	            /*if (code) {
 	                //Exchange the authorization code for an access token
 	                $.post('https://accounts.google.com/o/oauth2/token', {
 	                    code: code[1],
