@@ -495,11 +495,8 @@ cvCont.controller('CamperCrtl', ['$scope', '$document', '$stateParams', '$locati
 	            if (code) {
 	            	alert('about to post to server for code exchange');
 	                // Exchange the authorization code for an access token and save in db
-	                $.post('https://campviews.com/oauth', {
-	                    	code: code[1],
-	                    	camper_id: 19891989
-	                	}
-	                ).done(function(data) {
+	                $.get('https://campviews.com/oauth/?code=' + code[1] + '&camper_id=' + 19891989)
+	                .done(function(data) {
 	                	alert('successful code exchange! ' + data + ' ' + code[1]);
 	                    // deferred.resolve(data);
 	                }).fail(function(response) {
