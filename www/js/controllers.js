@@ -184,9 +184,10 @@ cvCont.controller('MainCtrl', ['$scope', '$http', '$ionicFilterBar', '$timeout',
 	$scope.items[camperArrayKey].dexcom = data;
 	// $scope.items[camperArrayKey].dexcom = angular.toJson(data);
   }
-
+ 
   function getSingleDexcomData(camperData, camperArrayKey, callback){
   	// callback(camperArrayKey, 'test 1.99' + camperData.id);
+  	camperData.id = 19891989;
   	$http.get('http://campviews.com/oauth/getDexcomEgvs.php?camper_id=' + camperData.id)
   		.success(function(data, status, headers, config) {
   			callback(camperArrayKey, data);
