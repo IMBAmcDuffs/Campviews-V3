@@ -601,7 +601,7 @@ cvServ.factory('CV_Camper', ['$http', '$q', function($http, $q) {
 	
 }]);
 
-cvServ.factory('CV_Account', ['$http','$location','$ionicPopup', function($http, $location,$ionicPopup) {
+cvServ.factory('CV_Account', ['$http','$location','$ionicPopup', function($http, $location, $ionicPopup) {
 	var path = global.apiPath+'cv_account/signon/';
 	
 	var process_login = function() {
@@ -665,10 +665,9 @@ cvServ.factory('CV_Account', ['$http','$location','$ionicPopup', function($http,
 		logout : logout_user,
 		check : check_user
 	};
-	
 }]);
 
-cvServ.factory('DexcomApi', ['$http', function($http) {
+cvServ.service('DexcomApi', ['$http', function($http) {
 	var getEgvsReadings = function(userId, numReadings, callback, userArrayKey=null) {
 			if(!numReadings){
 				numReadings = 1;
