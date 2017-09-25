@@ -433,6 +433,8 @@ cvCont.controller('CamperCrtl', ['$scope', '$document', '$stateParams', '$locati
 	var camper = {};
 	
 	$scope.camper = camper = global.camper;
+
+	dexcomapi.getSingleDexcomData($stateParams.camper_id);
 	
 	$scope.cabinColor = '';
 	
@@ -535,7 +537,19 @@ cvCont.controller('CamperCrtl', ['$scope', '$document', '$stateParams', '$locati
 
 	        // return deferred.promise();
 	        return true;
-	    }
+	    },
+	    getSingleDexcomData: function(camperId){
+	    	$url = 'http://campviews.com/oauth/getDexcomEgvs.php?camper_id=' + camperId + '&num_readings=' + 25;
+		  	$http.get($url)
+		  		.success(function(data, status, headers, config) {
+		  			if(data.error !== 'yes'){
+				  		$scope.camper.dexcom = data;
+				  	}
+				}).error(function(data, status, headers, config) {
+					// show some error
+					// callback('error returned');
+				});	
+		}
 	};
 	
  	$scope.callDexcomLogin = function() {
