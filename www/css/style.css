@@ -287,8 +287,17 @@ input[type="search"] {
 	clear:both;
 }
 .list_item_title {
-	font-weight:bolder;	
+	font-weight: bolder;
 }
+.list_item_title_center {
+	width:100%;
+	box-sizing: border-box;
+	font-size:16px;
+	font-weight:bolder;	
+	text-align: center;
+	clear:both;
+}
+
 .list_item_dates {
 	padding-top:0px;	
 	font-size:14px;
