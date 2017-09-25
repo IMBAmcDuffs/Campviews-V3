@@ -400,11 +400,11 @@ cvCont.controller('CamperCrtl', ['$scope', '$document', '$stateParams', '$locati
 	$scope.picture = '';
 
 	function assignDexcomData(data){
-		alert(data);
+		alert('zeroth: ' + data);
 		if(data.error !== 'yes'){
-			$scope.dexcom = {};
-			$scope.dexcom.data = data;
-			alert($scope.dexcom);
+			$scope.dexcom = {data: data};
+			alert('first: ' + $scope.dexcom);
+			alert('second: ' + $scope.dexcom.data);
 		}
 	}
 
