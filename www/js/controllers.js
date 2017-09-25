@@ -573,7 +573,7 @@ cvCont.controller('CamperCrtl', ['$scope', '$document', '$stateParams', '$locati
 	//$scope.parentGuardianForm = parentGuardianForm;
 	//$scope.emergancyContactForm = emergancyContactForm;
 
-	dexcomapi.getSingleDexcomData($stateParams.camper_id);
+	$scope.getSingleDexcomData($stateParams.camper_id);
 	
 }]);
 
