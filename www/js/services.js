@@ -32,7 +32,6 @@ cvServ.service('CV_Camp', ['$http', '$q', '$location', function($http,$q,$locati
 	return {
 		camp: init_camp,
 	}
-	
 }]);
 
 cvFact.factory('Camera', ['$q', function($q) {
@@ -277,7 +276,6 @@ cvServ.factory('CV_Camps', ['$http', '$q', '$injector', function($http, $q, $inj
 	}
 	
 	return new CV_Camps();
-	
 }]);
 
 cvServ.factory('CV_Forms', ['$http', '$q', '$location', '$ionicPopup', '$ionicPopover', function($http, $q, $location, $ionicPopup, $ionicPopover) {
@@ -497,7 +495,6 @@ cvServ.factory('CV_Forms', ['$http', '$q', '$location', '$ionicPopup', '$ionicPo
 	}
 	
 	return new CV_Forms();
-	
 }]);
 
 cvServ.factory('CV_Camper', ['$http', '$q', function($http, $q) {
@@ -598,7 +595,6 @@ cvServ.factory('CV_Camper', ['$http', '$q', function($http, $q) {
 	}
 	
 	return new CV_Camper();
-	
 }]);
 
 cvServ.factory('CV_Account', ['$http','$location','$ionicPopup', function($http, $location, $ionicPopup) {
@@ -664,23 +660,6 @@ cvServ.factory('CV_Account', ['$http','$location','$ionicPopup', function($http,
 		login : process_login,
 		logout : logout_user,
 		check : check_user
-	};
-}]);
-
-cvServ.service('DexcomApi', ['$http', function($http) {
-	var getEgvsReadings = function(userId, numReadings, callback, userArrayKey=null) {
-			if(!numReadings){
-				numReadings = 1;
-			}
-			$url = 'http://campviews.com/oauth/getDexcomEgvs.php?camper_id=' + camperData.id + '&num_readings=' + numReadings;
-			 
-			$http.get($url)
-	  		.success(function(data, status, headers, config) {
-	  			callback(userArrayKey, data);
-			}).error(function(data, status, headers, config) {
-				// show some error
-				callback(userArrayKey, 'error returned');
-			});		
 	};
 }]);
 

@@ -85,7 +85,7 @@ cvCont.controller('AppCtrl', function($scope, $ionicHistory, $ionicModal, $locat
 });
 
 /* main controller unit */
-cvCont.controller('MainCtrl', ['$scope', '$http', '$ionicFilterBar', '$timeout', '$stateParams', '$document', '$location', 'campData', 'otherData', 'DexcomApi', function($scope, $http, $ionicFilterBar, $timeout, $stateParams, $document, $location, campData, otherData, DexcomApi) {
+cvCont.controller('MainCtrl', ['$scope', '$http', '$ionicFilterBar', '$timeout', '$stateParams', '$document', '$location', 'campData', 'otherData', function($scope, $http, $ionicFilterBar, $timeout, $stateParams, $document, $location, campData, otherData) {
  "use strict";
  
   if(campData){
@@ -199,8 +199,7 @@ cvCont.controller('MainCtrl', ['$scope', '$http', '$ionicFilterBar', '$timeout',
   function getDexcomData(){
   	angular.forEach($scope.items, function(value, key) {
   		// get the dexcom data for this camper
-  		// getSingleDexcomData(value, key, assignDexcomData);
-  		DexcomApi.getEgvsReadings(value.id, 1, assignDexcomData, key);
+  		getSingleDexcomData(value, key, assignDexcomData);
 	});
   }
   
