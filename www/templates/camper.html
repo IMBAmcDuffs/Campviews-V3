@@ -12,10 +12,10 @@
                     <p><strong>Gender:</strong> {{camper.gender}}</p>
                     <p><strong>I have checked into:</strong> {{camper.checked_in}} out of {{total_check_ins}} stations</p>
                 </div>
-                <div ng-show="camper.dexcom" class="camper_data">
+                <div ng-show="dexcomData" class="camper_data">
                     <h3 class="title">Dexcom 24 Hour Reading:</h3>
-                    <p>Server Time | Device Time | Value | Status | Trend | Trend Rate</p>
-                    <div ng-repeat="egvsItem in camper.dexcom.egvs">
+                    <p>Server Time | Device Time | Value ({{dexcomData.unit}}) | Status | Trend | Trend Rate ({{dexcomData.rateUnit}})</p>
+                    <div ng-repeat="egvsItem in dexcomData.egvs">
                         <p>{{egvsItem.systemTime}} | {{egvsItem.displayTime}} | {{egvsItem.value}} | {{egvsItem.status}} | {{egvsItem.trend}} | {{egvsItem.trendRate}}</p>
                     </div>
                 </div>

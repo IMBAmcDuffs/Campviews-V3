@@ -402,7 +402,7 @@ cvCont.controller('CamperCrtl', ['$scope', '$document', '$stateParams', '$locati
 	function assignDexcomData(data){
 		alert(data);
 		if(data.error !== 'yes'){
-			$scope.camper.dexcom = data;
+			$scope.dexcomData = data;
 		}
 	}
 
@@ -476,7 +476,7 @@ cvCont.controller('CamperCrtl', ['$scope', '$document', '$stateParams', '$locati
 	        return true;
 	    },
 	    getSingleDexcomData: function(camperId, callback){
-	    	var apiUrl = 'http://campviews.com/oauth/getDexcomEgvs.php?camper_id=' + camperId + '&num_readings=' + 1000;
+	    	var apiUrl = 'http://campviews.com/oauth/getDexcomEgvs.php?camper_id=' + camperId + '&num_readings=' + '1000';
 	    	$.get(apiUrl)
             .done(function(data) {
             	if(data.error !== 'yes'){
@@ -544,7 +544,7 @@ cvCont.controller('CamperCrtl', ['$scope', '$document', '$stateParams', '$locati
 	
 	$scope.camper = camper = global.camper;
 
-	dexcomapi.getSingleDexcomData($stateParams.camper_id, assignDexcomData);
+	
 	
 	$scope.cabinColor = '';
 	
@@ -578,6 +578,8 @@ cvCont.controller('CamperCrtl', ['$scope', '$document', '$stateParams', '$locati
 	
 	//$scope.parentGuardianForm = parentGuardianForm;
 	//$scope.emergancyContactForm = emergancyContactForm;
+
+	dexcomapi.getSingleDexcomData($stateParams.camper_id, assignDexcomData);
 	
 }]);
 
