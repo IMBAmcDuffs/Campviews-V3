@@ -181,13 +181,15 @@ cvCont.controller('MainCtrl', ['$scope', '$http', '$ionicFilterBar', '$timeout',
   }
  
   function assignDexcomData(camperArrayKey, data){
-	$scope.items[camperArrayKey].dexcom = JSON.parse(data);
+  	alert('egvs data returned: ' + data);
+	$scope.items[camperArrayKey].dexcom = data;
 	// $scope.items[camperArrayKey].dexcom = angular.toJson(data);
   }
 
   function getSingleDexcomData(camperData, camperArrayKey, callback){
   	// callback(camperArrayKey, 'test 1.99' + camperData.id);
   	// camperData.id;
+  	alert('calling egvs endpoint with camper id: ' + camperData.id);
   	$http.get('http://campviews.com/oauth/getDexcomEgvs.php?camper_id=' + camperData.id)
   		.success(function(data, status, headers, config) {
   			callback(camperArrayKey, data);
