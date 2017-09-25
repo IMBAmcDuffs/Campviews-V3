@@ -265,10 +265,17 @@ input[type="search"] {
 	height:100px;
 	overflow:hidden;
 }
+.list_item_100 {
+	float:left;
+	width:30%;
+	margin:15px !important;
+	height:100px;
+	overflow:hidden;
+}
 .list_item_left {
 	float:left;
 	width: 25%;
-}
+} 
 .list_item_right {
 	float:left;
 	width:75%;
