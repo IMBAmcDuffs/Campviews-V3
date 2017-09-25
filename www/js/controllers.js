@@ -190,6 +190,8 @@ cvCont.controller('MainCtrl', ['$scope', '$http', '$ionicFilterBar', '$timeout',
   	// console.log('egvs: ' + item.dexcom.egvs[0].trend);
   	// console.log('egvs: ' + data.rateUnit);
 	$scope.items[camperArrayKey].dexcom = data;
+	console.log('egvs: ' + $scope.items[camperArrayKey].dexcom.unit);
+
 	// $scope.items[camperArrayKey].dexcom = angular.toJson(data);
   }
 
