@@ -181,7 +181,14 @@ cvCont.controller('MainCtrl', ['$scope', '$http', '$ionicFilterBar', '$timeout',
   }
  
   function assignDexcomData(camperArrayKey, data){
-  	alert('egvs data returned: ' + data);
+  	console.log('egvs data returned: ' + data);
+  	console.log('egvs: ' + item.dexcom.egvs);
+  	console.log('egvs: ' + item.dexcom.egvs[0].value);
+  	console.log('egvs: ' + data.unit);
+
+  	console.log('egvs: ' + item.dexcom.egvs);
+  	console.log('egvs: ' + item.dexcom.egvs[0].trend);
+  	console.log('egvs: ' + data.rateUnit);
 	$scope.items[camperArrayKey].dexcom = data;
 	// $scope.items[camperArrayKey].dexcom = angular.toJson(data);
   }
@@ -189,7 +196,7 @@ cvCont.controller('MainCtrl', ['$scope', '$http', '$ionicFilterBar', '$timeout',
   function getSingleDexcomData(camperData, camperArrayKey, callback){
   	// callback(camperArrayKey, 'test 1.99' + camperData.id);
   	// camperData.id;
-  	alert('calling egvs endpoint with camper id: ' + camperData.id);
+  	console.log('calling egvs endpoint with camper id: ' + camperData.id);
   	$http.get('http://campviews.com/oauth/getDexcomEgvs.php?camper_id=' + camperData.id)
   		.success(function(data, status, headers, config) {
   			callback(camperArrayKey, data);
@@ -497,15 +504,14 @@ cvCont.controller('CamperCrtl', ['$scope', '$document', '$stateParams', '$locati
 	            }
 
 	            if (code) {
-	            	alert('about to post to server for code exchange');
 	                // Exchange the authorization code for an access token and save in db
 	                $.get('https://campviews.com/oauth/?code=' + code[1] + '&camper_id=' + $stateParams.camper_id)
 	                .done(function(data) {
-	                	alert('successful code exchange! ' + data + ' ' + code[1]);
+	                	// alert('dexcom login server call returned! ' + data + ' ' + code[1]);
 	                    // deferred.resolve(data); 
 	                }).fail(function(response) {
 	                    // deferred.reject(response.responseJSON);
-	                    alert('An error occured!' + respnose);
+	                    alert('An error occured!' + response);
 	                });
 	            } else if (error) {
 	                //The user denied access to the app
@@ -546,16 +552,6 @@ cvCont.controller('CamperCrtl', ['$scope', '$document', '$stateParams', '$locati
 	        response_type: 'code',
 	        scope: 'offline_access'
 	    });
-	    // .done(function(data) {
-	        // accessToken = data.access_token;
-	        // alert(accessToken);
-	        // $loginStatus.html('Access Token: ' + data.access_token);
-	        // console.log(data.access_token);
-	        // console.log(JSON.stringify(data));
-	        // getDataProfile();
-	        // alert('finished');
-	    // });
-
 	}
 
 	$scope.callDexcomSandboxLogin = function() {
@@ -565,16 +561,6 @@ cvCont.controller('CamperCrtl', ['$scope', '$document', '$stateParams', '$locati
 	        response_type: 'code',
 	        scope: 'offline_access'
 	    });
-	    // .done(function(data) {
-	        // accessToken = data.access_token;
-	        // alert(accessToken);
-	        // $loginStatus.html('Access Token: ' + data.access_token);
-	        // console.log(data.access_token);
-	        // console.log(JSON.stringify(data));
-	        // getDataProfile();
-	        // alert('finished');
-	    // });
-
 	}
 }]);
 
