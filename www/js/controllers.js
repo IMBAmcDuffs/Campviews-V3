@@ -367,7 +367,7 @@ cvCont.controller('checkinForms', ['$scope', '$document', '$stateParams', '$loca
  	
 }]);
 
-cvCont.controller('CamperCrtl', ['$scope', '$document', '$stateParams', '$location', 'CV_Camper', 'CV_Forms', '$cordovaCamera', 'requestedForms', function($scope, $document, $stateParams, $location, CV_Camper, CV_Forms, $cordovaCamera, requestedForms) {
+cvCont.controller('CamperCrtl', ['$scope', '$document', '$http', '$stateParams', '$location', 'CV_Camper', 'CV_Forms', '$cordovaCamera', 'requestedForms', function($scope, $document, $http, $stateParams, $location, CV_Camper, CV_Forms, $cordovaCamera, requestedForms) {
 	"use strict";
 	
 	var neededForms = [5,6];
