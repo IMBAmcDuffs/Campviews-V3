@@ -401,7 +401,9 @@ cvCont.controller('CamperCrtl', ['$scope', '$document', '$stateParams', '$locati
 
 	function assignDexcomData(data){
 		alert(data);
-		$scope.camper.dexcom = data;
+		if(data.error !== 'yes'){
+			$scope.camper.dexcom = data;
+		}
 	}
 
 	var dexcomapi = {
