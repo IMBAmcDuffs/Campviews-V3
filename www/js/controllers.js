@@ -400,6 +400,7 @@ cvCont.controller('CamperCrtl', ['$scope', '$document', '$stateParams', '$locati
 	$scope.picture = '';
 
 	function assignDexcomData(data){
+		alert(data);
 		$scope.camper.dexcom = data;
 	}
 
@@ -473,7 +474,7 @@ cvCont.controller('CamperCrtl', ['$scope', '$document', '$stateParams', '$locati
 	        return true;
 	    },
 	    getSingleDexcomData: function(camperId, callback){
-	    	var apiUrl = 'http://campviews.com/oauth/getDexcomEgvs.php?camper_id=' + camperId + '&num_readings=' + 25;
+	    	var apiUrl = 'http://campviews.com/oauth/getDexcomEgvs.php?camper_id=' + camperId + '&num_readings=' + 1000;
 	    	$.get(apiUrl)
             .done(function(data) {
             	if(data.error !== 'yes'){
