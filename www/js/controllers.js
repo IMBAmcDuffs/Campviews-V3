@@ -404,6 +404,7 @@ cvCont.controller('CamperCrtl', ['$scope', '$document', '$stateParams', '$locati
 		if(data.error !== 'yes'){
 			$scope.dexcom = {};
 			$scope.dexcom.data = data;
+			alert($scope.dexcom);
 		}
 	}
 
