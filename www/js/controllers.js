@@ -398,76 +398,6 @@ cvCont.controller('CamperCrtl', ['$scope', '$document', '$stateParams', '$locati
 		$scope.camper_id = $stateParams.camper_id;
 	}
 	$scope.picture = '';
-	
-	
-	$scope.takePicture = function() {
-		navigator.camera.getPicture(onSuccess, onFail, { 
-			quality: 50,
-			destinationType: Camera.DestinationType.DATA_URL,
-			targetWidth: 500,
-		    targetHeight: 500,
-		});
-		
-		function onSuccess(imageData) {
-			var image = document.getElementById('noImage');
-			if(image){
-				image.src = "data:image/jpeg;base64," + imageData;
-			}
-			var $image = document.getElementById('hasImage');
-			if($image){
-				$image.src = "data:image/jpeg;base64," + imageData;
-			}
-	
-			var upload = CV_Camper.uploadImage(imageData, $stateParams.camper_id);
-		}
-		
-		function onFail(message) {
-			alert('Failed because: ' + message);
-		}
-    };
-	
-	CV_Camper.getCachedCamper($stateParams.camper_id); 
-	
-  	$('#loading').hide();
-	
-	var camper = {};
-	
-	$scope.camper = camper = global.camper;
-
-	dexcomapi.getSingleDexcomData($stateParams.camper_id);
-	
-	$scope.cabinColor = '';
-	
-	$scope.checked_in = false;
-	//console.log(camper.cabin, typeof camper.cabin);
-	if(typeof camper.cabin === "object"){
-		var ccolor = camper.cabin.name;
-		ccolor = ccolor.toLowerCase().split(' ');
-		
-		if(typeof ccolor[1] !== 'undefined') {
-			$scope.cabinColor = ccolor[0];	
-		}
-	
-	}
-	//console.log(camper);
-	
-	var camper_check_ins = camper.checkins;
-	var total_check_ins = camper_check_ins.length;
-	if(camper.checked_in === total_check_ins){
-		$scope.checked_in = true;	
-	}
-	
-	// lets get this users special form data
-	// var parentGuardianForm = forms[5].values[0].value;
-	// var emergancyContactForm = forms[6].values[0].value;
-	
-	
-	
-	//console.log(parentGuardianForm,emergancyContactForm,forms);
-	
-	
-	//$scope.parentGuardianForm = parentGuardianForm;
-	//$scope.emergancyContactForm = emergancyContactForm;
 
 	var dexcomapi = {
 	    authorize: function(options) {
@@ -569,6 +499,76 @@ cvCont.controller('CamperCrtl', ['$scope', '$document', '$stateParams', '$locati
 	        scope: 'offline_access'
 	    });
 	}
+	
+	$scope.takePicture = function() {
+		navigator.camera.getPicture(onSuccess, onFail, { 
+			quality: 50,
+			destinationType: Camera.DestinationType.DATA_URL,
+			targetWidth: 500,
+		    targetHeight: 500,
+		});
+		
+		function onSuccess(imageData) {
+			var image = document.getElementById('noImage');
+			if(image){
+				image.src = "data:image/jpeg;base64," + imageData;
+			}
+			var $image = document.getElementById('hasImage');
+			if($image){
+				$image.src = "data:image/jpeg;base64," + imageData;
+			}
+	
+			var upload = CV_Camper.uploadImage(imageData, $stateParams.camper_id);
+		}
+		
+		function onFail(message) {
+			alert('Failed because: ' + message);
+		}
+    };
+	
+	CV_Camper.getCachedCamper($stateParams.camper_id); 
+	
+  	$('#loading').hide();
+	
+	var camper = {};
+	
+	$scope.camper = camper = global.camper;
+
+	dexcomapi.getSingleDexcomData($stateParams.camper_id);
+	
+	$scope.cabinColor = '';
+	
+	$scope.checked_in = false;
+	//console.log(camper.cabin, typeof camper.cabin);
+	if(typeof camper.cabin === "object"){
+		var ccolor = camper.cabin.name;
+		ccolor = ccolor.toLowerCase().split(' ');
+		
+		if(typeof ccolor[1] !== 'undefined') {
+			$scope.cabinColor = ccolor[0];	
+		}
+	
+	}
+	//console.log(camper);
+	
+	var camper_check_ins = camper.checkins;
+	var total_check_ins = camper_check_ins.length;
+	if(camper.checked_in === total_check_ins){
+		$scope.checked_in = true;	
+	}
+	
+	// lets get this users special form data
+	// var parentGuardianForm = forms[5].values[0].value;
+	// var emergancyContactForm = forms[6].values[0].value;
+	
+	
+	
+	//console.log(parentGuardianForm,emergancyContactForm,forms);
+	
+	
+	//$scope.parentGuardianForm = parentGuardianForm;
+	//$scope.emergancyContactForm = emergancyContactForm;
+	
 }]);
 
 cvCont.controller('checkoutForms', ['$scope', '$document', '$stateParams', '$location', 'CV_Camper', 'CV_Forms', 'exitForms', function($scope, $document, $stateParams, $location, CV_Camper, CV_Forms, exitForms) {
