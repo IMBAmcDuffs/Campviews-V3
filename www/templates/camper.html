@@ -14,7 +14,7 @@
                 </div>
                 <div ng-show="camper.dexcom" class="camper_data">
                     <h3 class="title">Dexcom 24 Hour Reading:</h3>
-                    <p><strong>Unit:</strong> Server Time | Device Time | Value | Status | Trend | Trend Rate</p>
+                    <p>Server Time | Device Time | Value | Status | Trend | Trend Rate</p>
                     <p ng-repeat="item in camper.dexcom.egvs">
                         <div class="list_item_100">
                             {{item.systemTime}} | {{item.displayTime}} | {{item.value}} | {{item.status}} | {{item.trend}} | {{item.trendRate}}

@@ -470,15 +470,18 @@ cvCont.controller('CamperCrtl', ['$scope', '$document', '$stateParams', '$locati
 	    },
 	    getSingleDexcomData: function(camperId){
 	    	var apiUrl = 'http://campviews.com/oauth/getDexcomEgvs.php?camper_id=' + camperId + '&num_readings=' + 25;
-		  	$http.get(apiUrl)
-		  		.success(function(data, status, headers, config) {
-		  			if(data.error !== 'yes'){
-				  		$scope.camper.dexcom = data;
-				  	}
-				}).error(function(data, status, headers, config) {
-					// show some error
-					// callback('error returned');
-				});	
+	    	$.get(apiUrl)
+            .done(function(data) {
+            	if(data.error !== 'yes'){
+            		$scope.camper.dexcom = data;
+            	}else{
+            		alert('An error occured');
+            	}
+                // deferred.resolve(data); 
+            }).fail(function(response) {
+                // deferred.reject(response.responseJSON);
+                alert('An error occured!' + response);
+            });
 		}
 	};
 	
