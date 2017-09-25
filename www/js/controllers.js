@@ -399,13 +399,20 @@ cvCont.controller('CamperCrtl', ['$scope', '$document', '$stateParams', '$locati
 	}
 	$scope.picture = '';
 
-	function assignDexcomData(data){
-		alert('zeroth: ' + data);
-		if(data.error !== 'yes'){
-			$scope.dexcom = {data: data};
-			alert('first: ' + $scope.dexcom);
-			alert('second: ' + $scope.dexcom.data);
-		}
+	$scope.getSingleDexcomData = function (camperId){
+		alert('about to call api with id ' + camperId);
+	  	$http.get('http://campviews.com/oauth/getDexcomEgvs.php?camper_id=' + camperId + '&num_readings=' + 10)
+	  		.success(function(data, status, headers, config) {
+	  			if(data.error !== 'yes'){
+	  				alert('zeroth: ' + data);
+					$scope.dexcom = {data: data};
+					alert('first: ' + $scope.dexcom);
+					alert('second: ' + $scope.dexcom.data);
+				}
+			}).error(function(data, status, headers, config) {
+				// show some error
+				// callback('error returned');
+			});	
 	}
 
 	var dexcomapi = {
@@ -476,22 +483,7 @@ cvCont.controller('CamperCrtl', ['$scope', '$document', '$stateParams', '$locati
 
 	        // return deferred.promise();
 	        return true;
-	    },
-	    getSingleDexcomData: function(camperId, callback){
-	    	var apiUrl = 'http://campviews.com/oauth/getDexcomEgvs.php?camper_id=' + camperId + '&num_readings=' + '1000';
-	    	$.get(apiUrl)
-            .done(function(data) {
-            	if(data.error !== 'yes'){
-            		callback(data);
-            	}else{
-            		alert('An error occured');
-            	}
-                // deferred.resolve(data); 
-            }).fail(function(response) {
-                // deferred.reject(response.responseJSON);
-                alert('An error occured!' + response);
-            });
-		}
+	    }
 	};
 	
  	$scope.callDexcomLogin = function() {
@@ -581,7 +573,7 @@ cvCont.controller('CamperCrtl', ['$scope', '$document', '$stateParams', '$locati
 	//$scope.parentGuardianForm = parentGuardianForm;
 	//$scope.emergancyContactForm = emergancyContactForm;
 
-	dexcomapi.getSingleDexcomData($stateParams.camper_id, assignDexcomData);
+	dexcomapi.getSingleDexcomData($stateParams.camper_id);
 	
 }]);
 
