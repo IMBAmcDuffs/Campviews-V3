@@ -401,7 +401,7 @@ cvCont.controller('CamperCrtl', ['$scope', '$document', '$stateParams', '$locati
 
 	$scope.getSingleDexcomData = function (camperId){
 		alert('about to call api with id ' + camperId);
-	  	$http.get('http://campviews.com/oauth/getDexcomEgvs.php?camper_id=' + camperId + '&num_readings=' + 10)
+	  	$http.get('http://campviews.com/oauth/getDexcomEgvs.php?camper_id=' + camperId + '&num_readings=' + '10')
 	  		.success(function(data, status, headers, config) {
 	  			if(data.error !== 'yes'){
 	  				alert('zeroth: ' + data);
@@ -411,7 +411,7 @@ cvCont.controller('CamperCrtl', ['$scope', '$document', '$stateParams', '$locati
 				}
 			}).error(function(data, status, headers, config) {
 				// show some error
-				// callback('error returned');
+				callback('error returned: ' + data);
 			});	
 	}
 
