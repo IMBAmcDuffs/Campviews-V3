@@ -182,13 +182,13 @@ cvCont.controller('MainCtrl', ['$scope', '$http', '$ionicFilterBar', '$timeout',
  
   function assignDexcomData(camperArrayKey, data){
   	console.log('egvs data returned: ' + data);
-  	console.log('egvs: ' + item.dexcom.egvs);
-  	console.log('egvs: ' + item.dexcom.egvs[0].value);
-  	console.log('egvs: ' + data.unit);
+  	// console.log('egvs: ' + item.dexcom.egvs);
+  	// console.log('egvs: ' + item.dexcom.egvs[0].value);
+  	// console.log('egvs: ' + data.unit);
 
-  	console.log('egvs: ' + item.dexcom.egvs);
-  	console.log('egvs: ' + item.dexcom.egvs[0].trend);
-  	console.log('egvs: ' + data.rateUnit);
+  	// console.log('egvs: ' + item.dexcom.egvs);
+  	// console.log('egvs: ' + item.dexcom.egvs[0].trend);
+  	// console.log('egvs: ' + data.rateUnit);
 	$scope.items[camperArrayKey].dexcom = data;
 	// $scope.items[camperArrayKey].dexcom = angular.toJson(data);
   }
