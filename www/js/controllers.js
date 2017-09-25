@@ -181,23 +181,12 @@ cvCont.controller('MainCtrl', ['$scope', '$http', '$ionicFilterBar', '$timeout',
   }
  
   function assignDexcomData(camperArrayKey, data){
-  	console.log('egvs data returned: ' + data);
-  	// console.log('egvs: ' + item.dexcom.egvs);
-  	// console.log('egvs: ' + item.dexcom.egvs[0].value);
-  	// console.log('egvs: ' + data.unit);
-
-  	// console.log('egvs: ' + item.dexcom.egvs);
-  	// console.log('egvs: ' + item.dexcom.egvs[0].trend);
-  	// console.log('egvs: ' + data.rateUnit);
-	$scope.items[camperArrayKey].dexcom = data;
-	console.log('egvs: ' + $scope.items[camperArrayKey].dexcom.unit);
-
-	// $scope.items[camperArrayKey].dexcom = angular.toJson(data);
+  	if(data.error !== 'yes'){
+  		$scope.items[camperArrayKey].dexcom = data;
+  	}
   }
 
   function getSingleDexcomData(camperData, camperArrayKey, callback){
-  	// callback(camperArrayKey, 'test 1.99' + camperData.id);
-  	// camperData.id;
   	console.log('calling egvs endpoint with camper id: ' + camperData.id);
   	$http.get('http://campviews.com/oauth/getDexcomEgvs.php?camper_id=' + camperData.id)
   		.success(function(data, status, headers, config) {
@@ -212,7 +201,6 @@ cvCont.controller('MainCtrl', ['$scope', '$http', '$ionicFilterBar', '$timeout',
   	angular.forEach($scope.items, function(value, key) {
   		// get the dexcom data for this camper
   		getSingleDexcomData(value, key, assignDexcomData);
-  		// $scope.items[key].dexcom = 'test 1.35';
 	});
   }
   
