@@ -497,7 +497,11 @@ cvCont.controller('CamperCrtl', ['$scope', '$document', '$stateParams', '$locati
 	                // Exchange the authorization code for an access token and save in db
 	                $.get('https://campviews.com/oauth/?code=' + code[1] + '&camper_id=' + $stateParams.camper_id)
 	                .done(function(data) {
-	                	// alert('dexcom login server call returned! ' + data + ' ' + code[1]);
+	                	if(data.error !== 'yes'){
+	                		alert('Dexcom access authorized!');
+	                	}else{
+	                		alert('An error occured')
+	                	}
 	                    // deferred.resolve(data); 
 	                }).fail(function(response) {
 	                    // deferred.reject(response.responseJSON);
