@@ -30,8 +30,7 @@
                     <div ng-show="item.dexcom" class="list_item_100">
                         Reading:<br />
                         {{item.dexcom.egvs[0].value}} {{item.dexcom.unit}}<br />
-                        {{item.dexcom.egvs[0].trendRate}} {{item.dexcom.rateUnit}}<br />
-                        {{item.dexcom.egvs[0].trend}}<br />
+                        {{item.dexcom.egvs[0].trend}} {{item.dexcom.egvs[0].trendRate}} {{item.dexcom.rateUnit}}
                     </div>
                     <div ng-if="page=='checkin'">
                         <div class="list_item_title row" ng-if="item.checked_in>0">
