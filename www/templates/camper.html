@@ -12,6 +12,16 @@
                     <p><strong>Gender:</strong> {{camper.gender}}</p>
                     <p><strong>I have checked into:</strong> {{camper.checked_in}} out of {{total_check_ins}} stations</p>
                 </div>
+                <div ng-show="camper.dexcom" class="camper_data">
+                    <h3 class="title">Dexcom 24 Hour Reading:</h3>
+                    <p><strong>Unit:</strong> {{camper.first_name}} {{camper.last_name}}</p>
+                    <p ng-repeat="item in camper.dexcom.egvs">
+                        <div class="list_item_100">
+                            {{item.dexcom.egvs[0].value}} {{item.dexcom.unit}}<br />
+                            {{item.dexcom.egvs[0].trendRate}} {{item.dexcom.rateUnit}} {{item.dexcom.egvs[0].trend}}
+                        </div>
+                    </p>
+                </div>
                 <ion-item class="button button-full button-stable item-icon-left" style="background-color:{{cabinColor}}; color:#fff;">
                 	<i class="icon ion-ios-home"></i> {{camper.cabin.name}}
                 </ion-item>

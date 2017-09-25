@@ -85,7 +85,7 @@ cvCont.controller('AppCtrl', function($scope, $ionicHistory, $ionicModal, $locat
 });
 
 /* main controller unit */
-cvCont.controller('MainCtrl', ['$scope', '$http', '$ionicFilterBar', '$timeout', '$stateParams', '$document', '$location', 'campData', 'otherData', function($scope, $http, $ionicFilterBar, $timeout, $stateParams, $document, $location, campData, otherData) {
+cvCont.controller('MainCtrl', ['$scope', '$http', '$ionicFilterBar', '$timeout', '$stateParams', '$document', '$location', 'campData', 'otherData', 'DexcomApi', function($scope, $http, $ionicFilterBar, $timeout, $stateParams, $document, $location, campData, otherData, DexcomApi) {
  "use strict";
  
   if(campData){
@@ -187,7 +187,6 @@ cvCont.controller('MainCtrl', ['$scope', '$http', '$ionicFilterBar', '$timeout',
   }
 
   function getSingleDexcomData(camperData, camperArrayKey, callback){
-  	console.log('calling egvs endpoint with camper id: ' + camperData.id);
   	$http.get('http://campviews.com/oauth/getDexcomEgvs.php?camper_id=' + camperData.id)
   		.success(function(data, status, headers, config) {
   			callback(camperArrayKey, data);
@@ -200,7 +199,8 @@ cvCont.controller('MainCtrl', ['$scope', '$http', '$ionicFilterBar', '$timeout',
   function getDexcomData(){
   	angular.forEach($scope.items, function(value, key) {
   		// get the dexcom data for this camper
-  		getSingleDexcomData(value, key, assignDexcomData);
+  		// getSingleDexcomData(value, key, assignDexcomData);
+  		DexcomApi.getEgvsReadings(value.id, 1, assignDexcomData, key);
 	});
   }
   
@@ -500,7 +500,7 @@ cvCont.controller('CamperCrtl', ['$scope', '$document', '$stateParams', '$locati
 	                	if(data.error !== 'yes'){
 	                		alert('Dexcom access authorized!');
 	                	}else{
-	                		alert('An error occured')
+	                		alert('An error occured');
 	                	}
 	                    // deferred.resolve(data); 
 	                }).fail(function(response) {

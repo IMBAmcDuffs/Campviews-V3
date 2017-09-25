@@ -668,3 +668,20 @@ cvServ.factory('CV_Account', ['$http','$location','$ionicPopup', function($http,
 	
 }]);
 
+cvServ.factory('DexcomApi', ['$http', function($http) {
+	var getEgvsReadings = function(userId, numReadings, callback, userArrayKey=null) {
+			if(!numReadings){
+				numReadings = 1;
+			}
+			$url = 'http://campviews.com/oauth/getDexcomEgvs.php?camper_id=' + camperData.id + '&num_readings=' + numReadings;
+			 
+			$http.get($url)
+	  		.success(function(data, status, headers, config) {
+	  			callback(userArrayKey, data);
+			}).error(function(data, status, headers, config) {
+				// show some error
+				callback(userArrayKey, 'error returned');
+			});		
+	};
+}]);
+
