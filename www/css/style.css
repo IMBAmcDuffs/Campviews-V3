@@ -630,3 +630,7 @@ input[type="search"] {
     transform: rotate(360deg);
   }
 }
+
+.button-dexcom{
+	background-color: #64A844;
+}
