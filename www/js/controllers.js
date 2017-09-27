@@ -418,8 +418,10 @@ cvCont.controller('checkinForms', ['$scope', '$document', '$stateParams', '$loca
             .done(function(data) {
             	data = JSON.parse(data);
             	if(data.loggedIn == 'yes'){
+            		$scope.didDexcomLogin = true;
             		$scope.camper.checkins.push({id: -1, checked_in: true, name: 'Dexcom Login'})
             	}else{
+            		$scope.didDexcomLogin = false;
             		$scope.camper.checkins.push({id: -1, checked_in: false, name: 'Dexcom Login'})
             	}
                 // deferred.resolve(data); 
