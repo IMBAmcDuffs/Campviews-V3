@@ -1,9 +1,24 @@
+<style>
+    .header .col {
+      background-color:lightgrey;
+    }
+    .col {
+      border: solid 1px grey;
+      border-bottom-style: none;
+      border-right-style: none;
+    }
+    .col:last-child {
+      border-right: solid 1px grey;
+    }
+    .row:last-child .col {
+      border-bottom: solid 1px grey;
+    }
+</style>
+
 <ion-view view-title="Check In - Camper Selected">
   <ion-content class="padding">
   	<div class="row">
      	<div class="col col-75">
-            
-            
             <ion-item class="item col selected_camper">
             	<h3 class="title">General Camper Info:</h3>
                 <div class="camper_data">
@@ -13,11 +28,10 @@
                     <p><strong>I have checked into:</strong> {{camper.checked_in}} out of {{total_check_ins}} stations</p>
                 </div>
                 <div ng-show="dexcom" class="camper_data">
-                    <h3 class="title">Past 10 Dexcom Readings:</h3>
-
+                    <h3 class="title">Dexcom Readings</h3>
                     <div class="row header">
                         <div class="col">Time</div>
-                        <div class="col">Blood Sugar (({{dexcom.data.unit}}))</div>
+                        <div class="col">Blood Sugar ({{dexcom.data.unit}})</div>
                         <div class="col">Trend</div>
                     </div>
                     <div class="row" ng-repeat="egvsItem in dexcom.data.egvs">
