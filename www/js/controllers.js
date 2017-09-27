@@ -400,14 +400,10 @@ cvCont.controller('CamperCrtl', ['$scope', '$document', '$http', '$stateParams',
 	$scope.picture = '';
 
 	$scope.getSingleDexcomData = function (camperId){
-		alert('about to call api with id ' + camperId);
-	  	$http.get('http://campviews.com/oauth/getDexcomEgvs.php?camper_id=' + camperId + '&num_readings=' + '10')
+	  	$http.get('http://campviews.com/oauth/getDexcomEgvs.php?camper_id=' + camperId + '&num_readings=' + '6')
 	  		.success(function(data, status, headers, config) {
 	  			if(data.error !== 'yes'){
-	  				alert('zeroth: ' + data);
 					$scope.dexcom = {data: data};
-					alert('first: ' + $scope.dexcom);
-					alert('second: ' + $scope.dexcom.data);
 				}
 			}).error(function(data, status, headers, config) {
 				// show some error

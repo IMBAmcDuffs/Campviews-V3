@@ -14,9 +14,16 @@
                 </div>
                 <div ng-show="dexcom" class="camper_data">
                     <h3 class="title">Past 10 Dexcom Readings:</h3>
-                    <p>Server Time | Device Time | Value ({{dexcom.data.unit}}) | Status | Trend | Trend Rate ({{dexcom.data.rateUnit}})</p>
-                    <div ng-repeat="egvsItem in dexcom.data.egvs">
-                        <p>{{egvsItem.systemTime}} | {{egvsItem.displayTime}} | {{egvsItem.value}} | {{egvsItem.status}} | {{egvsItem.trend}} | {{egvsItem.trendRate}}</p>
+
+                    <div class="row header">
+                        <div class="col">Time</div>
+                        <div class="col">Blood Sugar (({{dexcom.data.unit}}))</div>
+                        <div class="col">Trend</div>
+                    </div>
+                    <div class="row" ng-repeat="egvsItem in dexcom.data.egvs">
+                        <div class="col">{{egvsItem.displayTime}}</div>
+                        <div class="col">{{egvsItem.value}}</div>
+                        <div class="col">{{egvsItem.trend}}</div>
                     </div>
                 </div>
                 <ion-item class="button button-full button-stable item-icon-left" style="background-color:{{cabinColor}}; color:#fff;">
