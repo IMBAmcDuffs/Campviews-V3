@@ -417,11 +417,9 @@ cvCont.controller('checkinForms', ['$scope', '$document', '$stateParams', '$loca
 		$.get('https://campviews.com/oauth/camperDidDexcomLogin.php?camper_id=' + $stateParams.camper_id)
             .done(function(data) {
             	if(data.loggedIn == 'yes'){
-            		alert('dexcom login true');
-            		$scope.camper.checkins.push({id: -1, checked_in: false, name: 'Dexcom Login'})
-            	}else{
-            		alert('dexcom login false');
             		$scope.camper.checkins.push({id: -1, checked_in: true, name: 'Dexcom Login'})
+            	}else{
+            		$scope.camper.checkins.push({id: -1, checked_in: false, name: 'Dexcom Login'})
             	}
                 // deferred.resolve(data); 
             }).fail(function(response) {
