@@ -43,7 +43,7 @@
                     <div class="row" ng-repeat="egvsItem in dexcom.data.egvs">
                         <div class="col">{{egvsItem.displayTimeReadable}}</div>
                         <div class="col">{{egvsItem.value}}</div>
-                        <div class="col">{{egvsItem.trend}}</div>
+                        <div class="col">{{egvsItem.trend}}<img src="../img/arrows/{{egvsItem.trend}}.png" /></div>
                     </div>
                 </div>
                 <ion-item class="button button-full button-stable item-icon-left" style="background-color:{{cabinColor}}; color:#fff;">
