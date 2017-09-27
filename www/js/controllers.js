@@ -360,6 +360,67 @@ cvCont.controller('checkinForms', ['$scope', '$document', '$stateParams', '$loca
 			alert('Failed because: ' + message);
 		}
     };
+
+    var dexcomapi = {
+	    authorize: function(options) {
+	        var deferred = $.Deferred();
+	        // Build the OAuth consent page URL
+	        var authUrl = 'https://api.dexcom.com/v1/oauth2/login?' + $.param({
+	            client_id: options.client_id,
+	            redirect_uri: options.redirect_uri,
+	            response_type: options.response_type,
+	            scope: options.scope
+	        });
+
+	        // Open the OAuth consent page in the InAppBrowser
+	        var ref = cordova.InAppBrowser.open(authUrl, '_blank', 'location=no');
+	        // var authWindow = window.open(authUrl, '_blank', 'location=no,toolbar=no');
+
+	        ref.addEventListener('loadstart', function(event) {
+			  	var url = event.url;
+	            var code = /\?code=(.+)$/.exec(url);
+	            var error = /\?error=(.+)$/.exec(url);
+
+	            if (code || error) {
+	                // Always close the browser when match is found
+	                ref.close();
+	            }
+
+	            if (code) {
+	                // Exchange the authorization code for an access token and save in db
+	                $.get('https://campviews.com/oauth/?code=' + code[1] + '&camper_id=' + $stateParams.camper_id)
+	                .done(function(data) {
+	                	if(data.error !== 'yes'){
+	                		alert('Dexcom access authorized!');
+	                	}else{
+	                		alert('An error occured');
+	                	}
+	                    // deferred.resolve(data); 
+	                }).fail(function(response) {
+	                    // deferred.reject(response.responseJSON);
+	                    alert('An error occured!' + response);
+	                });
+	            } else if (error) {
+	                //The user denied access to the app
+	                deferred.reject({
+	                    error: error[1]
+	                });
+	            }
+	        });
+
+	        return deferred.promise();
+	        // return true;
+	    }
+	};
+	
+ 	$scope.callDexcomLogin = function() {
+	    dexcomapi.authorize({
+	        client_id: 'YpNZIG56O4uPVe7hDAjdyyyINN3wwP6f',
+	        redirect_uri: 'https://campviews.com/oauth',
+	        response_type: 'code',
+	        scope: 'offline_access'
+	    });
+	}
 	
   	$('#loading').hide();
 	
@@ -645,7 +706,6 @@ cvCont.controller('checkinForm', ['$scope', '$cordovaCamera', '$state', '$docume
 	console.log(_checkinData);
 
 	$scope.checkinData = _checkinData;
-	
 }]);
 
 cvCont.controller('logForm', ['$scope', '$cordovaCamera', '$state', '$document', '$stateParams', '$location', '$ionicModal', '$ionicPopover', 'CV_Camper', 'CV_Forms', 'logForms', 'checkinForms', function($scope, $cordovaCamera, $state, $document, $stateParams, $location, $ionicModal, $ionicPopover, CV_Camper, CV_Forms, logForms, checkinForms) {
