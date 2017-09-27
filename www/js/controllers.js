@@ -416,6 +416,8 @@ cvCont.controller('checkinForms', ['$scope', '$document', '$stateParams', '$loca
 	$scope.checkDexcomLogin = function(){
 		$.get('https://campviews.com/oauth/camperDidDexcomLogin.php?camper_id=' + $stateParams.camper_id)
             .done(function(data) {
+            	alert('dexcom login check: ' + data);
+            	alert('dexcom login check 2: ' + data.loggedIn);
             	if(data.loggedIn == 'yes'){
             		$scope.camper.checkins.push({id: -1, checked_in: true, name: 'Dexcom Login'})
             	}else{
