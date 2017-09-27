@@ -437,11 +437,11 @@ cvCont.controller('checkinForms', ['$scope', '$document', '$stateParams', '$loca
 	    });
 	}
 	
-  	$('#loading').hide();
-	
 	$scope.camper = global.camper;
  	
  	$scope.checkDexcomLogin();
+
+ 	$('#loading').hide();
 }]);
 
 cvCont.controller('CamperCrtl', ['$scope', '$document', '$http', '$stateParams', '$location', 'CV_Camper', 'CV_Forms', '$cordovaCamera', 'requestedForms', function($scope, $document, $http, $stateParams, $location, CV_Camper, CV_Forms, $cordovaCamera, requestedForms) {
