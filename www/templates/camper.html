@@ -2,6 +2,9 @@
     .row:nth-child(odd) .col {
        background-color: #f1f1f1;
     }
+    .row:nth-child(even) .col {
+       background-color: white;
+    }
     .header .col {
       background-color: lightgrey !important;
     }
@@ -38,7 +41,7 @@
                         <div class="col">Trend</div>
                     </div>
                     <div class="row" ng-repeat="egvsItem in dexcom.data.egvs">
-                        <div class="col">{{egvsItem.displayTime}}</div>
+                        <div class="col">{{egvsItem.displayTimeReadable}}</div>
                         <div class="col">{{egvsItem.value}}</div>
                         <div class="col">{{egvsItem.trend}}</div>
                     </div>
