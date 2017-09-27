@@ -632,5 +632,5 @@ input[type="search"] {
 }
 
 .button-dexcom{
-	background-color: #64A844;
+	background-color: #64A844 !important;
 }
