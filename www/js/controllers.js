@@ -412,6 +412,21 @@ cvCont.controller('checkinForms', ['$scope', '$document', '$stateParams', '$loca
 	        // return true;
 	    }
 	};
+
+	$scope.checkDexcomLogin = function(){
+		$.get('https://campviews.com/oauth/camperDidDexcomLogin?camper_id=' + $stateParams.camper_id)
+            .done(function(data) {
+            	if(data.loggedIn === 'yes'){
+            		$scope.camper.checkins.push({checked_in: true, name: 'Dexcom Login'})
+            	}else{
+            		$scope.camper.checkins.push({checked_in: false, name: 'Dexcom Login'})
+            	}
+                // deferred.resolve(data); 
+            }).fail(function(response) {
+                // deferred.reject(response.responseJSON);
+                alert('An error occured!' + response);
+            });
+	}
 	
  	$scope.callDexcomLogin = function() {
 	    dexcomapi.authorize({
@@ -426,6 +441,7 @@ cvCont.controller('checkinForms', ['$scope', '$document', '$stateParams', '$loca
 	
 	$scope.camper = global.camper;
  	
+ 	$scope.checkDexcomLogin();
 }]);
 
 cvCont.controller('CamperCrtl', ['$scope', '$document', '$http', '$stateParams', '$location', 'CV_Camper', 'CV_Forms', '$cordovaCamera', 'requestedForms', function($scope, $document, $http, $stateParams, $location, CV_Camper, CV_Forms, $cordovaCamera, requestedForms) {
