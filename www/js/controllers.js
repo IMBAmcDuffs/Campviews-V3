@@ -1014,14 +1014,12 @@ cvCont.controller('logBuilder', ['$scope', '$http', '$sce', '$timeout', 'CV_Camp
 		$location.path('/logsheets');
 	}
 		
-	  if(logForms.status === 'success'){	
-	  if(!global.camp) global.camp = {}
+	if(logForms.status === 'success'){	
+		if(!global.camp) global.camp = {}
 		if(!global.camp.logForms) global.camp.logForms = {};
 		global.camp.logForms = logForms.forms;
 		$scope.logFroms = logForms.forms;
-		
-	  }
- 
+	}
 	
 	$scope.camper = global.camper;
 	$scope.camper_name = global.camper;
