@@ -236,13 +236,13 @@ cvCont.controller('MainCtrl', ['$scope', '$http', '$ionicFilterBar', '$timeout',
     };
 	
 	$scope.filterResults = function(type) {
-	$('#loading').show();
-	$scope.activeFilter = type;
-	var page = $location.$$path.replace('/','');
-	if(page === 'logsheets' && type!=='everyone'){
-		var id = type;
-		type = 'logsheets';	
-	}
+		$('#loading').show();
+		$scope.activeFilter = type;
+		var page = $location.$$path.replace('/','');
+		if((page === 'logsheets' || page === 'campers') && type!=='everyone'){
+			var id = type;
+			type = 'logsheets';	
+		}
 	  if(type){
 		$('.search-button.bar').hide();
 		var items = {};

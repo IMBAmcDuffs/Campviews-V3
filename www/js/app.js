@@ -118,7 +118,7 @@ cv.config(function($stateProvider, $urlRouterProvider, $httpProvider) {
     };
 		
 	var getCampers = function(CV_Camps, $location) {
-		var page = $location.$$path.replace('/','');
+		var page = $location.$$path.replace('/', '');
 		var params = page.split('/');
 		if(params.length > 1){
 			page = params[0];	
