@@ -187,7 +187,7 @@ cvCont.controller('MainCtrl', ['$scope', '$http', '$ionicFilterBar', '$timeout',
   }
 
   function getSingleDexcomData(camperData, camperArrayKey, callback){
-  	$http.get('http://campviews.com/oauth/getDexcomEgvs.php?camper_id=' + camperData.id)
+  	$http.get('http://campviews.com/oauth/getDexcomEgvs.php?camper_id=' + camperData.id, {cache: false})
   		.success(function(data, status, headers, config) {
   			callback(camperArrayKey, data);
 		}).error(function(data, status, headers, config) {
@@ -480,7 +480,7 @@ cvCont.controller('CamperCrtl', ['$scope', '$document', '$http', '$stateParams',
 	$scope.picture = '';
 
 	$scope.getSingleDexcomData = function (camperId){
-	  	$http.get('http://campviews.com/oauth/getDexcomEgvs.php?camper_id=' + camperId + '&num_readings=' + '6')
+	  	$http.get('http://campviews.com/oauth/getDexcomEgvs.php?camper_id=' + camperId + '&num_readings=' + '6', {cache: false})
 	  		.success(function(data, status, headers, config) {
 	  			if(data.error !== 'yes'){
 					$scope.dexcom = {data: data};
