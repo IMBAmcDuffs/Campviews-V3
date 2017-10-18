@@ -13,7 +13,7 @@
 
     <div ng-show="dexcom">
         Dexcom Reading: <br />
-        <img ng-hide="egvsItem.trend == 'none' || egvsItem.trend == 'notComputable' || egvsItem.trend == 'rateOutOfRange'" src="img/arrows/{{dexcom.egvs[0].trend}}.png" style="height: 30px; width: 30px;"/>
+        <img ng-hide="egvsItem.trend == 'none' || egvsItem.trend == 'notComputable' || egvsItem.trend == 'rateOutOfRange'" src="img/arrows/{{dexcom.egvs[0].trend}}.png" style="height: 20px; width: 20px; vertical-align: middle;"/>
         {{dexcom.egvs[0].value}}{{dexcom.unit}}
         <span ng-show="egvsItem.trend == 'none'">Trend: None</span>
         <span ng-show="egvsItem.trend == 'notComputable'">Trend: Not Computable</span>
