@@ -46,7 +46,11 @@
                     <div class="row" ng-repeat="egvsItem in dexcom.data.egvs">
                         <div class="col">{{egvsItem.displayTimeReadable}}</div>
                         <div class="col">{{egvsItem.value}}</div>
-                        <div class="col"><img src="img/arrows/{{egvsItem.trend}}.png" style="height: 30px; width: 30px;"/></div>
+                        <div class="col">
+                            <img ng-hide="egvsItem.trend == 'notComputable' || egvsItem.trend = 'rateOutOfRange'" src="img/arrows/{{egvsItem.trend}}.png" style="height: 30px; width: 30px;"/>
+                            <span ng-show="egvsItem.trend == 'notComputable'">Not Computable</span>
+                            <span ng-show="egvsItem.trend == 'rateOutOfRange'">Rate Out Of Range</span>
+                        </div>
                     </div>
                 </div>
                 <ion-item class="button button-full button-stable item-icon-left" style="background-color:{{cabinColor}}; color:#fff;">
