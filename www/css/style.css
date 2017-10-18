@@ -639,3 +639,11 @@ input[type="search"] {
 .button-dexcom{
 	background-color: #64A844 !important;
 }
+
+.text-danger {
+    color: #dc3545!important;
+}
+
+.text-warning {
+    color: #ffc107!important;
+}
