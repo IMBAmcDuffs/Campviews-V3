@@ -269,6 +269,11 @@ input[type="search"] {
 	float:left;
 	width:100%;
 }
+.list_item_100_center {
+	float: left;
+	width: 100%;
+	text-align: center;
+}
 .list_item_left {
 	float:left;
 	width: 25%;
