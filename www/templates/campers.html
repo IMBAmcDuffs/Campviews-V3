@@ -6,6 +6,7 @@
         <ion-refresher pulling-icon="ion-arrow-down-b" on-refresh="refreshItems()">
         </ion-refresher> 
    	<div class="camper_list_content">
+        page name {{$scope.page}}
         <div class="filter_options button-bar" ng-if="page == 'checkin'">
         	<a class="button filter icon-left ion-ios-people {{ activeFilter=='everyone' || !activeFilter ? 'active' : '' }}" ng-click="filterResults('everyone')">Everyone</a>
         	<a class="button filter icon-left ion-ios-checkmark-outline {{ activeFilter=='not_checked' ? 'active' : '' }}" ng-click="filterResults('not_checked')" data-filter="not-checked">Not Checked In</a>
