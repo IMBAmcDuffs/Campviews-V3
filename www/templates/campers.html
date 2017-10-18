@@ -30,7 +30,7 @@
                     <div ng-show="item.dexcom" class="list_item_title_center row">
                         Dexcom Reading:
                     </div>
-                    <div ng-show="item.dexcom && item.dexcom.egvs[0].trend != null" class="list_item_100">
+                    <div ng-show="item.dexcom && item.dexcom.egvs[0].trend != null && item.dexcom.trend != 'notComputable'" class="list_item_100">
                         <img src="img/arrows/{{item.dexcom.egvs[0].trend}}.png" style="height: 20px; width: 20px; vertical-align: middle;"/> {{item.dexcom.egvs[0].value}} {{item.dexcom.unit}}
                     </div>
                     <div ng-if="page=='checkin'">

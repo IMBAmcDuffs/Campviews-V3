@@ -181,7 +181,7 @@ cvCont.controller('MainCtrl', ['$scope', '$http', '$ionicFilterBar', '$timeout',
   }
  
   function assignDexcomData(camperArrayKey, data){
-  	if(data.error !== 'yes'){
+  	if(data.error !== 'yes' && data.egvs){
   		$scope.items[camperArrayKey].dexcom = data;
   	}
   }
