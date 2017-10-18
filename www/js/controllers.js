@@ -1004,7 +1004,7 @@ cvCont.controller('logNote', ['$scope', '$timeout', 'CV_Camps', 'CV_Camper', 'CV
 	
 }]);
 
-cvCont.controller('logBuilder', ['$scope', '$sce', '$timeout', 'CV_Camper', '$stateParams', '$location', '$ionicPopup', '$ionicPopover', 'logForms', function($scope, $sce, $timeout, CV_Camper, $stateParams, $location, $ionicPopup, $ionicPopover, logForms) {
+cvCont.controller('logBuilder', ['$scope', '$http', '$sce', '$timeout', 'CV_Camper', '$stateParams', '$location', '$ionicPopup', '$ionicPopover', 'logForms', function($scope, $http, $sce, $timeout, CV_Camper, $stateParams, $location, $ionicPopup, $ionicPopover, logForms) {
 	
 	CV_Camper.getCachedCamper($stateParams.camper_id); 
 	
