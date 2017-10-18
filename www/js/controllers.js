@@ -1049,11 +1049,25 @@ cvCont.controller('logBuilder', ['$scope', '$sce', '$timeout', 'CV_Camper', '$st
 	
 	$scope.values = values;
 	
-		$ionicPopover.fromTemplateUrl('templates/log-note.html', {
-                scope: $scope,
-		}).then(function(popover) {
-                $scope.popover = popover;
-		});
+	$ionicPopover.fromTemplateUrl('templates/log-note.html', {
+            scope: $scope,
+	}).then(function(popover) {
+            $scope.popover = popover;
+	});
+
+	getSingleDexcomData($scope.camper_id)
+
+    function getSingleDexcomData(camperId){
+	  	$http.get('http://campviews.com/oauth/getDexcomEgvs.php?camper_id=' + camperId, {cache: false})
+  		.success(function(data, status, headers, config) {
+  			if(data.error !== 'yes' && data.egvs){
+		  		$scope.dexcom = data;
+		  	}
+		}).error(function(data, status, headers, config) {
+			// show some error
+			callback(camperArrayKey, 'error returned');
+		});	
+    }
 
 	$scope.openPopover = function($event) {
         $scope.popover.show($event);
@@ -1135,7 +1149,6 @@ cvCont.controller('logBuilder', ['$scope', '$sce', '$timeout', 'CV_Camper', '$st
 	}
 	
 	$scope.filterCurrent = function() {
-		
 		var _timeOfDay = {};
 		if(timeOfDay){
 			$opt = timeOfDay.options;
@@ -1234,8 +1247,6 @@ cvCont.controller('logBuilder', ['$scope', '$sce', '$timeout', 'CV_Camper', '$st
 		}
 	}
 	
-	
-	
 	$scope.cur_i = 0;
 	$scope.maxDAYS = global.camp._length-1;
 	$scope.dayOutput = output;
@@ -1245,7 +1256,6 @@ cvCont.controller('logBuilder', ['$scope', '$sce', '$timeout', 'CV_Camper', '$st
 	  
 	$scope.setIntervalScope = function($index){
 		$scope.cur_i = $index;	
-		
 	};
 	
 	$scope.showValues = function($data){
