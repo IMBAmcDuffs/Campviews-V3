@@ -12,7 +12,7 @@
     </div>
 
     <div ng-show="dexcom">
-        Dexcom Reading: <br />
+        Latest Dexcom Reading: ({{dexcom.egvs[0].displayTimeReadable}})<br />
         <img ng-hide="egvsItem.trend == 'none' || egvsItem.trend == 'notComputable' || egvsItem.trend == 'rateOutOfRange'" src="img/arrows/{{dexcom.egvs[0].trend}}.png" style="height: 20px; width: 20px; vertical-align: middle;"/>
         {{dexcom.egvs[0].value}}{{dexcom.unit}}
         <span ng-show="egvsItem.trend == 'none'">Trend: None</span>
