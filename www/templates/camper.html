@@ -36,7 +36,7 @@
                     <p><strong>Gender:</strong> {{camper.gender}}</p>
                     <p><strong>I have checked into:</strong> {{camper.checked_in}} out of {{total_check_ins}} stations</p>
                 </div>
-                <div ng-show="dexcom" class="camper_data">
+                <div ng-show="dexcom && dexcom.data.egvs.length > 0" class="camper_data">
                     <h3 class="title">Dexcom Readings</h3>
                     <div class="row header">
                         <div class="col">Time</div>
